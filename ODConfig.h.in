@@ -1,0 +1,4 @@
+// the configured options and settings for OD
+#define OD_MAJOR_VERSION @OD_MAJOR_VERSION@
+#define OD_MINOR_VERSION @OD_MINOR_VERSION@
+#cmakedefine USE_MYMATH
