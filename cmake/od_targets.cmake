@@ -29,7 +29,7 @@ endif()
 set(OD_LIB_TYPE SHARED)
 
 # usefull functions called
-macro(OD_ADD_LIBRARY _name _srcs _incs _impl_incs)
+macro(OD_ADD_LIBRARY1 _name _srcs _incs _impl_incs)
 
     set(lib_name "od_${_name}")
 
@@ -56,4 +56,43 @@ macro(OD_ADD_LIBRARY _name _srcs _incs _impl_incs)
             DESTINATION ${OD_INSTALL_INCLUDE_DIR}/${_name}
             COMPONENT ${lib_name})
 
+endmacro(OD_ADD_LIBRARY1)
+
+macro(OD_ADD_LIBRARY _name)
+
+    set(lib_name "od_${_name}")
+
+    message(input to od_add_library: ${OD_LIB_TYPE} ${ARGN})
+    add_library(${lib_name} ${OD_LIB_TYPE} ${ARGN})
+
+    # allways link libs:
+    target_link_libraries(${lib_name} ${Boost_LIBRARIES})
+
+    # target properties
+    set_target_properties(${lib_name} PROPERTIES
+        VERSION ${OD_VERSION}
+        SOVERSION ${OD_MAJOR_VERSION}.${OD_MINOR_VERSION}
+        )
+
+    # Install library
+    install(TARGETS ${lib_name}
+        RUNTIME DESTINATION ${OD_INSTALL_RUNTIME_DIR} COMPONENT ${lib_name}
+        LIBRARY DESTINATION ${OD_INSTALL_LIBRARY_DIR} COMPONENT ${lib_name}
+        ARCHIVE DESTINATION ${OD_INSTALL_ARCHIVE_DIR} COMPONENT ${lib_name})
+
+    #install includes
+    install(FILES ${_incs} ${_impl_incs}
+            DESTINATION ${OD_INSTALL_INCLUDE_DIR}/${_name}
+            COMPONENT ${lib_name})
+
 endmacro(OD_ADD_LIBRARY)
+
+
+
+macro(OD_ADD_INCLUDES _name)
+    #install includes
+    install(FILES ${ARGN}
+            DESTINATION ${OD_INSTALL_INCLUDE_DIR}/${_name}
+            COMPONENT ${lib_name})
+
+endmacro(OD_ADD_INCLUDES)

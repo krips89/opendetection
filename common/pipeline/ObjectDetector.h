@@ -6,11 +6,10 @@
 #define OPENDETECTION_OBJECTDETECTOR_H
 
 #include <jmorecfg.h>
-#include "Scene.h"
 #include <string>
 
-using namespace std;
 
+using namespace std;
 
 namespace od
 {
@@ -21,6 +20,9 @@ namespace od
     IMAGE_LOCAL_SIMPLE,
     IMAGE_GLOBAL_DENSE,
     IMAGE_GLOBAL_CLASSIFICATION,
+  };
+
+  class Scene {
   };
 
 
@@ -83,6 +85,7 @@ namespace od
   class ODAlgorithmBase: public ObjectDetector
   {
   };
+
 
 }
 

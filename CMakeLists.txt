@@ -28,15 +28,14 @@ configure_file (
 
 # 3. set up different macros and configurations
 include(od_targets)
+include(od_mandatory_dependency)
 
 # 2. collect config options and set appropriate variables which will be used in the next hierarchy
 option(BUILD_DOCUMENTATION "Build the OD documentation" ON)
 
 
-
-
 # 3. add all the modules
-set(OD_MODULES_NAMES common doc)
+set(OD_MODULES_NAMES common doc detectors)
 set(OD_MODULES_DIRS ${OD_MODULES_NAMES})
 
 foreach(subdir ${OD_MODULES_DIRS})
