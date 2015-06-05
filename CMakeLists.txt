@@ -17,7 +17,7 @@ set(CMAKE_MODULE_PATH ${OD_CMAKE_DIR} ${CMAKE_MODULE_PATH})
 # include bunch of stuffs and set the appropriate variables
 
 # 1. Version
-include(ODVersion)
+include(od_version)
 set(OD_VERSION "${OD_MAJOR_VERSION}.${OD_MINOR_VERSION}")
 set(OD_VERSION_DETAILED "${OD_MAJOR_VERSION}.${OD_MINOR_VERSION}.${OD_BUILD_VERSION}")
 # generate config files
@@ -26,39 +26,17 @@ configure_file (
   "${OD_BINARY_DIR}/ODConfig.h"
   )
 
+# 3. set up different macros and configurations
+include(od_targets)
+
 # 2. collect config options and set appropriate variables which will be used in the next hierarchy
 option(BUILD_DOCUMENTATION "Build the OD documentation" ON)
 
-# installation structure
-if(NOT OD_INSTALL_RUNTIME_DIR)
-  set(OD_INSTALL_RUNTIME_DIR bin)
-endif()
-if(NOT OD_INSTALL_LIBRARY_DIR)
-  set(OD_INSTALL_LIBRARY_DIR lib)
-endif()
-if(NOT OD_INSTALL_ARCHIVE_DIR)
-  set(OD_INSTALL_ARCHIVE_DIR lib)
-endif()
-if(NOT OD_INSTALL_INCLUDE_DIR)
-  set(OD_INSTALL_INCLUDE_DIR include/od-{OD_VERSION})
-endif()
-if(NOT OD_INSTALL_DATA_DIR)
-  set(OD_INSTALL_DATA_DIR share/od-${OD_VERSION})
-endif()
-if(NOT OD_INSTALL_DOC_DIR)
-  set(OD_INSTALL_DOC_DIR share/doc/od-${OD_VERSION})
-endif()
-if(NOT OD_INSTALL_PACKAGE_DIR)
-  set(OD_INSTALL_PACKAGE_DIR "lib/cmake/od-${OD_VERSION}")
-endif()
-if(NOT OD_INSTALL_DOXYGEN_DIR)
-  set(OD_INSTALL_DOXYGEN_DIR ${OD_INSTALL_DOC_DIR}/doxygen)
-endif()
 
 
 
 # 3. add all the modules
-set(OD_MODULES_NAMES common doc/doxygen)
+set(OD_MODULES_NAMES common doc)
 set(OD_MODULES_DIRS ${OD_MODULES_NAMES})
 
 foreach(subdir ${OD_MODULES_DIRS})

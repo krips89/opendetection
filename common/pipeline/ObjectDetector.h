@@ -7,8 +7,9 @@
 
 #include <jmorecfg.h>
 #include "Scene.h"
-#include "ODAlgorithmBase.h"
+#include <string>
 
+using namespace std;
 
 
 namespace od
