@@ -7,6 +7,8 @@
 
 #include <jmorecfg.h>
 #include <string>
+#include "Detector.h"
+#include "Trainer.h"
 
 
 using namespace std;
@@ -22,21 +24,27 @@ namespace od
     IMAGE_GLOBAL_CLASSIFICATION,
   };
 
-  class Scene {
-  };
-
-
+  /** \brief This is the main class for object detection and recognition.
+   *
+   *
+   * \author Kripasindhu Sarkar
+   *
+   */
   class ObjectDetector {
   public:
 
-    DetectionMethod const &getDetectionMethod() const
+
+    ObjectDetector()
+    { }
+
+    DetectionMethod const &getMethod() const
     {
-      return detection_method_;
+      return method_;
     }
 
     void setDetectionMethod(DetectionMethod const &detection_method_)
     {
-      this->detection_method_ = detection_method_;
+      this->method_ = detection_method_;
     }
 
     bool getAlwaysTrain() const
@@ -69,13 +77,13 @@ namespace od
       this->training_data_location_ = training_data_location_;
     }
 
-    int train();
+    virtual int train() = 0;
 
-    int detect(Scene const & scene);
+    virtual int detect(Scene const & scene) = 0;
 
 
   protected:
-    DetectionMethod detection_method_;
+    DetectionMethod method_;
     bool always_train_;
     string training_input_location_, training_data_location_;
   };
@@ -84,6 +92,39 @@ namespace od
   // Subclassing ObjDetector as currently it requires all the information of ObjDetector
   class ODAlgorithmBase: public ObjectDetector
   {
+
+  public:
+
+    ODAlgorithmBase()
+    { }
+
+    int getTrainingMethod_() const
+    {
+      return training_method_;
+    }
+
+    void setTrainingMethod(int training_method_)
+    {
+      this->training_method_ = training_method_;
+    }
+
+    int getDetectionMethod() const
+    {
+      return detection_method_;
+    }
+
+    void setDetectionMethod(int detection_method_)
+    {
+      this->detection_method_ = detection_method_;
+    }
+
+    virtual void init() = 0;
+
+  protected:
+    int training_method_;
+    int detection_method_;
+    Trainer *trainer_;
+    Detector *detector_;
   };
 
 

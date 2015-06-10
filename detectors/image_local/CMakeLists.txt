@@ -1,7 +1,7 @@
-set(SUBSYS_NAME common)
+set(SUBSYS_NAME local_image_detector)
 set(LIB_NAME od_${SUBSYS_NAME})
-set(SUBSYS_DESC "The core module of OpenDetection having the pipeline logic")
-set(SUBSYS_DEPS ${OpenCV_LIBS})
+set(SUBSYS_DESC "The local feature matching based detector")
+set(SUBSYS_DEPS od_common ${PCL_LIBRARIES} ${VTK_LIBRARIES} ${OpenCV_LIBS} pugixml)
 
 set(build TRUE)
 #PCL_SUBSYS_OPTION(build "${SUBSYS_NAME}" "${SUBSYS_DESC}" ON)
@@ -11,35 +11,30 @@ set(build TRUE)
 if(build)
 
     set(submodules
-          pipeline
+          image_local
     )
 
     set(incs
-        "pipeline/ObjectDetector.h"
-        "pipeline/Scene.h"
-        "pipeline/Trainer.h"
-        "pipeline/Detector.h"
+        "ODImageLocalMatching.h"
 
-        "utils/utils.h"
+        "training/SnapshotCorrMaker.h"
+        "detection/SimpleRansacDetector.h"
+
         )
 
     set(impl_incs
         )
 
     set(srcs
-        "pipeline/ObjectDetector.cpp"
-        "pipeline/Scene.cpp"
+        "ODImageLocalMatching.cpp"
+        "training/SnapshotCorrMaker.cpp"
         )
 
-
-
-
-    #include_directories("${CMAKE_CURRENT_SOURCE_DIR}/pipeline")
-
-    #OD_ADD_LIBRARY("${SUBSYS_NAME}" ${srcs} ${incs} ${impl_incs})
-    #OD_ADD_INCLUDES("${SUBSYS_NAME}" ${incs} ${impl_incs})
+    include_directories("${OD_SOURCE_DIR}")
 
     OD_ADD_LIBRARY_ALL("${SUBSYS_NAME}" SRCS ${srcs} INCS ${incs} ${impl_incs})
+    #OD_ADD_LIBRARY("${SUBSYS_NAME}" ${srcs} ${incs} ${impl_incs})
+    #OD_ADD_INCLUDES("${SUBSYS_NAME}" ${incs} ${impl_incs})
 
     if(SUBSYS_DEPS)
       target_link_libraries("${LIB_NAME}" ${SUBSYS_DEPS})

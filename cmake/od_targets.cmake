@@ -58,12 +58,18 @@ macro(OD_ADD_LIBRARY1 _name _srcs _incs _impl_incs)
 
 endmacro(OD_ADD_LIBRARY1)
 
-macro(OD_ADD_LIBRARY _name)
+macro(OD_ADD_LIBRARY_ALL _name )
 
     set(lib_name "od_${_name}")
 
-    message(input to od_add_library: ${OD_LIB_TYPE} ${ARGN})
-    add_library(${lib_name} ${OD_LIB_TYPE} ${ARGN})
+    set(options)
+    set(oneValueArgs)
+    set(multiValueArgs SRCS INCS)
+    cmake_parse_arguments(OD_ADD_LIBRARY_ALL "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN} )
+
+    message(input to od_add_library: ${OD_LIB_TYPE} ${OD_ADD_LIBRARY_ALL_SRCS} ${OD_ADD_LIBRARY_ALL_INCS})
+
+    add_library(${lib_name} ${OD_LIB_TYPE} ${OD_ADD_LIBRARY_ALL_SRCS} ${OD_ADD_LIBRARY_ALL_INCS})
 
     # allways link libs:
     target_link_libraries(${lib_name} ${Boost_LIBRARIES})
@@ -81,12 +87,49 @@ macro(OD_ADD_LIBRARY _name)
         ARCHIVE DESTINATION ${OD_INSTALL_ARCHIVE_DIR} COMPONENT ${lib_name})
 
     #install includes
-    install(FILES ${_incs} ${_impl_incs}
+    install(FILES ${_OD_ADD_LIBRARY_ALL_INCS}
             DESTINATION ${OD_INSTALL_INCLUDE_DIR}/${_name}
             COMPONENT ${lib_name})
 
+endmacro(OD_ADD_LIBRARY_ALL)
+
+macro(OD_ADD_LIBRARY _name)
+
+    set(lib_name "od_${_name}")
+
+    include_directories("${OD_SOURCE_DIR}")
+
+    message(input to od_add_library: ${OD_LIB_TYPE} ${ARGN})
+    add_library(${lib_name} ${OD_LIB_TYPE} ${ARGN})
+
+
+    # allways link libs:
+    target_link_libraries(${lib_name} ${Boost_LIBRARIES})
+
+    # target properties
+    set_target_properties(${lib_name} PROPERTIES
+        VERSION ${OD_VERSION}
+        SOVERSION ${OD_MAJOR_VERSION}.${OD_MINOR_VERSION}
+        )
+
+    # Install library
+    install(TARGETS ${lib_name}
+        RUNTIME DESTINATION ${OD_INSTALL_RUNTIME_DIR} COMPONENT ${lib_name}
+        LIBRARY DESTINATION ${OD_INSTALL_LIBRARY_DIR} COMPONENT ${lib_name}
+        ARCHIVE DESTINATION ${OD_INSTALL_ARCHIVE_DIR} COMPONENT ${lib_name})
+
 endmacro(OD_ADD_LIBRARY)
 
+
+macro(OD_ADD_EXAMPLE _name)
+    set(options)
+    set(oneValueArgs)
+    set(multiValueArgs FILES LINK_WITH)
+    cmake_parse_arguments(OD_ADD_EXAMPLE "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN} )
+    include_directories("${OD_SOURCE_DIR}")
+    add_executable(${_name} ${OD_ADD_EXAMPLE_FILES})
+    target_link_libraries(${_name} ${OD_ADD_EXAMPLE_LINK_WITH})
+endmacro(OD_ADD_EXAMPLE)
 
 
 macro(OD_ADD_INCLUDES _name)

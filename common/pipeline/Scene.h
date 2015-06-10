@@ -1,16 +1,18 @@
 //
-// Created by sarkar on 05.06.15.
+// Created by sarkar on 10.06.15.
 //
 
-#ifndef OPENDETECTION_IMAGESCENE_H
-#define OPENDETECTION_IMAGESCENE_H
-
-#include "ObjectDetector.h"
+#ifndef OPENDETECTION_SCENE_H
+#define OPENDETECTION_SCENE_H
 
 #include <opencv2/core/core.hpp>
 
 namespace od
 {
+  class Scene
+  {
+
+  };
 
   class ImageScene: public Scene
   {
@@ -25,6 +27,6 @@ namespace od
     cv::Mat cvimage_;
   };
 
-
 }
-#endif //OPENDETECTION_IMAGESCENE_H
+
+#endif //OPENDETECTION_SCENE_H

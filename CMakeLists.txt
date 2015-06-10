@@ -23,7 +23,7 @@ set(OD_VERSION_DETAILED "${OD_MAJOR_VERSION}.${OD_MINOR_VERSION}.${OD_BUILD_VERS
 # generate config files
 configure_file (
   "${OD_SOURCE_DIR}/ODConfig.h.in"
-  "${OD_BINARY_DIR}/ODConfig.h"
+  "${OD_BINARY_DIR}/generated/ODConfig.h"
   )
 
 # 3. set up different macros and configurations
@@ -35,7 +35,7 @@ option(BUILD_DOCUMENTATION "Build the OD documentation" ON)
 
 
 # 3. add all the modules
-set(OD_MODULES_NAMES common doc detectors)
+set(OD_MODULES_NAMES common doc detectors examples)
 set(OD_MODULES_DIRS ${OD_MODULES_NAMES})
 
 foreach(subdir ${OD_MODULES_DIRS})
@@ -47,7 +47,7 @@ endforeach(subdir)
 
 
 #include folders
-include_directories("${OD_BINARY_DIR}")
+include_directories("${OD_BINARY_DIR}/generated")
 
 
 
