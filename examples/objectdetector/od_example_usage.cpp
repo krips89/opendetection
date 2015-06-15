@@ -1,17 +1,47 @@
+#include <detectors/image_local/training/SnapshotCorrTrainer.h>
+#include <detectors/image_local/detection/SimpleRansacDetector.h>
+
 #include "common/pipeline/ObjectDetector.h"
+#include "common/pipeline/ODDetection.h"
 #include "detectors/image_local/ODImageLocalMatching.h"
 
 
 
 int main(int argc, char *argv[])
 {
-  od::ODImageLocalMatching detector;
-  detector.setTrainingInputLocation(argv[1]);
-  detector.setTrainingDataLocation(argv[2]);
-  detector.setTrainingMethod(od::ODImageLocalMatching::TRAINING_SNAPSHOT_BASED_CORRESPONDENCES);
-  detector.setDetectionMethod(od::ODImageLocalMatching::DETECTION_MOPED);
-  detector.init();
-  detector.train();
+
+  string training_input_dir(argv[1]), trained_data_dir(argv[2]), image_file(argv[3]);
+
+  //trainer
+  od::SnapshotCorrTrainer *trainer = new od::SnapshotCorrTrainer(training_input_dir, trained_data_dir);
+  //trainer->train();
+
+
+  //detector
+  od::SimpleRansacDetector *detector = new od::SimpleRansacDetector(trained_data_dir);
+  //set commandline options type inputs
+  detector->parseParameterString("--use_gpuaa --fast --method=1 --error=2 --confidence=0.9 --iterations=500 --inliers=30 --metainfo");
+  //set some other inputs
+  detector->setCamera_intrinsic_file("image_local_scenes/out_camera_data_lion_old.yml");
+  //init
+  detector->init();
+
+
+  //Get a scene
+  od::ODSceneImage scene(image_file);
+  vector<od::ODDetection3D *> detections;
+
+  //Detect
+  detector->detect(&scene, detections);
+
+  //feedback
+  for(int i = 0; i < detections.size(); i++)
+  {
+    cv::namedWindow("Overlay" + toString(i), WINDOW_NORMAL);
+    detections[i]->printSelf();
+    cv::imshow("Overlay" + toString(i), detections[i]->metainfo_image_);
+  }
+  cv::waitKey();
 
 
   return 0;

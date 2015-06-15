@@ -116,7 +116,8 @@ RECURSIVE              = YES
 EXCLUDE                = "@OD_SOURCE_DIR@/cmake" \
 
 EXCLUDE_SYMLINKS       = YES
-EXCLUDE_PATTERNS       = 
+EXCLUDE_PATTERNS       = "@OD_SOURCE_DIR@/detectors/*/detection/*/*" \
+                         "@OD_SOURCE_DIR@/detectors/*/training/*/*"
 EXCLUDE_SYMBOLS        = 
 EXAMPLE_PATH           = 
 EXAMPLE_PATTERNS       = *
@@ -156,9 +157,9 @@ HTML_HEADER            =
 HTML_FOOTER            = @OD_SOURCE_DIR@/doc/doxygen/footer.html
 HTML_STYLESHEET        = 
 HTML_EXTRA_FILES       =
-HTML_COLORSTYLE_HUE    = 30
+HTML_COLORSTYLE_HUE    = 90
 HTML_COLORSTYLE_SAT    = 100
-HTML_COLORSTYLE_GAMMA  = 40
+HTML_COLORSTYLE_GAMMA  = 100
 HTML_TIMESTAMP         = YES
 HTML_DYNAMIC_SECTIONS  = YES
 GENERATE_DOCSET        = YES

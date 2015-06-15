@@ -16,9 +16,13 @@ if(build)
 
     set(incs
         "pipeline/ObjectDetector.h"
-        "pipeline/Scene.h"
-        "pipeline/Trainer.h"
-        "pipeline/Detector.h"
+        "pipeline/ODAlgorithmBase.h"
+
+        "pipeline/ODScene.h"
+        "pipeline/ODDetection.h"
+
+        "pipeline/ODTrainer.h"
+        "pipeline/ODDetector.h"
 
         "utils/utils.h"
         )
@@ -28,7 +32,7 @@ if(build)
 
     set(srcs
         "pipeline/ObjectDetector.cpp"
-        "pipeline/Scene.cpp"
+        "pipeline/ODScene.cpp"
         )
 
 

@@ -8,7 +8,7 @@ set(OD_SOURCE_DIR ${OpenDetection_SOURCE_DIR})
 set(OD_BINARY_DIR ${OpenDetection_BINARY_DIR})
 
 # init directories before doing all the searches and includes
-set(OD_CMAKE_DIR "${OpenDetection_SOURCE_DIR}/cmake")
+set(OD_CMAKE_DIR "${OpenDetection_SOURCE_DIR}/cmake" "${OpenDetection_SOURCE_DIR}/cmake/modules")
 set(CMAKE_MODULE_PATH ${OD_CMAKE_DIR} ${CMAKE_MODULE_PATH})
 
 

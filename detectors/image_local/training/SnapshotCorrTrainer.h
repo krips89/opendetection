@@ -67,12 +67,13 @@
 #include <opencv2/video/tracking.hpp>
 #include <opencv2/xfeatures2d.hpp>
 #include <vtkJPEGWriter.h>
+#include <detectors/image_local/ODImageLocalMatching.h>
 
 //extra
 //xml
 #include "pugixml.hpp"
 
-#include "common/pipeline/Trainer.h"
+#include "common/pipeline/ODTrainer.h"
 #include "common/utils/utils.h"
 
 
@@ -85,13 +86,17 @@ using namespace std;
 
 namespace od
 {
+  /** \brief ODImageLocalMatchingTrainer; One of the new algorithm; details will be explained later
+   *
+   * \author Kripasindhu Sarkar
+   *
+   */
 
-
-  class SnapshotCorrMaker : public Trainer
+  class SnapshotCorrTrainer : public ODImageLocalMatchingTrainer
   {
 
   public:
-    SnapshotCorrMaker(string const &training_input_location_, string const &training_data_location_) : Trainer(
+    SnapshotCorrTrainer(string const &training_input_location_="", string const &training_data_location_="") : ODImageLocalMatchingTrainer(
         training_input_location_, training_data_location_)
     { }
 

@@ -2,26 +2,35 @@
 // Created by sarkar on 08.06.15.
 //
 
-#ifndef OPENDETECTION_DETECTOR_H
-#define OPENDETECTION_DETECTOR_H
+#ifndef OPENDETECTION_TRAINER_H
+#define OPENDETECTION_TRAINER_H
 
-//#include "ObjectDetector.h"
-#include "Scene.h"
-#include <iostream>
+#include<iostream>
+#include <boost/filesystem.hpp>
+#include <boost/algorithm/string.hpp>
+
+#include "ODAlgorithmBase.h"
 
 using namespace std;
 
+namespace bf = boost::filesystem;
+
 namespace od
 {
-  class Detector
+  /** \brief Maining Trainer class; all trainers derives from this
+   *
+   * \author Kripasindhu Sarkar
+   *
+   */
+  class ODTrainer: public ODAlgorithmBase
   {
   public:
 
-    Detector(string const &training_input_location_, string const &training_data_location_) : training_input_location_(
+    ODTrainer(string const &training_input_location_ ="", string const &training_data_location_="") : training_input_location_(
         training_input_location_), training_data_location_(training_data_location_)
     { }
 
-    int detect(Scene scene);
+    virtual int train() = 0;
 
     string getTrainingInputLocation() const
     {
@@ -44,9 +53,12 @@ namespace od
     }
 
 
+
+
+
   protected:
     string training_input_location_, training_data_location_;
   };
 
 }
-#endif //OPENDETECTION_DETECTOR_H
+#endif //OPENDETECTION_TRAINER_H

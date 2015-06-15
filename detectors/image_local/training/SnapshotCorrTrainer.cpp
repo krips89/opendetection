@@ -1,4 +1,4 @@
-#include "SnapshotCorrMaker.h"
+#include "SnapshotCorrTrainer.h"
 
 namespace od
 {
@@ -32,8 +32,8 @@ namespace od
         cout << "Processing finished... Writing the final descriptors" << endl;
 
         string filename = boost::filesystem::path(input_file).filename().replace_extension(feature_type + ".xml").c_str();
-        write_pairs(pairs_3d_2d, common_descriptors, input_dir + "/" + filename);
-        write_pairs_xml(pairs_3d_2d, common_descriptors, input_dir + "/" + filename);
+        write_pairs(pairs_3d_2d, common_descriptors, output_dir + "/" + filename);
+        write_pairs_xml(pairs_3d_2d, common_descriptors, output_dir + "/" + filename);
 
         //delete and remove everything
         iren->TerminateApp();
@@ -85,7 +85,7 @@ namespace od
     bool snap_mode;
   };
 
-  int SnapshotCorrMaker::train()
+  int SnapshotCorrTrainer::train()
   {
     createTrainingDir(training_data_location_);
 
@@ -105,7 +105,7 @@ namespace od
     return 1;
   }
 
-  void SnapshotCorrMaker::trainSingleModel(std::string objname)
+  void SnapshotCorrTrainer::trainSingleModel(std::string objname)
   {
     ///////////setup object
 

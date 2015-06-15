@@ -7,14 +7,15 @@
 
 #include <jmorecfg.h>
 #include <string>
-#include "Detector.h"
-#include "Trainer.h"
-
+#include <vector>
 
 using namespace std;
 
 namespace od
 {
+
+  class ODScene;
+  class ODDetection;
 
   enum DetectionMethod {
     PC_GLOBAL_FEATUREMATCHING,
@@ -77,56 +78,18 @@ namespace od
       this->training_data_location_ = training_data_location_;
     }
 
+    virtual void init() = 0;
+
     virtual int train() = 0;
 
-    virtual int detect(Scene const & scene) = 0;
 
+    virtual int detect(ODScene *scene, std::vector<ODDetection *> detections) = 0;
 
   protected:
     DetectionMethod method_;
     bool always_train_;
     string training_input_location_, training_data_location_;
   };
-
-  //this class can be of different structure from ObjectDetector and should be defined seperately.
-  // Subclassing ObjDetector as currently it requires all the information of ObjDetector
-  class ODAlgorithmBase: public ObjectDetector
-  {
-
-  public:
-
-    ODAlgorithmBase()
-    { }
-
-    int getTrainingMethod_() const
-    {
-      return training_method_;
-    }
-
-    void setTrainingMethod(int training_method_)
-    {
-      this->training_method_ = training_method_;
-    }
-
-    int getDetectionMethod() const
-    {
-      return detection_method_;
-    }
-
-    void setDetectionMethod(int detection_method_)
-    {
-      this->detection_method_ = detection_method_;
-    }
-
-    virtual void init() = 0;
-
-  protected:
-    int training_method_;
-    int detection_method_;
-    Trainer *trainer_;
-    Detector *detector_;
-  };
-
 
 }
 
