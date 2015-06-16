@@ -16,29 +16,14 @@
 // OpenCV
 #include <opencv2/core/core.hpp>
 #include <opencv2/core/utility.hpp>
-#include <opencv2/highgui/highgui.hpp>
-#include <opencv2/imgproc/imgproc.hpp>
-#include <opencv2/calib3d/calib3d.hpp>
-#include <opencv2/video/tracking.hpp>
-#include <opencv2/xfeatures2d.hpp>
-#include <opencv2/viz.hpp>
-#include <sys/time.h>
-#include <common/utils/utils.h>
+#include <opencv2/calib3d.hpp>
 
 
-// PnP Tutorial
-#include "simple_ransac_detection/Mesh.h"
-#include "simple_ransac_detection/Model.h"
-#include "simple_ransac_detection/PnPProblem.h"
-#include "simple_ransac_detection/RobustMatcher.h"
-#include "simple_ransac_detection/ModelRegistration.h"
 #include "simple_ransac_detection/Utils.h"
 
 
-
-using namespace cv;
-using namespace std;
-using namespace cv::xfeatures2d;
+class Model;
+class PnpProblem;
 
 namespace od
 {
@@ -182,10 +167,10 @@ namespace od
     {
       camera_intrinsic_file = "Data/out_camera_data_lion_old.yml";         // mesh
 
-      red = Scalar(0, 0, 255);
-      green = Scalar(0,255,0);
-      blue = Scalar(255,0,0);
-      yellow = Scalar(0,255,255);
+      red = cv::Scalar(0, 0, 255);
+      green = cv::Scalar(0,255,0);
+      blue = cv::Scalar(255,0,0);
+      yellow = cv::Scalar(0,255,255);
 
 
       numKeyPoints = 2000;      // number of detected keypoints
@@ -200,7 +185,7 @@ namespace od
 
       minInliers = 30;    // Kalman threshold updating
 
-      pnpMethod = SOLVEPNP_EPNP;
+      pnpMethod = cv::SOLVEPNP_EPNP;
 
     }
 
@@ -215,10 +200,10 @@ namespace od
 
     string camera_intrinsic_file;         // mesh
 
-    Scalar red;
-    Scalar green;
-    Scalar blue;
-    Scalar yellow;
+    cv::Scalar red;
+    cv::Scalar green;
+    cv::Scalar blue;
+    cv::Scalar yellow;
 
 
 // Robust Matcher parameters
@@ -245,25 +230,17 @@ namespace od
     vector<Model> models;
     PnPProblem pnp_detection;
 
-    int somearbitfunction(int argc, char *argv[]);
-
-    Mat drawMatchesAfterRansac(Mat frame_vis, vector<Point2f> l_pt_scene, vector<KeyPoint> l_kp_model, Mat inliner_idx);
-
     bool detectSingleModel(ODSceneImage *scene, Model const &model, ODDetection3D * &pD);
   };
 
-  int SimpleRansacDetector::detect(ODScene *scene, vector<ODDetection *> &detections)
-  {
-    ODSceneImage *sceneimage = dynamic_cast<ODSceneImage *>(scene);
-    return detect(sceneimage, detections);
-  }
+
 
 
 
   class FrameGenerator
   {
   public:
-    FrameGenerator(CommandLineParser parser)
+    FrameGenerator(cv::CommandLineParser parser)
     {
       //some hardcoded default values (TEST ONE IMAGES), the program will run even without any arguments
       cameraID = 0;
@@ -305,9 +282,9 @@ namespace od
 
     }
 
-    Mat getNextFrame()
+    cv::Mat getNextFrame()
     {
-      Mat result;
+      cv::Mat result;
       if(inputType == IMAGE_LIST) {
         curr_image++;
 
@@ -322,7 +299,7 @@ namespace od
 //      cv::Mat descriptors; vector<KeyPoint> kps;
         //fd.findSiftGPUDescriptors(image_list[curr_image].c_str(), descriptors, kps);
 
-        result = imread(image_list[curr_image], IMREAD_COLOR);
+        result = cv::imread(image_list[curr_image], cv::IMREAD_COLOR);
 //      Mat result1 = imread(image_list[curr_image], IMREAD_GRAYSCALE);
 //      Mat temp;
 //      cv::cvtColor(result, temp, cv::COLOR_BGR2GRAY);
@@ -354,7 +331,7 @@ namespace od
     vector<string> image_list;
     string video_read_path;
     int curr_image;
-    VideoCapture inputCapture;
+    cv::VideoCapture inputCapture;
 
     InputType inputType;
     bool exhausted;

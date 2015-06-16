@@ -4,8 +4,36 @@
 
 #include "SimpleRansacDetector.h"
 
+
+#include <opencv2/highgui/highgui.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
+#include <opencv2/calib3d/calib3d.hpp>
+#include <opencv2/video/tracking.hpp>
+#include <opencv2/xfeatures2d.hpp>
+#include <opencv2/viz.hpp>
+#include <sys/time.h>
+#include <common/utils/utils.h>
+
+// PnP Tutorial
+#include "simple_ransac_detection/Mesh.h"
+#include "simple_ransac_detection/Model.h"
+#include "simple_ransac_detection/PnPProblem.h"
+#include "simple_ransac_detection/RobustMatcher.h"
+#include "simple_ransac_detection/ModelRegistration.h"
+#include "simple_ransac_detection/Utils.h"
+
+
+using namespace cv;
+using namespace std;
+using namespace cv::xfeatures2d;
+
 namespace od
 {
+  int SimpleRansacDetector::detect(ODScene *scene, vector<ODDetection *> &detections)
+  {
+    ODSceneImage *sceneimage = dynamic_cast<ODSceneImage *>(scene);
+    return detect(sceneimage, detections);
+  }
 
   void SimpleRansacDetector::parseParameterString(string parameter_string)
   {

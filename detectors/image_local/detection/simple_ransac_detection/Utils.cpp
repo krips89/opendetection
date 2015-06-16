@@ -23,8 +23,8 @@ double fontScale = 0.75;
 int thickness_font = 2;
 
 // For circles
-int lineType = 8;
-int radius = 4;
+int lineType = 16;
+int radius = 1;
 double thickness_circ = -1;
 
 

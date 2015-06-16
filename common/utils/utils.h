@@ -11,6 +11,7 @@
 #include <boost/algorithm/string.hpp>
 
 #include <fstream>
+#include <sstream>
 
 namespace bf = boost::filesystem;
 

@@ -20,9 +20,9 @@ int main(int argc, char *argv[])
   //detector
   od::SimpleRansacDetector *detector = new od::SimpleRansacDetector(trained_data_dir);
   //set commandline options type inputs
-  detector->parseParameterString("--use_gpuaa --fast --method=1 --error=2 --confidence=0.9 --iterations=500 --inliers=30 --metainfo");
+  detector->parseParameterString("--use_gpu --fast --method=1 --error=2 --confidence=0.9 --iterations=500 --inliers=20 --metainfo");
   //set some other inputs
-  detector->setCamera_intrinsic_file("image_local_scenes/out_camera_data_lion_old.yml");
+  detector->setCamera_intrinsic_file("image_local_scenes/camera_webcam_fixed.xml");
   //init
   detector->init();
 
@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
   //feedback
   for(int i = 0; i < detections.size(); i++)
   {
-    cv::namedWindow("Overlay" + toString(i), WINDOW_NORMAL);
+    cv::namedWindow("Overlay" + toString(i), cv::WINDOW_NORMAL);
     detections[i]->printSelf();
     cv::imshow("Overlay" + toString(i), detections[i]->metainfo_image_);
   }
