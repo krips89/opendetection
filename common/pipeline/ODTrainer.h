@@ -11,7 +11,6 @@
 
 #include "ODAlgorithmBase.h"
 
-using namespace std;
 
 namespace bf = boost::filesystem;
 
@@ -26,28 +25,28 @@ namespace od
   {
   public:
 
-    ODTrainer(string const &training_input_location_ ="", string const &training_data_location_="") : training_input_location_(
+    ODTrainer(std::string const &training_input_location_ ="", std::string const &training_data_location_="") : training_input_location_(
         training_input_location_), training_data_location_(training_data_location_)
     { }
 
     virtual int train() = 0;
 
-    string getTrainingInputLocation() const
+    std::string getTrainingInputLocation() const
     {
       return training_input_location_;
     }
 
-    void setTrainingInputLocation(string training_input_location_)
+    void setTrainingInputLocation(std::string training_input_location_)
     {
       this->training_input_location_ = training_input_location_;
     }
 
-    string getTrainingDataLocation() const
+    std::string getTrainingDataLocation() const
     {
       return training_data_location_;
     }
 
-    void setTrainingDataLocation(string training_data_location_)
+    void setTrainingDataLocation(std::string training_data_location_)
     {
       this->training_data_location_ = training_data_location_;
     }
@@ -57,7 +56,7 @@ namespace od
 
 
   protected:
-    string training_input_location_, training_data_location_;
+    std::string training_input_location_, training_data_location_;
   };
 
 }

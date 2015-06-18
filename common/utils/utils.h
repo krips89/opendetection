@@ -44,36 +44,36 @@ namespace bf = boost::filesystem;
 
 
 template<typename T>
-string toString(T Number)
+std::string toString(T Number)
 {
-  ostringstream ss;
+  std::ostringstream ss;
   ss << Number;
   return ss.str();
 }
 
-static string getTexfileinObj(string objfilename)
+static std::string getTexfileinObj(std::string objfilename)
 {
 
   boost::filesystem::path p(objfilename);
-  string input_dir = boost::filesystem::path(objfilename).parent_path().c_str();
+  std::string input_dir = boost::filesystem::path(objfilename).parent_path().c_str();
 
-  ifstream input(objfilename.c_str());
-  string line;
+  std::ifstream input(objfilename.c_str());
+  std::string line;
   while (getline(input, line)) {
-    istringstream iss(line);
-    string tok1;
+    std::istringstream iss(line);
+    std::string tok1;
     iss >> tok1;
     if(tok1 == "mtllib")
     {
-      string tok2;
+      std::string tok2;
 
       iss >> tok2;
-      string linemtl;
+      std::string linemtl;
 
-      ifstream inputmtl((input_dir + "/" + tok2).c_str());
+      std::ifstream inputmtl((input_dir + "/" + tok2).c_str());
       while (getline(inputmtl, linemtl))
       {
-        istringstream issmtl(linemtl);
+        std::istringstream issmtl(linemtl);
         issmtl >> tok1;
         if (tok1 == "map_Kd")
         {
@@ -126,23 +126,23 @@ public:
 
 
 template <typename T, typename Ptype>
-void printListIn ( vector<T> list, int n = 0)
+void printListIn (std::vector<T> list, int n = 0)
 {
   int num;
   if (n == 0) num = list.size();
   else num = n < list.size()? n: list.size();
 
   for (int i = 0; i < num; i++)
-    cout << (Ptype)list[i] << " ";
-  cout << endl;
+    std::cout << (Ptype)list[i] << " ";
+  std::cout << std::endl;
 }
 
 template <typename T>
-void printList ( vector<T> list )
+void printList (std::vector<T> list )
 {
   for (int i = 0; i < list.size(); i++)
-    cout << list[i] << " ";
-  cout << endl;
+    std::cout << list[i] << " ";
+  std::cout << std::endl;
 }
 
 #endif //OPENDETECTION_UTILS_H

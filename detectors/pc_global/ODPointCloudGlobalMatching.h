@@ -45,8 +45,9 @@ namespace od
     }
 
   protected:
+    std::string desc_name;
     ODPointCloudGlobalMatchingTrainer *trainer_;
-    ODPointCloudGlobalMatchingDetector *detector_;
+    ODPointCloudGlobalMatchingDetector<pcl::PointXYZ> *detector_;
   };
 }
 #endif //OPENDETECTION_ODPOINTCLOUDGLOBALMATCHING_H

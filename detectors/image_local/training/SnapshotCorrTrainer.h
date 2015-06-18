@@ -30,7 +30,7 @@ namespace od
   {
 
   public:
-    SnapshotCorrTrainer(std::string const &training_input_location_="", std::string const &training_data_location_="") : ODImageLocalMatchingTrainer(
+    SnapshotCorrTrainer(std::string const &training_input_location_ = "", std::string const &training_data_location_ = "") : ODImageLocalMatchingTrainer(
         training_input_location_, training_data_location_)
     { }
 

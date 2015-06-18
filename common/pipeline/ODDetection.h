@@ -99,16 +99,16 @@ namespace od
 
     Eigen::Matrix3Xd const &getPose() const
     {
-      return pose_;
+      return orientation_;
     }
 
     void setPose(Eigen::Matrix3Xd const &pose_)
     {
-      ODDetection3D::pose_ = pose_;
+      ODDetection3D::orientation_ = pose_;
     }
     void setPose(cv::Mat const & pose_cv)
     {
-      this->pose_ = Eigen::Map<Eigen::Matrix3d>(pose_cv.clone().ptr<double>());
+      this->orientation_ = Eigen::Map<Eigen::Matrix3d>(pose_cv.clone().ptr<double>());
     }
 
     double getScale() const
@@ -134,7 +134,7 @@ namespace od
     ODDetection3D()
     {
       location_ = Eigen::Vector4d::UnitW();
-      pose_.setIdentity();
+      orientation_.setIdentity();
       scale_ = 1;
 
     }
@@ -143,12 +143,12 @@ namespace od
     {
       ODDetection::printSelf();
       cout << "Location: " << location_ << endl;
-      cout << "Pose: " << pose_ << endl;
+      cout << "Pose: " << orientation_ << endl;
       cout << "Scale: " << scale_ << endl;
     }
 
     Eigen::Vector4d location_;
-    Eigen::Matrix3Xd pose_;
+    Eigen::Matrix3Xd orientation_;
     double scale_;
     cv::Mat metainfo_image_;
   };

@@ -12,8 +12,6 @@
 #include "ODAlgorithmBase.h"
 #include <iostream>
 
-using namespace std;
-
 namespace od
 {
   /** \brief The main detection class; all Detector derives from this
@@ -25,24 +23,34 @@ namespace od
   {
   public:
 
-    ODDetector(string const &training_data_location_) : training_data_location_(training_data_location_)
+    ODDetector(std::string const &training_data_location_) : training_data_location_(training_data_location_)
     { }
 
-    virtual int detect(ODScene *scene, vector<ODDetection *> &detections) = 0;
+    virtual int detect(ODScene *scene, std::vector<ODDetection *> &detections) = 0;
 
-    string getTrainingDataLocation() const
+    std::string getTrainingInputLocation() const
+    {
+      return training_input_location_;
+    }
+
+    void setTrainingInputLocation(std::string training_input_location_)
+    {
+      this->training_input_location_ = training_input_location_;
+    }
+
+    std::string getTrainingDataLocation() const
     {
       return training_data_location_;
     }
 
-    void setTrainingDataLocation(string training_data_location_)
+    void setTrainingDataLocation(std::string training_data_location_)
     {
       this->training_data_location_ = training_data_location_;
     }
 
 
   protected:
-    string training_data_location_;
+    std::string training_input_location_, training_data_location_;
   };
 
 }

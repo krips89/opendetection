@@ -6,6 +6,7 @@
 #define OPENDETECTION_ODPOINTCLOUDGLOBALMATCHINGTRAINER_H
 
 #include <common/pipeline/ODTrainer.h>
+#include <iostream>
 
 namespace od
 {
@@ -18,10 +19,25 @@ namespace od
   {
 
   public:
-    ODPointCloudGlobalMatchingTrainer(string const &training_input_location_, string const &training_data_location_) : ODTrainer(training_input_location_, training_data_location_)
-    { }
+    ODPointCloudGlobalMatchingTrainer(std::string const &training_input_location_ = "", std::string const &training_data_location_ = "") : ODTrainer(training_input_location_, training_data_location_)
+    {
+      desc_name = "esf";
+    }
 
     int train();
+
+    std::string const &getDescName() const
+    {
+      return desc_name;
+    }
+
+    void setDescName(std::string const &desc_name)
+    {
+      ODPointCloudGlobalMatchingTrainer::desc_name = desc_name;
+    }
+
+  protected:
+    std::string desc_name;
   };
 }
 

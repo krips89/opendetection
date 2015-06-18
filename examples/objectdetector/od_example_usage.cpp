@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
   //set commandline options type inputs
   detector->parseParameterString("--use_gpu --fast --method=1 --error=2 --confidence=0.9 --iterations=500 --inliers=20 --metainfo");
   //set some other inputs
-  detector->setCamera_intrinsic_file("image_local_scenes/camera_webcam_fixed.xml");
+  detector->setCameraIntrinsicFile("image_local_scenes/camera_webcam_fixed.xml");
   //init
   detector->init();
 

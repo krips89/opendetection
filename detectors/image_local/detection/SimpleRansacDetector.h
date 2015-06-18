@@ -42,12 +42,12 @@ namespace od
   class SimpleRansacDetector : public ODImageLocalMatchingDetector
   {
   public:
-    string const &getCamera_intrinsic_file() const
+    string const &getCameraIntrinsicFile() const
     {
       return camera_intrinsic_file;
     }
 
-    void setCamera_intrinsic_file(string const &camera_intrinsic_file)
+    void setCameraIntrinsicFile(string const &camera_intrinsic_file)
     {
       SimpleRansacDetector::camera_intrinsic_file = camera_intrinsic_file;
     }

@@ -8,7 +8,6 @@
 #include <boost/filesystem.hpp>
 #include <boost/algorithm/string.hpp>
 
-using namespace std;
 
 namespace bf = boost::filesystem;
 
@@ -69,7 +68,7 @@ namespace od
         bf::create_directory(trained_dir);
     }
 
-    void getArgvArgc(string const &commandline, char ***argv, int &argc)
+    void getArgvArgc(std::string const &commandline, char ***argv, int &argc)
     {
       enum
       {
@@ -88,11 +87,11 @@ namespace od
       }
     }
 
-    virtual void parseParameterString(string parameter_string)
+    virtual void parseParameterString(std::string parameter_string)
     { }
 
     virtual void init()
-    { };
+    { }
   };
 }
 
