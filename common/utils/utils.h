@@ -12,6 +12,7 @@
 
 #include <fstream>
 #include <sstream>
+#include <glob.h>
 
 namespace bf = boost::filesystem;
 
@@ -50,6 +51,8 @@ std::string toString(T Number)
   ss << Number;
   return ss.str();
 }
+
+std::vector<std::string> myglob(const std::string& pat);
 
 static std::string getTexfileinObj(std::string objfilename)
 {

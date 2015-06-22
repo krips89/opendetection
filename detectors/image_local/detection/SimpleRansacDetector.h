@@ -10,6 +10,7 @@
 
 #include "common/pipeline/ODDetector.h"
 #include "common/pipeline/ODScene.h"
+#include "common/utils/utils.h"
 
 #include <iostream>
 #include <time.h>

@@ -16,8 +16,6 @@
 
 using namespace std;
 
-std::vector<std::string> myglob(const std::string& pat);
-
 void viewImage(cv::Mat image, vector<cv::KeyPoint> keypoints = vector<cv::KeyPoint>(0));
 
 // Draw a text with the question point

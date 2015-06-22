@@ -1,7 +1,7 @@
 set(SUBSYS_NAME common)
 set(LIB_NAME od_${SUBSYS_NAME})
 set(SUBSYS_DESC "The core module of OpenDetection having the pipeline logic")
-set(SUBSYS_DEPS ${OpenCV_LIBS})
+set(SUBSYS_DEPS ${OpenCV_LIBS} ${PCL_LIBRARIES})
 
 set(build TRUE)
 #PCL_SUBSYS_OPTION(build "${SUBSYS_NAME}" "${SUBSYS_DESC}" ON)
@@ -24,6 +24,7 @@ if(build)
         "pipeline/ODTrainer.h"
         "pipeline/ODDetector.h"
 
+        "utils/ODFrameGenerator.h"
         "utils/utils.h"
         )
 
@@ -33,12 +34,12 @@ if(build)
     set(srcs
         "pipeline/ObjectDetector.cpp"
         "pipeline/ODScene.cpp"
+        "utils/utils.cpp"
         )
 
 
 
-
-    #include_directories("${CMAKE_CURRENT_SOURCE_DIR}/pipeline")
+    include_directories("${OD_SOURCE_DIR}" )
 
     #OD_ADD_LIBRARY("${SUBSYS_NAME}" ${srcs} ${incs} ${impl_incs})
     #OD_ADD_INCLUDES("${SUBSYS_NAME}" ${incs} ${impl_incs})

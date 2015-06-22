@@ -80,6 +80,7 @@ namespace od
       vtkTimerCallbackSnapshot *cb = new vtkTimerCallbackSnapshot;
       cb->snap_count = 0;
       cb->snap_mode = true;
+      cb->feature_type = "SIFT";
       return cb;
     }
 
@@ -125,9 +126,9 @@ namespace od
 
     string takeSnapshot(vtkRenderWindow *renderWindow, int snap_no);
 
-    void write_pairs(vector<pair<cv::Point3f, cv::KeyPoint>> pairs, cv::Mat descriptors, string filename);
+    void write_pairs(vector<pair<cv::Point3f, cv::KeyPoint> > pairs, cv::Mat descriptors, string filename);
 
-    void write_pairs_xml(vector<pair<cv::Point3f, cv::KeyPoint>> pairs, cv::Mat descriptors, string filename);
+    void write_pairs_xml(vector<pair<cv::Point3f, cv::KeyPoint> > pairs, cv::Mat descriptors, string filename);
 
     void process_image(string imgname, vtkRenderer *ren, vtkActor *actor, int ino);
 
@@ -145,7 +146,7 @@ namespace od
     vector<pair<cv::Point3f, cv::KeyPoint> > pairs_3d_2d;
     cv::Mat common_descriptors;
     map<cv::Point3f, cv::KeyPoint, fcomp3d_euclidian> map_3d_2d;
-    string feature_type = "SIFT";
+    string feature_type;
     string input_file, input_dir, output_dir;
 
 

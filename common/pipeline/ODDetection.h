@@ -10,6 +10,9 @@
 #include <Eigen/Core>
 #include <opencv2/core/eigen.hpp>
 
+#include <pcl/point_cloud.h>
+#include <pcl/point_types.h>
+
 using namespace std;
 
 namespace od
@@ -83,7 +86,7 @@ namespace od
   class ODDetection3D : public ODDetection
   {
   public:
-    Eigen::Vector4d const &getLocation_() const
+    Eigen::Vector4d const &getLocation() const
     {
       return location_;
     }
@@ -131,6 +134,16 @@ namespace od
       ODDetection3D::metainfo_image_ = metainfo_image;
     }
 
+    typename pcl::PointCloud<pcl::PointXYZ>::Ptr const &getMetainfoCluster() const
+    {
+      return metainfo_cluster_;
+    }
+
+    void setMetainfoCluster(typename pcl::PointCloud<pcl::PointXYZ>::Ptr const &metainfo_cluster_)
+    {
+      ODDetection3D::metainfo_cluster_ = metainfo_cluster_;
+    }
+
     ODDetection3D()
     {
       location_ = Eigen::Vector4d::UnitW();
@@ -151,6 +164,7 @@ namespace od
     Eigen::Matrix3Xd orientation_;
     double scale_;
     cv::Mat metainfo_image_;
+    typename pcl::PointCloud<pcl::PointXYZ>::Ptr metainfo_cluster_;
   };
 }
 #endif //OPENDETECTION_ODDETECTION_H

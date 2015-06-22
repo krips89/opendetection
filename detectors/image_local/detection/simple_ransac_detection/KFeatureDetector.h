@@ -40,7 +40,7 @@ public:
     if (type == SIFT) {
       feature_detector_ = cv::xfeatures2d::SIFT::create();
     }
-    else if (type = ORB) {
+    else if (type == ORB) {
       feature_detector_ = cv::ORB::create();
     }
     else if (type == SURF) {

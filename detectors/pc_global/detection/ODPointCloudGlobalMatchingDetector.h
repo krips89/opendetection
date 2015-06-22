@@ -40,7 +40,7 @@ namespace od
   * \author Kripasindhu Sarkar
   *
   */
-  template<typename PointT = pcl::PointXYZ>
+  template<typename PointT = pcl::PointXYZRGBA>
   class ODPointCloudGlobalMatchingDetector : public ODDetector
   {
 
@@ -82,7 +82,7 @@ namespace od
   protected:
     int NN;
     string desc_name;
-    boost::shared_ptr<pcl::rec_3d_framework::GlobalClassifier<PointT> > global_;
+    boost::shared_ptr<pcl::rec_3d_framework::GlobalClassifier<pcl::PointXYZ> > global_;
 
   };
 
@@ -117,7 +117,7 @@ namespace od
           vfh_estimator);
 
       //pcl::rec_3d_framework::GlobalNNPipeline<flann::L1, pcl::PointXYZ, pcl::VFHSignature308> global;
-      boost::shared_ptr<pcl::rec_3d_framework::GlobalNNPipeline<flann::ChiSquareDistance, PointT, pcl::VFHSignature308> > global(new pcl::rec_3d_framework::GlobalNNPipeline<flann::ChiSquareDistance, PointT, pcl::VFHSignature308>());
+      boost::shared_ptr<pcl::rec_3d_framework::GlobalNNPipeline<flann::ChiSquareDistance, pcl::PointXYZ, pcl::VFHSignature308> > global(new pcl::rec_3d_framework::GlobalNNPipeline<flann::ChiSquareDistance, pcl::PointXYZ, pcl::VFHSignature308>());
       global->setDataSource(cast_source);
       global->setTrainingDir(training_data_location_);
       global->setDescriptorName(desc_name);
@@ -128,7 +128,45 @@ namespace od
 
       //segmentAndClassify<flann::L1, pcl::PointXYZ, pcl::VFHSignature308> (global);
     }
+    else if (desc_name.compare ("cvfh") == 0)
+    {
+      boost::shared_ptr<pcl::rec_3d_framework::CVFHEstimation<pcl::PointXYZ, pcl::VFHSignature308> > vfh_estimator;
+      vfh_estimator.reset (new pcl::rec_3d_framework::CVFHEstimation<pcl::PointXYZ, pcl::VFHSignature308>);
+      vfh_estimator->setNormalEstimator (normal_estimator);
 
+      boost::shared_ptr<pcl::rec_3d_framework::GlobalEstimator<pcl::PointXYZ, pcl::VFHSignature308> > cast_estimator;
+      cast_estimator = boost::dynamic_pointer_cast<pcl::rec_3d_framework::CVFHEstimation<pcl::PointXYZ, pcl::VFHSignature308> > (vfh_estimator);
+
+      boost::shared_ptr<pcl::rec_3d_framework::GlobalNNPipeline<Metrics::HistIntersectionUnionDistance, pcl::PointXYZ, pcl::VFHSignature308> > global(new pcl::rec_3d_framework::GlobalNNPipeline<Metrics::HistIntersectionUnionDistance, pcl::PointXYZ, pcl::VFHSignature308>());
+      global->setDataSource (cast_source);
+      global->setTrainingDir (training_data_location_);
+      global->setDescriptorName (desc_name);
+      global->setFeatureEstimator (cast_estimator);
+      global->setNN (NN);
+      global->initialize (false);
+      this->global_ = global;
+    }
+    else if (desc_name.compare ("esf") == 0)
+    {
+      boost::shared_ptr<pcl::rec_3d_framework::ESFEstimation<pcl::PointXYZ, pcl::ESFSignature640> > estimator;
+      estimator.reset (new pcl::rec_3d_framework::ESFEstimation<pcl::PointXYZ, pcl::ESFSignature640>);
+
+      boost::shared_ptr<pcl::rec_3d_framework::GlobalEstimator<pcl::PointXYZ, pcl::ESFSignature640> > cast_estimator;
+      cast_estimator = boost::dynamic_pointer_cast<pcl::rec_3d_framework::ESFEstimation<pcl::PointXYZ, pcl::ESFSignature640> > (estimator);
+
+      boost::shared_ptr<pcl::rec_3d_framework::GlobalNNPipeline<flann::L1, pcl::PointXYZ, pcl::ESFSignature640> > global(new pcl::rec_3d_framework::GlobalNNPipeline<flann::L1, pcl::PointXYZ, pcl::ESFSignature640>());
+      global->setDataSource (cast_source);
+      global->setTrainingDir (training_data_location_);
+      global->setDescriptorName (desc_name);
+      global->setFeatureEstimator (cast_estimator);
+      global->setNN (NN);
+      global->initialize (false);
+      this->global_ = global;
+    }
+    else
+    {
+      std::cout << "FATAL: descriptor type not available.";
+    }
 
   }
 
@@ -169,10 +207,6 @@ namespace od
 
     for (size_t i = 0; i < clusters.size (); i++)
     {
-      std::stringstream cluster_name;
-      cluster_name << "cluster_" << i;
-      pcl::visualization::PointCloudColorHandlerRandom<pcl::PointXYZ> random_handler (clusters[i]);
-      //vis.addPointCloud<pcl::PointXYZ> (clusters[i], random_handler, cluster_name.str ());
 
       global_->setInputCloud (xyz_points);
       global_->setIndices (indices[i].indices);
@@ -196,24 +230,8 @@ namespace od
       detection->setType(ODDetection::OD_DETECTION_CLASS);
       detection->setId(categories[0]);
       detection->setLocation(centroid);
+      detection->setMetainfoCluster(clusters[i]);
       detections.push_back(detection);
-
-      /*for (size_t kk = 0; kk < categories.size (); kk++)
-      {
-
-
-        pcl::PointXYZ pos;
-        pos.x = centroid[0] + normal_plane_[0] * static_cast<float> (kk + 1) * dist_;
-        pos.y = centroid[1] + normal_plane_[1] * static_cast<float> (kk + 1) * dist_;
-        pos.z = centroid[2] + normal_plane_[2] * static_cast<float> (kk + 1) * dist_;
-
-        std::ostringstream prob_str;
-        prob_str.precision (1);
-        prob_str << categories[kk] << " [" << conf[kk] << "]";
-
-        std::stringstream cluster_text;
-
-      }*/
     }
 
 

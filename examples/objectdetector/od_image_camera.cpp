@@ -9,21 +9,9 @@
 
 using namespace od;
 
-void visualizeDetection(vector<od::ODDetection3D *> detections)
-{
-  //feedback
-  for(int i = 0; i < detections.size(); i++)
-  {
-    cv::namedWindow("Overlay" + toString(i), cv::WINDOW_NORMAL);
-    detections[i]->printSelf();
-    cv::imshow("Overlay" + toString(i), detections[i]->metainfo_image_);
-  }
-  cv::waitKey();
-}
-
 int main(int argc, char *argv[])
 {
-  string training_input_dir(argv[1]), trained_data_dir(argv[2]), image_files(argv[3]);
+  string training_input_dir(argv[1]), trained_data_dir(argv[2]);
 
   //trainer
   od::SnapshotCorrTrainer *trainer = new od::SnapshotCorrTrainer(training_input_dir, trained_data_dir);
@@ -37,16 +25,22 @@ int main(int argc, char *argv[])
   detector->init();
 
   //get scenes
-  od::ODFrameGenerator<od::ODSceneImage, od::GeneratorType::FILE_LIST> frameGenerator(image_files);
-  while(frameGenerator.isValid())
+  od::ODFrameGenerator<od::ODSceneImage, od::DEVICE> frameGenerator("0");
+  //GUI
+  cv::namedWindow("Overlay", cv::WINDOW_NORMAL);
+  while(frameGenerator.isValid() && cv::waitKey(30) != 27)
   {
     od::ODSceneImage * scene = frameGenerator.getNextFrame();
+    cv::imshow("Overlay", scene->getCVImage());
 
     //Detect
     vector<od::ODDetection3D *> detections;
     detector->detect(scene, detections);
 
-    visualizeDetection(detections);
+    if(detections.size() > 0)
+      cv::imshow("Overlay", detections[0]->metainfo_image_); //only showing the first detection
+    else
+      cv::imshow("Overlay", scene->getCVImage());
   }
 
   return 0;
