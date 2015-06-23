@@ -42,6 +42,13 @@ public:
 
   void set_P_matrix( const cv::Mat &R_matrix, const cv::Mat &t_matrix);
 
+  void clearExtrinsics()
+  {
+    _R_matrix = cv::Mat::zeros(3, 3, CV_64FC1);   // rotation matrix
+    _t_matrix = cv::Mat::zeros(3, 1, CV_64FC1);   // translation matrix
+    _P_matrix = cv::Mat::zeros(3, 4, CV_64FC1);
+  }
+
 private:
   /** The calibration matrix */
   cv::Mat _A_matrix;

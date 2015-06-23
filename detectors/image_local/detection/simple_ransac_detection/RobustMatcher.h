@@ -71,6 +71,8 @@ public:
   void findFeatureAndMatch(cv::Mat const &frame, vector<cv::DMatch> &good_matches, vector<cv::KeyPoint> &keypoints_frame,
                            cv::Mat const &descriptors_model);
 
+  void match(const cv::Mat & descriptors_frame, const cv::Mat &descriptors_model, std::vector<cv::DMatch>& good_matches);
+
 private:
   // pointer to the feature point detector object
   cv::Ptr<KFeatureDetector> featureDetector_;
@@ -84,16 +86,16 @@ private:
   //DIFFERENT TYPES OF MATCHERS, add here in this list (based on the construction
   cv::Ptr<cv::DescriptorMatcher> matcher_;
   cv::Ptr<cv::cuda::DescriptorMatcher> matcher_gpu_;
-  SiftMatchGPU *matcher_sift_gpu_;
   // max ratio between 1st and 2nd NN
   float ratio_;
 
   void instantiateMatcher(Model const &feature_type, bool use_gpu);
 
 
-  void match(const cv::Mat & descriptors_frame, const cv::Mat &descriptors_model, std::vector<cv::DMatch>& good_matches);
+
 
   void instantiateMatcher1(Model const &model, bool use_gpu);
+
 };
 
 #endif /* ROBUSTMATCHER_H_ */

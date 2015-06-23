@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
   size_t previous_cluster_size = 0;
 
 
-  od::ODFrameGenerator<od::ODScenePointCloud<pcl::PointXYZRGBA>, od::DEVICE> frameGenerator("");
+  od::ODFrameGenerator<od::ODScenePointCloud<pcl::PointXYZRGBA>, od::DEVICE> frameGenerator;
   while(frameGenerator.isValid())
   {
 

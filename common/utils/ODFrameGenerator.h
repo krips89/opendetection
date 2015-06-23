@@ -29,7 +29,7 @@ namespace od
   {
   public:
 
-    ODFrameGenerator(std::string input);
+    ODFrameGenerator(std::string input = "");
 
     SceneT * getNextFrame();
 

@@ -44,50 +44,6 @@ void convertToDmatch(int siftgpu_matches[][2], int num_match, vector<cv::DMatch>
   }
 }
 
-void RobustMatcher::instantiateMatcher1(Model const &model, bool use_gpu)
-{
-
-  if (use_gpu_ == true) {
-
-    //####GPU
-
-    //1. for SIFT
-    if (featureDetector_->mode_ == KFeatureDetector::SIFT_GPU) {
-
-
-      matcher_sift_gpu_ = new SiftMatchGPU(4096);
-      //matcher->SetLanguage(SiftMatchGPU::SIFTMATCH_CUDA); // +i for the (i+1)-th device
-      //Verify current OpenGL Context and initialize the Matcher;
-      //If you don't have an OpenGL Context, call matcher->CreateContextGL instead;
-      if (matcher_sift_gpu_->VerifyContextGL() == 0)
-        cout << "FATAL ERROR: SIFTGPUMATCH not initialized properly" << endl;
-
-
-      //add the first descriptor
-      vector<unsigned char> descriptor_model;
-      convertToUnsignedSiftGPU(model.get_descriptors(), descriptor_model);
-
-      cout << model.get_descriptors();
-      printListIn<unsigned char, int>(descriptor_model, 20);
-
-
-      matcher_sift_gpu_->SetDescriptors(0,descriptor_model.size(), &descriptor_model[0]);
-
-    }
-    else
-    {
-      matcher_gpu_ = cv::cuda::DescriptorMatcher::createBFMatcher(cv::NORM_L2);
-      cv::cuda::GpuMat train_descriptors(model.get_descriptors());
-      matcher_gpu_->add(std::vector<cv::cuda::GpuMat>(1, train_descriptors));
-      cout << "GPU matcher instantiated ..." << endl;
-
-    }
-  }
-  else
-  {
-    matcher_ =  cv::makePtr<cv::FlannBasedMatcher>();
-  }
-}
 
 void RobustMatcher::instantiateMatcher(Model const &model, bool use_gpu)
 {
@@ -123,7 +79,7 @@ RobustMatcher::RobustMatcher(Model const &model, bool use_gpu, bool use_gpu_matc
 
 
 
-  featureDetector_ = new KFeatureDetector(model.f_type, use_gpu);
+  //featureDetector_ = new KFeatureDetector(model.f_type, use_gpu);
   instantiateMatcher(model, use_gpu_match);
 
 //  // BruteFroce matcher with Norm Hamming is the default matcher
@@ -242,22 +198,7 @@ void RobustMatcher::match(const cv::Mat & descriptors_frame, const cv::Mat &desc
   std::vector<std::vector<cv::DMatch> > matches;
 
   //if (featureDetector_->mode_ == KFeatureDetector::SIFT_GPU)
-
-  if (featureDetector_->mode_ == 98989898)
-  {
-    //first descriptor is already assigned at the time of init
-    matcher_sift_gpu_->SetDescriptors(1, descriptors_frame.cols, descriptors_frame.data);
-
-    //match and get result.
-    int match_buf[4096][2];
-    //use the default thresholds. Check the declaration in SiftGPU.h
-    int num_match = matcher_sift_gpu_->GetSiftMatch(4096, match_buf);
-    std::cout << num_match << " sift matches were found;\n";
-    convertToDmatch(match_buf, num_match, good_matches);
-
-
-  }
-  else if (use_gpu_)
+  if (use_gpu_)
   {
     matcher_gpu_->knnMatch(cv::cuda::GpuMat(descriptors_frame), matches, 2); // return 2 nearest neighbours
     ratioTest(matches);
@@ -333,6 +274,7 @@ void RobustMatcher::findFeatureAndMatch( const cv::Mat& frame, std::vector<cv::D
   match(descriptors_frame, descriptors_model, good_matches);
 
 }
+
 
 void RobustMatcher::fastRobustMatch( const cv::Mat& frame, std::vector<cv::DMatch>& good_matches,
                                  std::vector<cv::KeyPoint>& keypoints_frame,

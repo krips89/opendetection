@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
   detector->init();
 
   //get scenes
-  od::ODFrameGenerator<od::ODSceneImage, od::GeneratorType::FILE_LIST> frameGenerator(image_files);
+  od::ODFrameGenerator<od::ODSceneImage, od::FILE_LIST> frameGenerator(image_files);
   while(frameGenerator.isValid())
   {
     od::ODSceneImage * scene = frameGenerator.getNextFrame();

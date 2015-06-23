@@ -51,14 +51,13 @@ public:
     }
     else if (type == SIFT_GPU) {
       sift_gpu_ = new SiftGPU;
-      char * argv[] = {(char *)"-fo", (char *)"-1",  (char *)"-v", (char *)"1"};
+      //char * argv[] = {(char *)"-fo", (char *)"-1",  (char *)"-v", (char *)"1"};
+      char * argv[] = {(char *)"-fo", (char *)"-1",  (char *)"-v", (char *)"3", (char *)"-cuda"};
       int argc = sizeof(argv)/sizeof(char*);
       sift_gpu_->ParseParam(argc, argv);
       if(sift_gpu_->CreateContextGL() != SiftGPU::SIFTGPU_FULL_SUPPORTED)
         cout << "FATAL ERROR cannot create SIFTGPU context";
-
     }
-
   }
 
   //always return Opencv type keypoints
@@ -74,11 +73,10 @@ private:
   //cv::Ptr<cv::DescriptorExtractor> extractor_;
 
   cv::Ptr<cv::FeatureDetector> feature_detector_;
-  SiftGPU *sift_gpu_;
+  cv::Ptr<SiftGPU> sift_gpu_;
 
 
   void findSiftGPUDescriptors1(cv::Mat const &image, cv::Mat &descriptors, vector<cv::KeyPoint> &keypoints);
 };
-
 
 #endif //OBJECT_DETECTION_FEATUREDETECTOR_H

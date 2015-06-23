@@ -33,12 +33,33 @@ namespace od
   {
   public:
 
-    ODSceneImage(cv::Mat const &cvimage)
+    std::vector<cv::KeyPoint> const &getKeypoints() const
+    {
+      return keypoints_;
+    }
+
+    void setKeypoints(std::vector<cv::KeyPoint> const &keypoints_)
+    {
+      ODSceneImage::keypoints_ = keypoints_;
+    }
+
+    cv::Mat const &getDescriptors() const
+    {
+      return descriptors_;
+    }
+
+    void setDescriptors(cv::Mat const &descriptors_)
+    {
+      ODSceneImage::descriptors_ = descriptors_;
+      is_trained_ = true;
+    }
+
+    ODSceneImage(cv::Mat const &cvimage):is_trained_(false)
     {
       this->cvimage_ = cvimage.clone();
     }
 
-    ODSceneImage(std::string const &path)
+    ODSceneImage(std::string const &path):is_trained_(false)
     {
       this->cvimage_ = cv::imread(path);
     }
@@ -55,6 +76,11 @@ namespace od
 
   protected:
     cv::Mat cvimage_;
+
+    std::vector<cv::KeyPoint> keypoints_;
+    cv::Mat descriptors_;
+    bool is_trained_;
+
   };
 
 

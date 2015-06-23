@@ -18,6 +18,7 @@
 #include <opencv2/core/core.hpp>
 #include <opencv2/core/utility.hpp>
 #include <opencv2/calib3d.hpp>
+#include <detectors/image_local/detection/simple_ransac_detection/KFeatureDetector.h>
 
 
 #include "simple_ransac_detection/Utils.h"
@@ -187,7 +188,8 @@ namespace od
       minInliers = 30;    // Kalman threshold updating
 
       pnpMethod = cv::SOLVEPNP_EPNP;
-
+      f_type_default = "SIFT";
+      featureDetector = boost::make_shared<KFeatureDetector>(f_type_default, use_gpu);
     }
 
     void parseParameterString(string parameter_string);
@@ -205,7 +207,6 @@ namespace od
     cv::Scalar green;
     cv::Scalar blue;
     cv::Scalar yellow;
-
 
 // Robust Matcher parameters
     int numKeyPoints;      // number of detected keypoints
@@ -230,118 +231,10 @@ namespace od
     vector<string> model_names;
     vector<Model> models;
     PnPProblem pnp_detection;
+    std::string f_type_default;
+    boost::shared_ptr<KFeatureDetector> featureDetector;
 
     bool detectSingleModel(ODSceneImage *scene, Model const &model, ODDetection3D * &pD);
-  };
-
-
-
-
-
-  class FrameGenerator
-  {
-  public:
-    FrameGenerator(cv::CommandLineParser parser)
-    {
-      //some hardcoded default values (TEST ONE IMAGES), the program will run even without any arguments
-      cameraID = 0;
-      curr_image = -1;
-      string test_images = "Data/Lion/test_images/IMG_20150226_102852.jpg";
-      image_list = myglob(test_images);
-
-      inputType = IMAGE_LIST;
-
-      exhausted = false;
-      cout << "yo " << parser.get<int>("cam_id") << endl;
-
-      //parsing input from the arguments now
-      if(parser.get<string>("test_images").size() > 0) {
-        test_images = parser.get<string>("test_images");
-        inputType = IMAGE_LIST;
-        image_list = myglob(test_images);
-      }
-      if(parser.get<string>("video").size() > 0) {
-        video_read_path = parser.get<string>("video");
-        inputType = VIDEO_FILE;
-        inputCapture.open(video_read_path);
-        if(!inputCapture.isOpened()) {
-          cout << "FATAL: Cannot open video capture!";
-          exhausted = true;
-        }
-      }
-      if(parser.has("cam_id"))      //MAX PREFERENCE
-      {
-        cameraID = !parser.get<int>("cam_id") ? parser.get<int>("cam_id") : cameraID;
-        inputType = CAMERA;
-        inputCapture.open(cameraID);
-        if(!inputCapture.isOpened()) {
-          cout << "FATAL: Cannot open video capture!";
-          exhausted = true;
-        }
-      }
-
-
-    }
-
-    cv::Mat getNextFrame()
-    {
-      cv::Mat result;
-      if(inputType == IMAGE_LIST) {
-        curr_image++;
-
-        //sleep(3); //wait for 3 seconds
-
-        if(curr_image == image_list.size() - 1)
-          exhausted = true;
-        cout << "Frame: " << image_list[curr_image] << endl;
-
-
-//      KFeatureDetector fd("SIFT", true);
-//      cv::Mat descriptors; vector<KeyPoint> kps;
-        //fd.findSiftGPUDescriptors(image_list[curr_image].c_str(), descriptors, kps);
-
-        result = cv::imread(image_list[curr_image], cv::IMREAD_COLOR);
-//      Mat result1 = imread(image_list[curr_image], IMREAD_GRAYSCALE);
-//      Mat temp;
-//      cv::cvtColor(result, temp, cv::COLOR_BGR2GRAY);
-
-        //2
-//      fd.findSiftGPUDescriptors(result1, descriptors, kps );
-//      fd.findSiftGPUDescriptors(temp, descriptors, kps );
-//      fd.findSiftGPUDescriptors(result, descriptors, kps );
-
-      } else {
-        if(inputCapture.isOpened()) {
-          //as real time as possible
-          inputCapture.read(result);
-        } else exhausted = false;
-      }
-
-      return result;
-    }
-
-  public:
-    enum InputType
-    {
-      INVALID, CAMERA, VIDEO_FILE, IMAGE_LIST
-    };
-
-    string input;
-
-    int cameraID;
-    vector<string> image_list;
-    string video_read_path;
-    int curr_image;
-    cv::VideoCapture inputCapture;
-
-    InputType inputType;
-    bool exhausted;
-
-
-  private:
-    string patternToUse;
-
-
   };
 
 

@@ -90,7 +90,6 @@ namespace od
     fs["Distortion_Coefficients"] >> dist_coeff;
     pnp_detection = PnPProblem(cam_man, dist_coeff);
 
-
     // get all trained models
     string start_path = "";
     boost::filesystem::path dir(training_data_location_);
@@ -101,13 +100,25 @@ namespace od
       model.load_new_xml(training_data_location_ + "/" + model_names[i]);
       models.push_back(model);
     }
+    if (models.size() > 0)
+      f_type_default = models[0].f_type;
+
+    featureDetector = boost::make_shared<KFeatureDetector>(f_type_default, use_gpu);
 
   }
 
   int SimpleRansacDetector::detect(ODSceneImage *scene, vector<ODDetection3D *> &detections)
   {
+
+
+    vector<KeyPoint> keypoints_scene;
+    Mat descriptor_scene;
+    featureDetector->computeKeypointsAndDescriptors(scene->getCVImage(), descriptor_scene, keypoints_scene);
+    scene->setDescriptors(descriptor_scene); scene->setKeypoints(keypoints_scene);
+
     for(int i = 0; i < models.size(); i++) {
-      ODDetection3D *detection = new ODDetection3D;
+
+      ODDetection3D *detection;
       if(detectSingleModel(scene, models[i], detection))
         detections.push_back(detection);
     }
@@ -125,16 +136,12 @@ namespace od
 
     // -- Step 1: Robust matching between model descriptors and scene descriptors
     vector<DMatch> good_matches;       // to obtain the 3D points of the model
-    vector<KeyPoint> keypoints_scene;  // to obtain the 2D points of the scene
+    vector<KeyPoint> keypoints_scene = scene->getKeypoints();  // to obtain the 2D points of the scene
 
     Mat frame = scene->getCVImage();
     Mat frame_vis = frame.clone();
 
-    if(fast_match) {
-      rmatcher.findFeatureAndMatch(frame, good_matches, keypoints_scene, descriptors_model);
-    } else {
-      rmatcher.robustMatch(frame, good_matches, keypoints_scene, descriptors_model);
-    }
+    rmatcher.match(scene->getDescriptors(), descriptors_model, good_matches);
 
     if(good_matches.size() <= 0) return false;
 
@@ -183,23 +190,26 @@ namespace od
 
       drawModel(frame_vis, &model, &pnp_detection, yellow); // draw estimated pose
 
-      cout << "Object detected!!!" << endl;
+      cout << "Object detected: " << model.id << endl;
       // Draw some debug text
       int inliers_int = inliers_idx.rows;
       int outliers_int = (int) good_matches.size() - inliers_int;
       string inliers_str = IntToString(inliers_int);
       string outliers_str = IntToString(outliers_int);
       string n = IntToString((int) good_matches.size());
-      string text = "Found " + inliers_str + " of " + n + " matches";
+      string text = "Found: " +  model.id;
       string text2 = "Inliers: " + inliers_str + " - Outliers: " + outliers_str;
+
 
       drawText(frame_vis, text, green);
       drawText2(frame_vis, text2, red);
       detection3D->setMetainfoImage(frame_vis);
     }
 
+    //reset
+    pnp_detection.clearExtrinsics();
+
     return true;
   }
-
 
 }

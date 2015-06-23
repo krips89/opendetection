@@ -21,13 +21,15 @@ int main(int argc, char *argv[])
   od::ODFrameGenerator<od::ODScenePointCloud<pcl::PointXYZRGBA>, od::DEVICE> frameGenerator("");
   while(frameGenerator.isValid())
   {
-
+    //get frame
     frame = frameGenerator.getNextFrame();
 
     vis.removePointCloud ("frame");
     vis.addPointCloud<pcl::PointXYZRGBA> (frame->getPointCloud(), "frame");
-
     vis.spinOnce ();
+
+    //free frame
+    delete frame;
   }
   return 0;
 }
