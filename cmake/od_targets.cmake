@@ -67,7 +67,7 @@ macro(OD_ADD_LIBRARY_ALL _name )
     set(multiValueArgs SRCS INCS)
     cmake_parse_arguments(OD_ADD_LIBRARY_ALL "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN} )
 
-    message(input to od_add_library: ${OD_LIB_TYPE} ${OD_ADD_LIBRARY_ALL_SRCS} ${OD_ADD_LIBRARY_ALL_INCS})
+    #message(input to od_add_library: ${OD_LIB_TYPE} ${OD_ADD_LIBRARY_ALL_SRCS} ${OD_ADD_LIBRARY_ALL_INCS})
 
     add_library(${lib_name} ${OD_LIB_TYPE} ${OD_ADD_LIBRARY_ALL_SRCS} ${OD_ADD_LIBRARY_ALL_INCS})
 
@@ -99,7 +99,7 @@ macro(OD_ADD_LIBRARY _name)
 
     include_directories("${OD_SOURCE_DIR}")
 
-    message(input to od_add_library: ${OD_LIB_TYPE} ${ARGN})
+    #message(input to od_add_library: ${OD_LIB_TYPE} ${ARGN})
     add_library(${lib_name} ${OD_LIB_TYPE} ${ARGN})
 
 
