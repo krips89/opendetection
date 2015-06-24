@@ -1,7 +1,11 @@
 set(SUBSYS_NAME local_image_detector)
 set(LIB_NAME od_${SUBSYS_NAME})
 set(SUBSYS_DESC "The local feature matching based detector")
-set(SUBSYS_DEPS od_common ${PCL_LIBRARIES} ${VTK_LIBRARIES} ${OpenCV_LIBS} pugixml siftgpu)
+
+set(SUBSYS_DEPS od_common ${PCL_LIBRARIES} ${VTK_LIBRARIES} ${OpenCV_LIBS} pugixml)
+if(WITH_GPU)
+  set(SUBSYS_DEPS ${SUBSYS_DEPS} siftgpu)
+endif()
 
 set(build TRUE)
 #PCL_SUBSYS_OPTION(build "${SUBSYS_NAME}" "${SUBSYS_DESC}" ON)
@@ -10,6 +14,7 @@ set(build TRUE)
 
 if(build)
 
+    #include all the individual implementation dirs
     add_subdirectory(detection/simple_ransac_detection)
 
     set(incs
@@ -31,11 +36,6 @@ if(build)
         ${SUB_IMPL_SRCS}
         )
 
-    #include all the individual implementation dirs
-
-
-    #set mandatory directories
-    include_directories("${OD_SOURCE_DIR}" )
 
     OD_ADD_LIBRARY_ALL("${SUBSYS_NAME}" SRCS ${srcs} INCS ${incs} ${impl_incs})
 

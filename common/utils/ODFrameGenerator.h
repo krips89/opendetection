@@ -21,7 +21,7 @@ namespace od
 {
   enum GeneratorType
   {
-    FILE_LIST, DEVICE
+    GENERATOR_TYPE_FILE_LIST, GENERATOR_TYPE_DEVICE
   };
 
   template<typename SceneT, GeneratorType TYPE>
@@ -45,7 +45,7 @@ namespace od
   };
 
   template<typename SceneT>
-  class ODFrameGenerator<SceneT, FILE_LIST>
+  class ODFrameGenerator<SceneT, GENERATOR_TYPE_FILE_LIST>
   {
   public:
     ODFrameGenerator(std::string const input = "")
@@ -77,7 +77,7 @@ namespace od
   };
 
   template<>
-  class ODFrameGenerator<ODSceneImage, DEVICE>
+  class ODFrameGenerator<ODSceneImage, GENERATOR_TYPE_DEVICE>
   {
   public:
     ODFrameGenerator(std::string input = "")
@@ -98,7 +98,7 @@ namespace od
 
   /*
   template<>
-  class ODFrameGenerator<ODScenePointCloud<pcl::PointXYZRGBA> , DEVICE>
+  class ODFrameGenerator<ODScenePointCloud<pcl::PointXYZRGBA> , GENERATOR_TYPE_DEVICE>
   {
   public:
 
@@ -131,7 +131,7 @@ namespace od
 
 
   template<>
-  class ODFrameGenerator<ODScenePointCloud<pcl::PointXYZRGBA> , DEVICE>
+  class ODFrameGenerator<ODScenePointCloud<pcl::PointXYZRGBA> , GENERATOR_TYPE_DEVICE>
   {
   public:
     typedef pcl::PointXYZRGBA PointT;
@@ -142,7 +142,7 @@ namespace od
     /* A simple class for capturing data from an OpenNI camera */
     ODFrameGenerator(std::string input = "") : grabber_(input), most_recent_frame_(), frame_counter_(0), active_(true)
     {
-      boost::function<void(const PointCloudConstPtr&)> frame_cb = boost::bind (&ODFrameGenerator<ODScenePointCloud<pcl::PointXYZRGBA> , DEVICE>::onNewFrame, this, _1);
+      boost::function<void(const PointCloudConstPtr&)> frame_cb = boost::bind (&ODFrameGenerator<ODScenePointCloud<pcl::PointXYZRGBA> , GENERATOR_TYPE_DEVICE>::onNewFrame, this, _1);
       grabber_.registerCallback (frame_cb);
       grabber_.start ();
       boost::this_thread::sleep (boost::posix_time::seconds(5));

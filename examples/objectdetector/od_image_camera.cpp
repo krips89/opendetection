@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
   detector->init();
 
   //get scenes
-  od::ODFrameGenerator<od::ODSceneImage, od::DEVICE> frameGenerator("0");
+  od::ODFrameGenerator<od::ODSceneImage, od::GENERATOR_TYPE_DEVICE> frameGenerator("0");
   //GUI
   cv::namedWindow("Overlay", cv::WINDOW_NORMAL);
   while(frameGenerator.isValid() && cv::waitKey(30) != 27)

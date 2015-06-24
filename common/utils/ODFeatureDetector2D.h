@@ -65,9 +65,6 @@ namespace od
     void findSiftGPUDescriptors(cv::Mat const &image, cv::Mat &descriptors, vector<cv::KeyPoint> &keypoints);
 
   private:
-    //cv::Ptr<cv::FeatureDetector> detector_;
-    // pointer to the feature descriptor extractor object
-    //cv::Ptr<cv::DescriptorExtractor> extractor_;
 
     cv::Ptr<cv::FeatureDetector> feature_detector_;
     cv::Ptr<SiftGPU> sift_gpu_;

@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
   pcl::visualization::PCLVisualizer vis ("kinect");
 
   od::ODScenePointCloud<pcl::PointXYZRGBA> *frame;
-  od::ODFrameGenerator<od::ODScenePointCloud<pcl::PointXYZRGBA>, od::DEVICE> frameGenerator("");
+  od::ODFrameGenerator<od::ODScenePointCloud<pcl::PointXYZRGBA>, od::GENERATOR_TYPE_DEVICE> frameGenerator("");
   while(frameGenerator.isValid())
   {
     //get frame

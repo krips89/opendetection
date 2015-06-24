@@ -16,7 +16,7 @@ namespace od
     if(use_gpu) {
 
 
-      //##########GPU VERSION!!!!
+      //##########GPU VERSION
 
 
       if(type == "ORB") {
@@ -83,8 +83,6 @@ namespace od
 
   void ODFeatureDetector2D::findSiftGPUDescriptors1(cv::Mat const &image, cv::Mat &descriptors, vector<cv::KeyPoint> &keypoints)
   {
-
-
     unsigned char *data = image.data;
     cv::Mat greyimage;
     if(image.type() != CV_8U) {
@@ -125,8 +123,6 @@ namespace od
 
   void ODFeatureDetector2D::findSiftGPUDescriptors(cv::Mat const &image, cv::Mat &descriptors, vector<cv::KeyPoint> &keypoints)
   {
-
-
     unsigned char *data = image.data;
     cv::Mat greyimage;
     if(image.type() != CV_8U) {
@@ -163,8 +159,6 @@ namespace od
 
   void ODFeatureDetector2D::findSiftGPUDescriptors(char const *image_name, cv::Mat &descriptors, vector<cv::KeyPoint> &keypoints)
   {
-
-
     sift_gpu_->RunSIFT(image_name);
 
     int nFeat = sift_gpu_->GetFeatureNum();//get feature count

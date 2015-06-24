@@ -4,8 +4,6 @@ set(SUBSYS_DESC "The core module of OpenDetection having the pipeline logic")
 set(SUBSYS_DEPS ${OpenCV_LIBS} ${PCL_LIBRARIES})
 
 set(build TRUE)
-#PCL_SUBSYS_OPTION(build "${SUBSYS_NAME}" "${SUBSYS_DESC}" ON)
-#PCL_SUBSYS_DEPEND(build "${SUBSYS_NAME}" DEPS ${SUBSYS_DEPS})
 
 
 if(build)
@@ -38,13 +36,6 @@ if(build)
         "utils/utils.cpp"
         "utils/ODFeatureDetector2D.cpp"
         )
-
-
-
-    include_directories("${OD_SOURCE_DIR}" )
-
-    #OD_ADD_LIBRARY("${SUBSYS_NAME}" ${srcs} ${incs} ${impl_incs})
-    #OD_ADD_INCLUDES("${SUBSYS_NAME}" ${incs} ${impl_incs})
 
     OD_ADD_LIBRARY_ALL("${SUBSYS_NAME}" SRCS ${srcs} INCS ${incs} ${impl_incs})
 
