@@ -13,7 +13,7 @@
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/features2d/features2d.hpp>
-#include "KFeatureDetector.h"
+#include "common/utils/ODFeatureDetector2D.h"
 #include "Model.h"
 
 using namespace std;
@@ -75,7 +75,7 @@ public:
 
 private:
   // pointer to the feature point detector object
-  cv::Ptr<KFeatureDetector> featureDetector_;
+  cv::Ptr<od::ODFeatureDetector2D> featureDetector_;
 
   cv::Ptr<cv::FeatureDetector> detector_;
   // pointer to the feature descriptor extractor object

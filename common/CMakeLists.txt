@@ -26,6 +26,7 @@ if(build)
 
         "utils/ODFrameGenerator.h"
         "utils/utils.h"
+        "utils/ODFeatureDetector2D.h"
         )
 
     set(impl_incs
@@ -35,6 +36,7 @@ if(build)
         "pipeline/ObjectDetector.cpp"
         "pipeline/ODScene.cpp"
         "utils/utils.cpp"
+        "utils/ODFeatureDetector2D.cpp"
         )
 
 

@@ -103,7 +103,7 @@ namespace od
     if (models.size() > 0)
       f_type_default = models[0].f_type;
 
-    featureDetector = boost::make_shared<KFeatureDetector>(f_type_default, use_gpu);
+    featureDetector = boost::make_shared<ODFeatureDetector2D>(f_type_default, use_gpu);
 
   }
 

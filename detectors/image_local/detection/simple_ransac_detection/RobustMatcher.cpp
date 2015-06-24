@@ -79,7 +79,6 @@ RobustMatcher::RobustMatcher(Model const &model, bool use_gpu, bool use_gpu_matc
 
 
 
-  //featureDetector_ = new KFeatureDetector(model.f_type, use_gpu);
   instantiateMatcher(model, use_gpu_match);
 
 //  // BruteFroce matcher with Norm Hamming is the default matcher
@@ -197,7 +196,6 @@ void RobustMatcher::match(const cv::Mat & descriptors_frame, const cv::Mat &desc
 {
   std::vector<std::vector<cv::DMatch> > matches;
 
-  //if (featureDetector_->mode_ == KFeatureDetector::SIFT_GPU)
   if (use_gpu_)
   {
     matcher_gpu_->knnMatch(cv::cuda::GpuMat(descriptors_frame), matches, 2); // return 2 nearest neighbours

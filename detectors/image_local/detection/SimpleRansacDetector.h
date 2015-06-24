@@ -11,6 +11,7 @@
 #include "common/pipeline/ODDetector.h"
 #include "common/pipeline/ODScene.h"
 #include "common/utils/utils.h"
+#include "common/utils/ODFeatureDetector2D.h"
 
 #include <iostream>
 #include <time.h>
@@ -18,7 +19,7 @@
 #include <opencv2/core/core.hpp>
 #include <opencv2/core/utility.hpp>
 #include <opencv2/calib3d.hpp>
-#include <detectors/image_local/detection/simple_ransac_detection/KFeatureDetector.h>
+
 
 
 #include "simple_ransac_detection/Utils.h"
@@ -189,7 +190,7 @@ namespace od
 
       pnpMethod = cv::SOLVEPNP_EPNP;
       f_type_default = "SIFT";
-      featureDetector = boost::make_shared<KFeatureDetector>(f_type_default, use_gpu);
+      featureDetector = boost::make_shared<ODFeatureDetector2D>(f_type_default, use_gpu);
     }
 
     void parseParameterString(string parameter_string);
@@ -232,7 +233,7 @@ namespace od
     vector<Model> models;
     PnPProblem pnp_detection;
     std::string f_type_default;
-    boost::shared_ptr<KFeatureDetector> featureDetector;
+    boost::shared_ptr<ODFeatureDetector2D> featureDetector;
 
     bool detectSingleModel(ODSceneImage *scene, Model const &model, ODDetection3D * &pD);
   };
