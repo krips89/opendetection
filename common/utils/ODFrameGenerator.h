@@ -5,12 +5,6 @@
 #ifndef OPENDETECTION_ODFRAMEGENERATOR_H
 #define OPENDETECTION_ODFRAMEGENERATOR_H
 
-/** \brief The FrameGenerator class for capturing and reading Scenes conveniently
-   *
-   * \author Kripasindhu Sarkar
-   *
-   */
-
 #include "common/pipeline/ODDetection.h"
 #include "common/pipeline/ODScene.h"
 #include <iostream>
@@ -24,6 +18,11 @@ namespace od
     GENERATOR_TYPE_FILE_LIST, GENERATOR_TYPE_DEVICE
   };
 
+  /** \brief The FrameGenerator class for capturing and reading Scenes conveniently
+   *
+   * \author Kripasindhu Sarkar
+   *
+   */
   template<typename SceneT, GeneratorType TYPE>
   class ODFrameGenerator
   {

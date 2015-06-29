@@ -117,7 +117,8 @@ EXCLUDE                = "@OD_SOURCE_DIR@/cmake" \
 
 EXCLUDE_SYMLINKS       = YES
 EXCLUDE_PATTERNS       = "@OD_SOURCE_DIR@/detectors/*/detection/*/*" \
-                         "@OD_SOURCE_DIR@/detectors/*/training/*/*"
+                         "@OD_SOURCE_DIR@/detectors/*/training/*/*" \
+                         "@OD_SOURCE_DIR@/3rdparty/*"
 EXCLUDE_SYMBOLS        = 
 EXAMPLE_PATH           = 
 EXAMPLE_PATTERNS       = *
