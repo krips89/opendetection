@@ -21,17 +21,6 @@
 #include <pcl/visualization/pcl_visualizer.h>
 #include <pcl/apps/dominant_plane_segmentation.h>
 #include <pcl/console/parse.h>
-template <typename T>
-void printVector ( std::vector<T> vec )
-{
-  for (int i = 0; i < vec.size(); i++)
-  {
-    std::cout << vec[i] << " ";
-  }
-  std::cout << std::endl;
-}
-
-
 
 namespace od
 {
@@ -45,7 +34,7 @@ namespace od
   {
 
   public:
-    ODPointCloudGlobalMatchingDetector(string const &training_data_location_ = "") : ODDetector(training_data_location_), NN(2), desc_name("vfh")
+    ODPointCloudGlobalMatchingDetector(string const &training_data_location_ = "") : ODDetector(training_data_location_), NN(2), desc_name("esf")
     { }
 
     void init();
@@ -87,8 +76,6 @@ namespace od
   };
 
 
-  //bin/pcl_global_classification -models_dir /home/aitor/data/3d-net_one_class/ -descriptor_name esf -training_dir /home/aitor/data/3d-net_one_class_trained_level_1 -nn 10
-
   template<typename PointT>
   void ODPointCloudGlobalMatchingDetector<PointT>::init()
   {
@@ -116,8 +103,7 @@ namespace od
       cast_estimator = boost::dynamic_pointer_cast<pcl::rec_3d_framework::VFHEstimation<pcl::PointXYZ, pcl::VFHSignature308> >(
           vfh_estimator);
 
-      //pcl::rec_3d_framework::GlobalNNPipeline<flann::L1, pcl::PointXYZ, pcl::VFHSignature308> global;
-      boost::shared_ptr<pcl::rec_3d_framework::GlobalNNPipeline<flann::ChiSquareDistance, pcl::PointXYZ, pcl::VFHSignature308> > global(new pcl::rec_3d_framework::GlobalNNPipeline<flann::ChiSquareDistance, pcl::PointXYZ, pcl::VFHSignature308>());
+      boost::shared_ptr<pcl::rec_3d_framework::GlobalNNPipeline<flann::L1, pcl::PointXYZ, pcl::VFHSignature308> > global(new pcl::rec_3d_framework::GlobalNNPipeline<flann::L1, pcl::PointXYZ, pcl::VFHSignature308>());
       global->setDataSource(cast_source);
       global->setTrainingDir(training_data_location_);
       global->setDescriptorName(desc_name);
@@ -126,7 +112,6 @@ namespace od
       global->initialize(false);
       this->global_ = global;
 
-      //segmentAndClassify<flann::L1, pcl::PointXYZ, pcl::VFHSignature308> (global);
     }
     else if (desc_name.compare ("cvfh") == 0)
     {
@@ -177,8 +162,6 @@ namespace od
     float Z_DIST_ = 1.25f;
     float text_scale = 0.015f;
 
-
-    pcl::ScopeTime frame_process ("Global frame processing ------------- ");
     frame = scene->getPointCloud();
     pcl::PointCloud<pcl::PointXYZ>::Ptr xyz_points (new pcl::PointCloud<pcl::PointXYZ>);
     pcl::copyPointCloud (*frame, *xyz_points);
@@ -216,8 +199,6 @@ namespace od
       std::vector<float> conf;
       global_->getCategory (categories);
       global_->getConfidence (conf);
-      printVector(categories);
-      printVector(conf);
       //detection done!
 
       std::string category = categories[0];

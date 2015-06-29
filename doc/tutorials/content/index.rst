@@ -17,6 +17,19 @@ Table of contents
 Basic Usage
 -----------
 
+  * :ref:`installation_instruction`
+
+     ======  ======
+             Title: **Installation instructions**
+
+             Author: *Kripasindhu Sarkar*
+
+             Compatibility: > OD 1.0
+
+             This guide provides the instruction for installing OD with its dependencies and get it working.            
+     ======  ======
+
+
   * :ref:`basic_structures`
 
      ======  ======
