@@ -3,7 +3,7 @@
 Installation Instructions
 =========================
 
-To compile OD from source please install its dependencies first as stated below.
+To compile OD from source, install its dependencies as stated below.
 
 
 Dependencies
@@ -14,17 +14,17 @@ Dependencies
     :Source: http://opencv.org/downloads.html or https://github.com/Itseez/opencv
     
         
-    :Required setting:
+    Required setting
     
     - OpenCV contrib (for xfeatures2d module handing SIFT/SURF features):
      
            Detailed instructions with source: https://github.com/itseez/opencv_contrib
            
-           Additional CMAKE options: OPENCV_EXTRA_MODULES_PATH=<opencv_contrib>/modules
+           :Additional CMAKE options: OPENCV_EXTRA_MODULES_PATH=<opencv_contrib>/modules
            
     - OpenCV CUDA module (for GPU enabled feature detectors and matcher): 
     
-           Additional CMAKE options: WITH_CUDA=ON
+           :Additional CMAKE options: WITH_CUDA=ON
     
     Compile and install Opencv 3.0 with the above settings.
  
@@ -42,11 +42,11 @@ Dependencies
     
     * 3d_rec_framework (for ESF, ESF etc recognition pipeline)
     
-        Additional CMAKE options: BUILD_apps=ON, BUILD_apps_3d_rec_framework=ON
+        :Additional CMAKE options: BUILD_apps=ON, BUILD_apps_3d_rec_framework=ON
     
 4. Eigen
 
 OD
 --
-Download the source from https://github.com/krips89/opendetection. With the above dependencies installed OD should compile fine. If you still encounter a problem shoot an email at krips.from.iit.kgp@gmail.com.
+Download the source from https://github.com/krips89/opendetection. With the above dependencies installed, OD should compile fine. If you still encounter a problem shoot an email at krips.from.iit.kgp@gmail.com.
 
