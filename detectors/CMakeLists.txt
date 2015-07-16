@@ -1,2 +1,3 @@
 add_subdirectory(image_local)
+add_subdirectory(image_global)
 add_subdirectory(pc_global)

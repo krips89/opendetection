@@ -172,14 +172,14 @@ namespace od
     dps.setInputCloud (xyz_points);
     dps.setMaxZBounds (Z_DIST_);
     dps.setObjectMinHeight (0.005);
-    dps.setMinClusterSize (1000);
+    dps.setMinClusterSize (50);
     dps.setWSize (9);
-    dps.setDistanceBetweenClusters (0.1f);
+    dps.setDistanceBetweenClusters (0.01f);
 
     std::vector<pcl::PointCloud<pcl::PointXYZ>::Ptr> clusters;
     std::vector<pcl::PointIndices> indices;
-    dps.setDownsamplingSize (0.02f);
-    dps.compute_fast (clusters);
+    dps.setDownsamplingSize (0.002f);
+    dps.compute_full (clusters);
     dps.getIndicesClusters (indices);
     Eigen::Vector4f table_plane_;
     Eigen::Vector3f normal_plane_ = Eigen::Vector3f (table_plane_[0], table_plane_[1], table_plane_[2]);
