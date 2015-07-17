@@ -16,6 +16,15 @@
 namespace od
 {
 
+  /** \brief ODHOGMultiscaleDetector: A linear classifier detector for HOG features
+   * User can set any linear classifier through setSVMDetector function or one of the default available detectors like OD_DEFAULT_PEOPLE
+   * This class will then find HOG features in the scene and use the liniar classification model as an input to classify the scene
+   * It covers both simple region detection and omni detection (multiscale mitilocation detection on the entire scene)
+   *
+   *
+   * \author Kripasindhu Sarkar
+   *
+   */
   class ODHOGMultiscaleDetector: ODDetector
   {
   public:
@@ -32,7 +41,7 @@ namespace od
     {
       switch (svmtype_)
       {
-        case OD_DEFAULT_PEOPLE: hog_.setSVMDetector(cv::HOGDescriptor::getDefaultPeopleDetector());break;
+        case OD_DEFAULT_PEOPLE: hog_.setSVMDetector(cv::HOGDescriptor::getDefaultPeopleDetector()); break;
         case OD_DAIMLER_PEOPLE: hog_.setSVMDetector(cv::HOGDescriptor::getDaimlerPeopleDetector()); break;
           //dont set anything for custom, it is to be set by the user
       }
@@ -50,7 +59,8 @@ namespace od
       hog_.detectMultiScale(scene->getCVImage(), found, 0, cv::Size(8, 8), cv::Size(32, 32), 1.05, 2);
 
       size_t i, j;
-      for(i = 0; i < found.size(); i++) {
+      for(i = 0; i < found.size(); i++)
+      {
         cv::Rect r = found[i];
         for(j = 0; j < found.size(); j++)
           if(j != i && (r & found[j]) == r)
@@ -90,12 +100,10 @@ namespace od
 
     int detect(ODScene *scene, vector<ODDetection *> &detections) {}
 
-
   private:
     cv::HOGDescriptor hog_;
     SVMType svmtype_;
   };
-
 
 }
 #endif //OPENDETECTION_ODHOGMULTISCALEDETECTOR_H

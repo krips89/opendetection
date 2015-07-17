@@ -86,6 +86,12 @@ namespace od
   class ODDetection2D : public ODDetection
   {
   public:
+
+    ODDetection2D(DetectionType const &type_ = OD_DETECTION_NULL, string const &id_ = "", double confidence_ = 1) : ODDetection(type_, id_, confidence_)
+    {
+      location_ = Eigen::Vector3d::UnitZ();
+    }
+
     Eigen::Vector3d const &getLocation() const
     {
       return location_;
@@ -114,11 +120,6 @@ namespace od
     void setMetainfoImage(cv::Mat const &metainfo_image_)
     {
       ODDetection2D::metainfo_image_ = metainfo_image_;
-    }
-
-    ODDetection2D()
-    {
-      location_ = Eigen::Vector3d::UnitZ();
     }
 
     Eigen::Vector3d location_;

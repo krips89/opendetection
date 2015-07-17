@@ -3,6 +3,10 @@ set(LIB_NAME od_${SUBSYS_NAME})
 set(SUBSYS_DESC "The core module of OpenDetection having the pipeline logic")
 set(SUBSYS_DEPS ${OpenCV_LIBS} ${PCL_LIBRARIES})
 
+if(WITH_GPU)
+  set(SUBSYS_DEPS ${SUBSYS_DEPS} siftgpu)
+endif()
+
 set(build TRUE)
 
 

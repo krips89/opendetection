@@ -3,9 +3,7 @@ set(LIB_NAME od_${SUBSYS_NAME})
 set(SUBSYS_DESC "The local feature matching based detector")
 
 set(SUBSYS_DEPS od_common ${PCL_LIBRARIES} ${VTK_LIBRARIES} ${OpenCV_LIBS} pugixml)
-if(WITH_GPU)
-  set(SUBSYS_DEPS ${SUBSYS_DEPS} siftgpu)
-endif()
+
 
 set(build TRUE)
 #PCL_SUBSYS_OPTION(build "${SUBSYS_NAME}" "${SUBSYS_DESC}" ON)

@@ -1,4 +1,4 @@
-#include <detectors/image_global/detection/ODHOGMultiscaleDetector.h>
+#include <detectors/image_global/detection/ODCascadeDetector.h>
 #include "common/utils/ODFrameGenerator.h"
 
 #include "common/pipeline/ObjectDetector.h"
@@ -9,8 +9,11 @@ using namespace od;
 
 int main(int argc, char *argv[])
 {
+  string trained_cascade(argv[1]);
+
   //detector
-  od::ODHOGMultiscaleDetector *detector = new od::ODHOGMultiscaleDetector;
+  od::ODCascadeDetector *detector = new od::ODCascadeDetector;
+  detector->setTrainingDataLocation(trained_cascade);
   detector->init();
 
   //get scenes
@@ -22,7 +25,7 @@ int main(int argc, char *argv[])
     od::ODSceneImage * scene = frameGenerator.getNextFrame();
 
     //Detect
-    ODDetections2D *detections =  detector->detect(scene);
+    ODDetections2D *detections =  detector->detectOmni(scene);
 
     if(detections->size() > 0)
       cv::imshow("Overlay", detections->getMetainfoImage()); //only showing the first detection

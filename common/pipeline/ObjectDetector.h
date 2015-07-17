@@ -8,6 +8,7 @@
 #include <jmorecfg.h>
 #include <string>
 #include <vector>
+#include "ODDetection.h"
 
 using namespace std;
 
@@ -80,14 +81,20 @@ namespace od
 
     virtual void init() = 0;
 
+    virtual void initDetector(){}
+    virtual void initTrainer(){}
+
     virtual int train() = 0;
 
 
-    virtual int detect(ODScene *scene, std::vector<ODDetection *> detections) = 0;
+    virtual int detect(ODScene *scene, std::vector<ODDetection *> detections) {}
+
+    virtual ODDetections* detect(ODScene *scene) {}
 
   protected:
     DetectionMethod method_;
     bool always_train_;
+    bool trained_;
     string training_input_location_, training_data_location_;
   };
 
