@@ -8,8 +8,8 @@
 #include <common/pipeline/ODDetector.h>
 #include <common/pipeline/ODTrainer.h>
 #include <common/utils/utils.h>
-#include <detectors/pc_global/training/ODPointCloudGlobalMatchingTrainer.h>
-#include <detectors/pc_global/detection/ODPointCloudGlobalMatchingDetector.h>
+#include <detectors/global3D/training/ODPointCloudGlobalMatchingTrainer.h>
+#include <detectors/global3D/detection/ODPointCloudGlobalMatchingDetector.h>
 
 #include "opencv2/core.hpp"
 #include "opencv2/face.hpp"

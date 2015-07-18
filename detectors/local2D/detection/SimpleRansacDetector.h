@@ -5,7 +5,7 @@
 #ifndef OPENDETECTION_SIMPLERANSACDETECTOR_H
 #define OPENDETECTION_SIMPLERANSACDETECTOR_H
 
-#include <detectors/image_local/ODImageLocalMatching.h>
+#include <detectors/local2D/ODImageLocalMatching.h>
 
 #include "common/pipeline/ODDetector.h"
 #include "common/pipeline/ODScene.h"

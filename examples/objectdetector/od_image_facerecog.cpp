@@ -1,5 +1,12 @@
-#include <detectors/image_global/detection/ODHOGMultiscaleDetector.h>
-#include <detectors/image_global/ODFaceRecognizer.h>
+/** \brief Example of the usage of FaceRecognizer
+   *
+   * \author Kripasindhu Sarkar
+   *
+   */
+
+
+#include <detectors/global2D/detection/ODHOGMultiscaleDetector.h>
+#include <detectors/global2D/ODFaceRecognizer.h>
 
 #include "common/utils/ODFrameGenerator.h"
 #include "common/pipeline/ObjectDetector.h"

@@ -7,8 +7,8 @@
 
 #include <common/pipeline/ODDetector.h>
 #include <common/pipeline/ODTrainer.h>
-#include <detectors/pc_global/training/ODPointCloudGlobalMatchingTrainer.h>
-#include <detectors/pc_global/detection/ODPointCloudGlobalMatchingDetector.h>
+#include <detectors/global3D/training/ODPointCloudGlobalMatchingTrainer.h>
+#include <detectors/global3D/detection/ODPointCloudGlobalMatchingDetector.h>
 
 namespace od
 {

@@ -11,7 +11,7 @@
 
 #include "common/pipeline/ObjectDetector.h"
 #include "common/pipeline/ODDetection.h"
-#include "detectors/pc_global/ODPointCloudGlobalMatching.h"
+#include "detectors/global3D/ODPointCloudGlobalMatching.h"
 #include "common/utils/ODFrameGenerator.h"
 
 

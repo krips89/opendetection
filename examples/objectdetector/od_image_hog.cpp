@@ -1,4 +1,12 @@
-#include <detectors/image_global/detection/ODHOGMultiscaleDetector.h>
+
+/** \brief Example of the usage of HOG detector
+   *
+   * \author Kripasindhu Sarkar
+   *
+   */
+
+
+#include <detectors/global2D/detection/ODHOGMultiscaleDetector.h>
 #include "common/utils/ODFrameGenerator.h"
 
 #include "common/pipeline/ObjectDetector.h"

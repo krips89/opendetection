@@ -1,3 +1,3 @@
-add_subdirectory(image_local)
-add_subdirectory(image_global)
-add_subdirectory(pc_global)
+add_subdirectory(local2D)
+add_subdirectory(global2D)
+add_subdirectory(global3D)

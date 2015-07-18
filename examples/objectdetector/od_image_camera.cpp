@@ -1,10 +1,17 @@
-#include <detectors/image_local/training/SnapshotCorrTrainer.h>
-#include <detectors/image_local/detection/SimpleRansacDetector.h>
+
+/** \brief Example of the usage of local 2d pipeline with simple ransac based pose detector
+   *
+   * \author Kripasindhu Sarkar
+   *
+   */
+
+#include <detectors/local2D/training/SnapshotCorrTrainer.h>
+#include <detectors/local2D/detection/SimpleRansacDetector.h>
 #include "common/utils/ODFrameGenerator.h"
 
 #include "common/pipeline/ObjectDetector.h"
 #include "common/pipeline/ODDetection.h"
-#include "detectors/image_local/ODImageLocalMatching.h"
+#include "detectors/local2D/ODImageLocalMatching.h"
 
 
 using namespace od;

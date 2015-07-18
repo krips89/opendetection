@@ -1,4 +1,10 @@
-#include <detectors/image_global/detection/ODCascadeDetector.h>
+/** \brief Example of the usage of cascade detector
+   *
+   * \author Kripasindhu Sarkar
+   *
+   */
+
+#include <detectors/global2D/detection/ODCascadeDetector.h>
 #include "common/utils/ODFrameGenerator.h"
 
 #include "common/pipeline/ObjectDetector.h"

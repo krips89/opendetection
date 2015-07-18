@@ -2,7 +2,7 @@
 // Created by sarkar on 16.06.15.
 //
 
-/** \brief Example of the usage of global pipeline
+/** \brief Example of the usage of global 3D pipeline
    *
    * \author Kripasindhu Sarkar
    *
@@ -11,7 +11,7 @@
 
 #include "common/pipeline/ObjectDetector.h"
 #include "common/pipeline/ODDetection.h"
-#include "detectors/pc_global/ODPointCloudGlobalMatching.h"
+#include "detectors/global3D/ODPointCloudGlobalMatching.h"
 
 
 int main(int argc, char *argv[])
