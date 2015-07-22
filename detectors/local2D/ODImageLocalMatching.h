@@ -14,91 +14,92 @@
 namespace od
 {
 
-  /** \brief ODImageLocalMatchingTrainer
+  namespace l2d
+  {
+    /** \brief ODImageLocalMatchingTrainer
    *
    * \author Kripasindhu Sarkar
    *
    */
-  class ODImageLocalMatchingTrainer : public ODTrainer
-  {
+    class ODImageLocalMatchingTrainer : public ODTrainer
+    {
 
-  public:
-    ODImageLocalMatchingTrainer(string const &training_input_location_, string const &training_data_location_)
-        : ODTrainer(training_input_location_, training_data_location_)
-    { }
+    public:
+      ODImageLocalMatchingTrainer(string const &training_input_location_, string const &training_data_location_) : ODTrainer(training_input_location_, training_data_location_)
+      { }
 
-  };
+    };
 
-  /** \brief ODImageLocalMatchingDetector
+    /** \brief ODImageLocalMatchingDetector
    *
    * \author Kripasindhu Sarkar
    *
    */
-  class ODImageLocalMatchingDetector : public ODDetector
-  {
+    class ODImageLocalMatchingDetector : public ODDetector
+    {
 
-  public:
-    ODImageLocalMatchingDetector(string const &training_data_location_) : ODDetector(training_data_location_)
-    { }
-  };
+    public:
+      ODImageLocalMatchingDetector(string const &training_data_location_) : ODDetector(training_data_location_)
+      { }
+    };
 
-  /** \brief ODImageLocalMatching
+    /** \brief ODImageLocalMatching
    *
    * \author Kripasindhu Sarkar
    *
    */
-  class ODImageLocalMatching : public ObjectDetector
-  {
-
-  public:
-
-    ODImageLocalMatchingTrainer *getTrainer() const
+    class ODImageLocalMatching : public ObjectDetector
     {
-      return trainer_;
-    }
 
-    void setTrainer(ODImageLocalMatchingTrainer *trainer_)
-    {
-      ODImageLocalMatching::trainer_ = trainer_;
-    }
+    public:
 
-    ODImageLocalMatchingDetector *getDetector() const
-    {
-      return detector_;
-    }
+      ODImageLocalMatchingTrainer *getTrainer() const
+      {
+        return trainer_;
+      }
 
-    void setDetector(ODImageLocalMatchingDetector *detector_)
-    {
-      ODImageLocalMatching::detector_ = detector_;
-    }
+      void setTrainer(ODImageLocalMatchingTrainer *trainer_)
+      {
+        ODImageLocalMatching::trainer_ = trainer_;
+      }
 
+      ODImageLocalMatchingDetector *getDetector() const
+      {
+        return detector_;
+      }
 
-    ODImageLocalMatching()
-    {
-    }
-
-    void init()
-    { }
+      void setDetector(ODImageLocalMatchingDetector *detector_)
+      {
+        ODImageLocalMatching::detector_ = detector_;
+      }
 
 
-    int train()
-    {
-      return trainer_->train();
-    }
+      ODImageLocalMatching()
+      {
+      }
 
-    int detect(ODScene *scene, vector<ODDetection *> detections)
-    {
-      detector_->detect(scene, detections);
-    }
+      void init()
+      { }
 
 
-  protected:
+      int train()
+      {
+        return trainer_->train();
+      }
 
-    ODImageLocalMatchingTrainer *trainer_;
-    ODImageLocalMatchingDetector *detector_;
+      int detect(ODScene *scene, vector<ODDetection *> detections)
+      {
+        detector_->detect(scene, detections);
+      }
 
-  };
 
+    protected:
 
+      ODImageLocalMatchingTrainer *trainer_;
+      ODImageLocalMatchingDetector *detector_;
+
+    };
+
+  }
 }
 #endif //OPENDETECTION_ODIMAGELOCALMATCHINGSIMPLE_H

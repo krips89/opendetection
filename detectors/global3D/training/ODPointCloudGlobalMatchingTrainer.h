@@ -10,35 +10,39 @@
 
 namespace od
 {
+  namespace g3d
+  {
 /** \brief ODPointCloudGlobalMatchingTrainer
    *
    * \author Kripasindhu Sarkar
    *
    */
-  class ODPointCloudGlobalMatchingTrainer : public ODTrainer
-  {
-
-  public:
-    ODPointCloudGlobalMatchingTrainer(std::string const &training_input_location_ = "", std::string const &training_data_location_ = "") : ODTrainer(training_input_location_, training_data_location_)
+    class ODPointCloudGlobalMatchingTrainer : public ODTrainer
     {
-      desc_name = "esf";
-    }
 
-    int train();
+    public:
+      ODPointCloudGlobalMatchingTrainer(std::string const &training_input_location_ = "", std::string const &training_data_location_ = "") : ODTrainer(
+          training_input_location_, training_data_location_)
+      {
+        desc_name = "esf";
+      }
 
-    std::string const &getDescName() const
-    {
-      return desc_name;
-    }
+      int train();
 
-    void setDescName(std::string const &desc_name)
-    {
-      ODPointCloudGlobalMatchingTrainer::desc_name = desc_name;
-    }
+      std::string const &getDescName() const
+      {
+        return desc_name;
+      }
 
-  protected:
-    std::string desc_name;
-  };
+      void setDescName(std::string const &desc_name)
+      {
+        ODPointCloudGlobalMatchingTrainer::desc_name = desc_name;
+      }
+
+    protected:
+      std::string desc_name;
+    };
+  }
 }
 
 #endif //OPENDETECTION_ODPOINTCLOUDGLOBALMATCHINGTRAINER_H

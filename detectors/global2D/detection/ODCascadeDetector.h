@@ -15,7 +15,9 @@
 
 namespace od
 {
-  /** \brief ODCascadeDetector: This class classifies a scene (omni detection) using a provided cascade classifier
+  namespace g2d
+  {
+    /** \brief ODCascadeDetector: This class classifies a scene (omni detection) using a provided cascade classifier
    * Given a scene the class will first find HAAR like features and use the cascade classifier to classify the scene. Only supports omni detection for the time being
     *
     *
@@ -23,40 +25,40 @@ namespace od
     *
     */
 
-  class ODCascadeDetector: public ODDetector
-  {
-  public:
-
-    ODCascadeDetector(double scaleFactor = 1.1,
-                      int minNeighbors = 3, int flags = 0,
-                      cv::Size minSize = cv::Size(),
-                      cv::Size maxSize = cv::Size()): scaleFactor_ (scaleFactor), minNeighbors_(minNeighbors), minSize_(minSize), maxSize_(maxSize)
+    class ODCascadeDetector : public ODDetector
     {
-      metainfo_ = true;
-    }
+    public:
 
-    void init()
-    {
-      haar_cascade_ = boost::make_shared<cv::CascadeClassifier>(training_data_location_);
-    }
+      ODCascadeDetector(double scaleFactor = 1.1, int minNeighbors = 3, int flags = 0, cv::Size minSize = cv::Size(), cv::Size maxSize = cv::Size())
+          : scaleFactor_(scaleFactor), minNeighbors_(minNeighbors), minSize_(minSize), maxSize_(maxSize)
+      {
+        metainfo_ = true;
+      }
 
-    ODDetections2D* detect(ODSceneImage *scene)
-    {
-    }
+      void init()
+      {
+        haar_cascade_ = boost::make_shared<cv::CascadeClassifier>(training_data_location_);
+      }
 
-    ODDetections2D* detectOmni(ODSceneImage *scene);
+      ODDetections2D *detect(ODSceneImage *scene)
+      {
+      }
 
-    int detect(ODScene *scene, vector<ODDetection *> &detections) {}
+      ODDetections2D *detectOmni(ODSceneImage *scene);
 
-  private:
-    boost::shared_ptr<cv::CascadeClassifier> haar_cascade_;
+      int detect(ODScene *scene, vector<ODDetection *> &detections)
+      { }
 
-    double scaleFactor_;
-    int minNeighbors_;
-    cv::Size minSize_;
-    cv::Size maxSize_;
+    private:
+      boost::shared_ptr<cv::CascadeClassifier> haar_cascade_;
 
-  };
+      double scaleFactor_;
+      int minNeighbors_;
+      cv::Size minSize_;
+      cv::Size maxSize_;
+
+    };
+  }
 
 }
 

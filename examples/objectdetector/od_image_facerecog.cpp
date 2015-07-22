@@ -19,10 +19,10 @@ int main(int argc, char *argv[])
 {
   string training_input_csv(argv[1]), trained_xml(argv[2]), query_images(argv[3]);
   //detector
-  ODFaceRecognizer * objdetector = new ODFaceRecognizer;
+  g2d::ODFaceRecognizer * objdetector = new g2d::ODFaceRecognizer;
   objdetector->setTrainingInputLocation(training_input_csv);
   objdetector->setTrainingDataLocation(trained_xml);
-  objdetector->setRecogtype(ODFaceRecognizer::OD_FACE_FISCHER);
+  objdetector->setRecogtype(g2d::ODFaceRecognizer::OD_FACE_FISCHER);
   objdetector->initTrainer();
   objdetector->train();
 

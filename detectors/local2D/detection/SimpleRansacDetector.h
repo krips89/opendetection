@@ -30,215 +30,217 @@ class PnpProblem;
 namespace od
 {
 
-  //--model=Data/Chicken/Mesh.xml --mesh=Data/Chicken/Mesh.ply
-  // --use_gpu --fast --method=1 --error=2 --confidence=0.9 --iterations=500 --inliers=30 --model=Data/Chicken/Mesh.xml --mesh=Data/Chicken/Mesh.ply --test_images=./Data/Chicken/Chicken/*.JPG --camera_intrinsic_file=Data/out_camera_dataset_101.yml
-  // --use_gpu --fast --method=1 --error=2 --confidence=0.9 --iterations=500 --inliers=30 --test_images=./Data/Lion/test_images/IMG_*.JPG --camera_intrinsic_file=Data/out_camera_data_lion_old.yml
-  //  --fast --method=1 --error=2 --confidence=0.9 --iterations=500 --inliers=30 --test_images=./Data/Lion/Lion2/IMG_*.JPG --camera_intrinsic_file=Data/out_camera_dataset_101.yml
-  //--fast --method=1 --error=2 --confidence=0.9 --iterations=500 --inliers=10 --model=Data/Totem/Param.SIFT.xml --mesh=Data/Totem/Param.ply --test_images=./Data/Totem/Totem/IMG_0251.JPG --camera_intrinsic_file=Data/out_camera_dataset_101.yml
+  namespace l2d
+  {
+    //--model=Data/Chicken/Mesh.xml --mesh=Data/Chicken/Mesh.ply
+    // --use_gpu --fast --method=1 --error=2 --confidence=0.9 --iterations=500 --inliers=30 --model=Data/Chicken/Mesh.xml --mesh=Data/Chicken/Mesh.ply --test_images=./Data/Chicken/Chicken/*.JPG --camera_intrinsic_file=Data/out_camera_dataset_101.yml
+    // --use_gpu --fast --method=1 --error=2 --confidence=0.9 --iterations=500 --inliers=30 --test_images=./Data/Lion/test_images/IMG_*.JPG --camera_intrinsic_file=Data/out_camera_data_lion_old.yml
+    //  --fast --method=1 --error=2 --confidence=0.9 --iterations=500 --inliers=30 --test_images=./Data/Lion/Lion2/IMG_*.JPG --camera_intrinsic_file=Data/out_camera_dataset_101.yml
+    //--fast --method=1 --error=2 --confidence=0.9 --iterations=500 --inliers=10 --model=Data/Totem/Param.SIFT.xml --mesh=Data/Totem/Param.ply --test_images=./Data/Totem/Totem/IMG_0251.JPG --camera_intrinsic_file=Data/out_camera_dataset_101.yml
 
-  /** \brief Simple ransac based 3D object detector; the details will be explained later
+    /** \brief Simple ransac based 3D object detector; the details will be explained later
    *
    * \author Kripasindhu Sarkar
    *
    */
-  class SimpleRansacDetector : public ODImageLocalMatchingDetector
-  {
-  public:
-    string const &getCameraIntrinsicFile() const
+    class SimpleRansacDetector : public ODImageLocalMatchingDetector
     {
-      return camera_intrinsic_file;
-    }
+    public:
+      string const &getCameraIntrinsicFile() const
+      {
+        return camera_intrinsic_file;
+      }
 
-    void setCameraIntrinsicFile(string const &camera_intrinsic_file)
-    {
-      SimpleRansacDetector::camera_intrinsic_file = camera_intrinsic_file;
-    }
+      void setCameraIntrinsicFile(string const &camera_intrinsic_file)
+      {
+        SimpleRansacDetector::camera_intrinsic_file = camera_intrinsic_file;
+      }
 
-    int getNumKeyPoints() const
-    {
-      return numKeyPoints;
-    }
+      int getNumKeyPoints() const
+      {
+        return numKeyPoints;
+      }
 
-    void setNumKeyPoints(int numKeyPoints)
-    {
-      SimpleRansacDetector::numKeyPoints = numKeyPoints;
-    }
+      void setNumKeyPoints(int numKeyPoints)
+      {
+        SimpleRansacDetector::numKeyPoints = numKeyPoints;
+      }
 
-    float getRatioTest() const
-    {
-      return ratioTest;
-    }
+      float getRatioTest() const
+      {
+        return ratioTest;
+      }
 
-    void setRatioTest(float ratioTest)
-    {
-      SimpleRansacDetector::ratioTest = ratioTest;
-    }
+      void setRatioTest(float ratioTest)
+      {
+        SimpleRansacDetector::ratioTest = ratioTest;
+      }
 
-    bool isFast_match() const
-    {
-      return fast_match;
-    }
+      bool isFast_match() const
+      {
+        return fast_match;
+      }
 
-    void setFast_match(bool fast_match)
-    {
-      SimpleRansacDetector::fast_match = fast_match;
-    }
+      void setFast_match(bool fast_match)
+      {
+        SimpleRansacDetector::fast_match = fast_match;
+      }
 
-    bool isUse_gpu() const
-    {
-      return use_gpu;
-    }
+      bool isUse_gpu() const
+      {
+        return use_gpu;
+      }
 
-    void setUse_gpu(bool use_gpu)
-    {
-      SimpleRansacDetector::use_gpu = use_gpu;
-    }
+      void setUse_gpu(bool use_gpu)
+      {
+        SimpleRansacDetector::use_gpu = use_gpu;
+      }
 
-    bool isUse_gpu_match() const
-    {
-      return use_gpu_match;
-    }
+      bool isUse_gpu_match() const
+      {
+        return use_gpu_match;
+      }
 
-    void setUse_gpu_match(bool use_gpu_match)
-    {
-      SimpleRansacDetector::use_gpu_match = use_gpu_match;
-    }
+      void setUse_gpu_match(bool use_gpu_match)
+      {
+        SimpleRansacDetector::use_gpu_match = use_gpu_match;
+      }
 
-    bool isMetainfo() const
-    {
-      return metainfo;
-    }
+      bool isMetainfo() const
+      {
+        return metainfo;
+      }
 
-    void setMetainfo(bool metainfo)
-    {
-      SimpleRansacDetector::metainfo = metainfo;
-    }
+      void setMetainfo(bool metainfo)
+      {
+        SimpleRansacDetector::metainfo = metainfo;
+      }
 
-    int getIterationsCount() const
-    {
-      return iterationsCount;
-    }
+      int getIterationsCount() const
+      {
+        return iterationsCount;
+      }
 
-    void setIterationsCount(int iterationsCount)
-    {
-      SimpleRansacDetector::iterationsCount = iterationsCount;
-    }
+      void setIterationsCount(int iterationsCount)
+      {
+        SimpleRansacDetector::iterationsCount = iterationsCount;
+      }
 
-    float getReprojectionError() const
-    {
-      return reprojectionError;
-    }
+      float getReprojectionError() const
+      {
+        return reprojectionError;
+      }
 
-    void setReprojectionError(float reprojectionError)
-    {
-      SimpleRansacDetector::reprojectionError = reprojectionError;
-    }
+      void setReprojectionError(float reprojectionError)
+      {
+        SimpleRansacDetector::reprojectionError = reprojectionError;
+      }
 
-    double getConfidence() const
-    {
-      return confidence;
-    }
+      double getConfidence() const
+      {
+        return confidence;
+      }
 
-    void setConfidence(double confidence)
-    {
-      SimpleRansacDetector::confidence = confidence;
-    }
+      void setConfidence(double confidence)
+      {
+        SimpleRansacDetector::confidence = confidence;
+      }
 
-    int getMinInliers() const
-    {
-      return minInliers;
-    }
+      int getMinInliers() const
+      {
+        return minInliers;
+      }
 
-    void setMinInliers(int minInliers)
-    {
-      SimpleRansacDetector::minInliers = minInliers;
-    }
+      void setMinInliers(int minInliers)
+      {
+        SimpleRansacDetector::minInliers = minInliers;
+      }
 
-    int getPnpMethod() const
-    {
-      return pnpMethod;
-    }
+      int getPnpMethod() const
+      {
+        return pnpMethod;
+      }
 
-    void setPnpMethod(int pnpMethod)
-    {
-      SimpleRansacDetector::pnpMethod = pnpMethod;
-    }
+      void setPnpMethod(int pnpMethod)
+      {
+        SimpleRansacDetector::pnpMethod = pnpMethod;
+      }
 
-    SimpleRansacDetector(string const &training_data_location_ = 0) : ODImageLocalMatchingDetector(
-        training_data_location_)
-    {
-      camera_intrinsic_file = "Data/out_camera_data_lion_old.yml";         // mesh
+      SimpleRansacDetector(string const &training_data_location_ = 0) : ODImageLocalMatchingDetector(
+          training_data_location_)
+      {
+        camera_intrinsic_file = "Data/out_camera_data_lion_old.yml";         // mesh
 
-      red = cv::Scalar(0, 0, 255);
-      green = cv::Scalar(0,255,0);
-      blue = cv::Scalar(255,0,0);
-      yellow = cv::Scalar(0,255,255);
+        red = cv::Scalar(0, 0, 255);
+        green = cv::Scalar(0, 255, 0);
+        blue = cv::Scalar(255, 0, 0);
+        yellow = cv::Scalar(0, 255, 255);
 
 
-      numKeyPoints = 2000;      // number of detected keypoints
-      ratioTest = 0.70f;          // ratio test
-      fast_match = true;       // fastRobustMatch() or robustMatch()
-      use_gpu = false;
-      use_gpu_match = false;
+        numKeyPoints = 2000;      // number of detected keypoints
+        ratioTest = 0.70f;          // ratio test
+        fast_match = true;       // fastRobustMatch() or robustMatch()
+        use_gpu = false;
+        use_gpu_match = false;
 
-      iterationsCount = 500;      // number of Ransac iterations.
-      reprojectionError = 2.0;  // maximum allowed distance to consider it an inlier.
-      confidence = 0.95;        // ransac successful confidence.
+        iterationsCount = 500;      // number of Ransac iterations.
+        reprojectionError = 2.0;  // maximum allowed distance to consider it an inlier.
+        confidence = 0.95;        // ransac successful confidence.
 
-      minInliers = 30;    // Kalman threshold updating
+        minInliers = 30;    // Kalman threshold updating
 
-      pnpMethod = cv::SOLVEPNP_EPNP;
-      f_type_default = "SIFT";
-      featureDetector = boost::make_shared<ODFeatureDetector2D>(f_type_default, use_gpu);
-    }
+        pnpMethod = cv::SOLVEPNP_EPNP;
+        f_type_default = "SIFT";
+        featureDetector = boost::make_shared<ODFeatureDetector2D>(f_type_default, use_gpu);
+      }
 
-    void parseParameterString(string parameter_string);
+      void parseParameterString(string parameter_string);
 
-    void init();
+      void init();
 
-    int detect(ODScene *scene, vector<ODDetection *> &detections);
-    int detect(ODSceneImage *scene, vector<ODDetection3D *> &detections);
+      int detect(ODScene *scene, vector<ODDetection *> &detections);
 
-  protected:
+      int detect(ODSceneImage *scene, vector<ODDetection3D *> &detections);
 
-    string camera_intrinsic_file;         // mesh
+    protected:
 
-    cv::Scalar red;
-    cv::Scalar green;
-    cv::Scalar blue;
-    cv::Scalar yellow;
+      string camera_intrinsic_file;         // mesh
+
+      cv::Scalar red;
+      cv::Scalar green;
+      cv::Scalar blue;
+      cv::Scalar yellow;
 
 // Robust Matcher parameters
-    int numKeyPoints;      // number of detected keypoints
-    float ratioTest;          // ratio test
-    bool fast_match;       // fastRobustMatch() or robustMatch()
-    bool use_gpu;
-    bool use_gpu_match;
-    bool metainfo;
+      int numKeyPoints;      // number of detected keypoints
+      float ratioTest;          // ratio test
+      bool fast_match;       // fastRobustMatch() or robustMatch()
+      bool use_gpu;
+      bool use_gpu_match;
+      bool metainfo;
 
 // RANSAC parameters
-    int iterationsCount;      // number of Ransac iterations.
-    float reprojectionError;  // maximum allowed distance to consider it an inlier.
-    double confidence;        // ransac successful confidence.
+      int iterationsCount;      // number of Ransac iterations.
+      float reprojectionError;  // maximum allowed distance to consider it an inlier.
+      double confidence;        // ransac successful confidence.
 
 // Kalman Filter parameters
-    int minInliers;    // Kalman threshold updating
+      int minInliers;    // Kalman threshold updating
 
 // PnP parameters
-    int pnpMethod;
+      int pnpMethod;
 
-    //############NON-CONFIG PARAMETERS used for detection###########
-    vector<string> model_names;
-    vector<Model> models;
-    PnPProblem pnp_detection;
-    std::string f_type_default;
-    boost::shared_ptr<ODFeatureDetector2D> featureDetector;
+      //############NON-CONFIG PARAMETERS used for detection###########
+      vector<string> model_names;
+      vector<Model> models;
+      PnPProblem pnp_detection;
+      std::string f_type_default;
+      boost::shared_ptr<ODFeatureDetector2D> featureDetector;
 
-    bool detectSingleModel(ODSceneImage *scene, Model const &model, ODDetection3D * &pD);
-  };
+      bool detectSingleModel(ODSceneImage *scene, Model const &model, ODDetection3D *&pD);
+    };
 
-
-
+  }
 }
 
 #endif //OPENDETECTION_SIMPLERANSACDETECTOR_H

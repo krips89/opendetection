@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
   string trained_cascade(argv[1]);
 
   //detector
-  od::ODCascadeDetector *detector = new od::ODCascadeDetector;
+  od::g2d::ODCascadeDetector *detector = new od::g2d::ODCascadeDetector;
   detector->setTrainingDataLocation(trained_cascade);
   detector->init();
 

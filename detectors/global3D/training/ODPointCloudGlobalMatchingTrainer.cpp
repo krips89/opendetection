@@ -16,7 +16,7 @@
 #include <pcl/console/parse.h>
 
 
-int od::ODPointCloudGlobalMatchingTrainer::train()
+int od::g3d::ODPointCloudGlobalMatchingTrainer::train()
 {
   boost::shared_ptr<pcl::rec_3d_framework::MeshSource<pcl::PointXYZ> > mesh_source (new pcl::rec_3d_framework::MeshSource<pcl::PointXYZ>);
   mesh_source->setPath (training_input_location_);

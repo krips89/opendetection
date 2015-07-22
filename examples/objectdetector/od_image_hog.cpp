@@ -18,7 +18,7 @@ using namespace od;
 int main(int argc, char *argv[])
 {
   //detector
-  od::ODHOGMultiscaleDetector *detector = new od::ODHOGMultiscaleDetector;
+  g2d::ODHOGMultiscaleDetector *detector = new g2d::ODHOGMultiscaleDetector;
   detector->init();
 
   //get scenes

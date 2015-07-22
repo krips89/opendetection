@@ -13,41 +13,40 @@
 namespace od
 {
 
-
-
-
-
-  /** \brief ODPointCloudGlobalMatching: global feature based object detection in point cloud
+  namespace g3d
+  {
+    /** \brief ODPointCloudGlobalMatching: global feature based object detection in point cloud
    *
    * \author Kripasindhu Sarkar
    *
    */
 
-  class ODPointCloudGlobalMatching: ObjectDetector
-  {
-
-    ODPointCloudGlobalMatching()
+    class ODPointCloudGlobalMatching : ObjectDetector
     {
-    }
 
-    void init()
-    { }
+      ODPointCloudGlobalMatching()
+      {
+      }
+
+      void init()
+      { }
 
 
-    int train()
-    {
-      return trainer_->train();
-    }
+      int train()
+      {
+        return trainer_->train();
+      }
 
-    int detect(ODScene *scene, vector<ODDetection *> detections)
-    {
-      detector_->detect(scene, detections);
-    }
+      int detect(ODScene *scene, vector<ODDetection *> detections)
+      {
+        detector_->detect(scene, detections);
+      }
 
-  protected:
-    std::string desc_name;
-    ODPointCloudGlobalMatchingTrainer *trainer_;
-    ODPointCloudGlobalMatchingDetector<pcl::PointXYZ> *detector_;
-  };
+    protected:
+      std::string desc_name;
+      ODPointCloudGlobalMatchingTrainer *trainer_;
+      ODPointCloudGlobalMatchingDetector<pcl::PointXYZ> *detector_;
+    };
+  }
 }
 #endif //OPENDETECTION_ODPOINTCLOUDGLOBALMATCHING_H

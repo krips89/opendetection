@@ -20,27 +20,29 @@
 
 namespace od
 {
-  /** \brief ODImageLocalMatchingTrainer; One of the new algorithm; details will be explained later
+  namespace l2d
+  {
+    /** \brief ODImageLocalMatchingTrainer; One of the new algorithm; details will be explained later
    *
    * \author Kripasindhu Sarkar
    *
    */
 
-  class SnapshotCorrTrainer : public ODImageLocalMatchingTrainer
-  {
+    class SnapshotCorrTrainer : public ODImageLocalMatchingTrainer
+    {
 
-  public:
-    SnapshotCorrTrainer(std::string const &training_input_location_ = "", std::string const &training_data_location_ = "") : ODImageLocalMatchingTrainer(
-        training_input_location_, training_data_location_)
-    { }
+    public:
+      SnapshotCorrTrainer(std::string const &training_input_location_ = "", std::string const &training_data_location_ = "") : ODImageLocalMatchingTrainer(
+          training_input_location_, training_data_location_)
+      { }
 
-    int train();
+      int train();
 
-    void trainSingleModel(std::string objname);
+      void trainSingleModel(std::string objname);
 
-  };
+    };
 
-
+  }
 }
 
 
