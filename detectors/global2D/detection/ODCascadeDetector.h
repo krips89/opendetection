@@ -40,14 +40,8 @@ namespace od
         haar_cascade_ = boost::make_shared<cv::CascadeClassifier>(training_data_location_);
       }
 
-      ODDetections2D *detect(ODSceneImage *scene)
-      {
-      }
-
       ODDetections2D *detectOmni(ODSceneImage *scene);
 
-      int detect(ODScene *scene, vector<ODDetection *> &detections)
-      { }
 
     private:
       boost::shared_ptr<cv::CascadeClassifier> haar_cascade_;

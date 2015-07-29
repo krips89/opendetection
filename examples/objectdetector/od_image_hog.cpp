@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
     od::ODSceneImage * scene = frameGenerator.getNextFrame();
 
     //Detect
-    ODDetections2D *detections =  detector->detect(scene);
+    ODDetections2D *detections =  detector->detectOmni(scene);
 
     if(detections->size() > 0)
       cv::imshow("Overlay", detections->getMetainfoImage()); //only showing the first detection

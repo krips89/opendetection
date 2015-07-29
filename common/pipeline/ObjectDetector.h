@@ -89,7 +89,8 @@ namespace od
 
     virtual int detect(ODScene *scene, std::vector<ODDetection *> detections) {}
 
-    virtual ODDetections* detect(ODScene *scene) {}
+    virtual ODDetection* detect(ODScene *scene) {}
+    virtual ODDetections* detectOmni(ODScene *scene) {}
 
   protected:
     DetectionMethod method_;

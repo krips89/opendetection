@@ -238,7 +238,9 @@ namespace od
     {
       detections_.push_back(detection);
     }
+
     ODDetection * operator[](int i) { return detections_[i]; }
+    ODDetection * at(int i) { return (*this)[i]; }
 
     cv::Mat const &getMetainfoImage() const
     {

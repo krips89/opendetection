@@ -38,14 +38,12 @@ int main(int argc, char *argv[])
   while(frameGenerator.isValid() && cv::waitKey(30) != 27)
   {
     od::ODSceneImage * scene = frameGenerator.getNextFrame();
-    cv::imshow("Overlay", scene->getCVImage());
 
     //Detect
-    vector<od::ODDetection3D *> detections;
-    detector->detect(scene, detections);
+    ODDetections3D *detections =  detector->detectOmni(scene);
 
-    if(detections.size() > 0)
-      cv::imshow("Overlay", detections[0]->metainfo_image_); //only showing the first detection
+    if(detections->size() > 0)
+      cv::imshow("Overlay", detections->getMetainfoImage()); //only showing the first detection
     else
       cv::imshow("Overlay", scene->getCVImage());
   }

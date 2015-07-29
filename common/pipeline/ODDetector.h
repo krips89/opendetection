@@ -29,9 +29,11 @@ namespace od
     ODDetector(std::string const &training_data_location_) : training_data_location_(training_data_location_)
     { }
 
-    virtual int detect(ODScene *scene, std::vector<ODDetection *> &detections) = 0;
+    virtual int detect(ODScene *scene, std::vector<ODDetection *> &detections) {};
 
-    virtual ODDetections* detect(ODScene *scene) {}
+    virtual ODDetection* detect(ODScene *scene) {}
+
+    virtual ODDetections* detectOmni(ODScene *scene) {}
 
     std::string getTrainingInputLocation() const
     {

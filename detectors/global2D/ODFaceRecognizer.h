@@ -53,7 +53,7 @@ namespace od
 
       int train();
 
-      ODDetections2D *detect(ODSceneImage *scene);
+      ODDetections2D *detectOmni(ODSceneImage *scene);
 
 
       FaceRecogType const &getRecogtype() const

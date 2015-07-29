@@ -28,22 +28,20 @@ int main(int argc, char *argv[])
   od::ODFrameGenerator<od::ODSceneImage, od::GENERATOR_TYPE_FILE_LIST> frameGenerator(query_images);
   //GUI
   cv::namedWindow("Overlay", cv::WINDOW_NORMAL);
-  while(frameGenerator.isValid() && cv::waitKey(30) != 27)
+  while(frameGenerator.isValid() && cv::waitKey(300) != 27)
   {
     od::ODSceneImage * scene = frameGenerator.getNextFrame();
     cv::imshow("Overlay", scene->getCVImage());
 
     //Detect
-    vector<od::ODDetection3D *> detections;
-    detector->detect(scene, detections);
+    ODDetections3D *detections =  detector->detectOmni(scene);
 
-    if(detections.size() > 0)
-      cv::imshow("Overlay", detections[0]->metainfo_image_); //only showing the first detection
+    if(detections->size() > 0)
+      cv::imshow("Overlay", detections->getMetainfoImage()); //only showing the first detection
     else
       cv::imshow("Overlay", scene->getCVImage());
 
     delete scene;
-    for(int i = 0; i < detections.size(); i++) delete detections[i];
 
   }
 

@@ -38,6 +38,12 @@ namespace od
       return detect(sceneimage, detections);
     }
 
+    ODDetections* SimpleRansacDetector::detectOmni(ODScene *scene)
+    {
+      ODSceneImage *sceneimage = dynamic_cast<ODSceneImage *>(scene);
+      return detectOmni(sceneimage);
+    }
+
     void SimpleRansacDetector::parseParameterString(string parameter_string)
     {
       const String keys = "{help h        |      | print this message                   }"
@@ -123,17 +129,42 @@ namespace od
       scene->setDescriptors(descriptor_scene);
       scene->setKeypoints(keypoints_scene);
 
+      cv::Mat viz = scene->getCVImage().clone();
       for(int i = 0; i < models.size(); i++)
       {
 
         ODDetection3D *detection;
-        if(detectSingleModel(scene, models[i], detection))
+        if(detectSingleModel(scene, models[i], detection, viz))
           detections.push_back(detection);
       }
+
       return 1;
     }
 
-    bool SimpleRansacDetector::detectSingleModel(ODSceneImage *scene, Model const &model, ODDetection3D *&detection3D)
+    ODDetections3D* SimpleRansacDetector::detectOmni(ODSceneImage *scene)
+    {
+
+      vector<KeyPoint> keypoints_scene;
+      Mat descriptor_scene;
+      featureDetector->computeKeypointsAndDescriptors(scene->getCVImage(), descriptor_scene, keypoints_scene);
+      scene->setDescriptors(descriptor_scene);
+      scene->setKeypoints(keypoints_scene);
+
+      ODDetections3D *detections = new ODDetections3D;
+      cv::Mat viz = scene->getCVImage().clone();
+
+      for(int i = 0; i < models.size(); i++)
+      {
+
+        ODDetection3D *detection;
+        if(detectSingleModel(scene, models[i], detection, viz))
+          detections->push_back(detection);
+      }
+      detections->setMetainfoImage(viz);
+      return detections;
+    }
+
+    bool SimpleRansacDetector::detectSingleModel(ODSceneImage *scene, Model const &model, ODDetection3D *&detection3D, Mat & frame_vis)
     {
       vector<Point3f> list_points3d_model = model.get_points3d();  // list with model 3D coordinates
       vector<KeyPoint> list_keypoints_model = model.get_keypoints();  // list with model 3D coordinates
@@ -147,7 +178,6 @@ namespace od
       vector<KeyPoint> keypoints_scene = scene->getKeypoints();  // to obtain the 2D points of the scene
 
       Mat frame = scene->getCVImage();
-      Mat frame_vis = frame.clone();
 
       rmatcher.match(scene->getDescriptors(), descriptors_model, good_matches);
 

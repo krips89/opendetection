@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
     od::ODSceneImage * scene = frameGenerator.getNextFrame();
 
     //Detect
-    ODDetections2D *detections =  objdetector->detect(scene);
+    ODDetections2D *detections =  objdetector->detectOmni(scene);
     (*detections)[0]->printSelf();
 
     cv::imshow("Overlay", scene->getCVImage());

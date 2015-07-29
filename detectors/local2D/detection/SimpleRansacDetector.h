@@ -202,6 +202,10 @@ namespace od
 
       int detect(ODSceneImage *scene, vector<ODDetection3D *> &detections);
 
+      ODDetections* detectOmni(ODScene *scene);
+
+      ODDetections3D* detectOmni(ODSceneImage *scene);
+
     protected:
 
       string camera_intrinsic_file;         // mesh
@@ -237,7 +241,7 @@ namespace od
       std::string f_type_default;
       boost::shared_ptr<ODFeatureDetector2D> featureDetector;
 
-      bool detectSingleModel(ODSceneImage *scene, Model const &model, ODDetection3D *&pD);
+      bool detectSingleModel(ODSceneImage *scene, Model const &model, ODDetection3D *&pD, cv::Mat &frame_viz);
     };
 
   }

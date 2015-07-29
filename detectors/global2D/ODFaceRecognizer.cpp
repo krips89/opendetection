@@ -60,7 +60,7 @@ namespace od
       im_height_ = images[0].rows;
     }
 
-    ODDetections2D *ODFaceRecognizer::detect(ODSceneImage *scene)
+    ODDetections2D *ODFaceRecognizer::detectOmni(ODSceneImage *scene)
     {
       cv::Mat face_edited;
       cvtColor(scene->getCVImage(), face_edited, CV_BGR2GRAY);
