@@ -19,7 +19,7 @@ namespace od
    * \author Kripasindhu Sarkar
    *
    */
-  class ODDetector: public ODAlgorithmBase
+  class ODDetector
   {
   public:
 

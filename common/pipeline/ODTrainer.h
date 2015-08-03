@@ -21,7 +21,7 @@ namespace od
    * \author Kripasindhu Sarkar
    *
    */
-  class ODTrainer: public ODAlgorithmBase
+  class ODTrainer
   {
   public:
 

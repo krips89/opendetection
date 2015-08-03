@@ -14,6 +14,8 @@
 #include <sstream>
 #include <glob.h>
 
+
+
 namespace bf = boost::filesystem;
 
 /** \brief misclenious helping functions; will be refactored later
@@ -66,21 +68,25 @@ namespace od
 
     std::ifstream input(objfilename.c_str());
     std::string line;
-    while(getline(input, line)) {
+    while(getline(input, line))
+    {
       std::istringstream iss(line);
       std::string tok1;
       iss >> tok1;
-      if(tok1 == "mtllib") {
+      if(tok1 == "mtllib")
+      {
         std::string tok2;
 
         iss >> tok2;
         std::string linemtl;
 
         std::ifstream inputmtl((input_dir + "/" + tok2).c_str());
-        while(getline(inputmtl, linemtl)) {
+        while(getline(inputmtl, linemtl))
+        {
           std::istringstream issmtl(linemtl);
           issmtl >> tok1;
-          if(tok1 == "map_Kd") {
+          if(tok1 == "map_Kd")
+          {
             issmtl >> tok2;
             return input_dir + "/" + tok2;
           }
@@ -152,5 +158,73 @@ namespace od
     std::cout << std::endl;
   }
 
+  class FileUtils
+  {
+  public:
+    static void getFilesInDirectory(bf::path &dir, std::string &rel_path_so_far, std::vector<std::string> &relative_paths, std::string const &ext)
+    {
+      bf::directory_iterator end_itr;
+      for(bf::directory_iterator itr(dir); itr != end_itr; ++itr) {
+        //check if its a directory, then get models in it
+        if(bf::is_directory(*itr)) {
+#if BOOST_FILESYSTEM_VERSION == 3
+          std::string so_far = rel_path_so_far + (itr->path().filename()).string() + "/";
+#else
+            std::string so_far = rel_path_so_far + (itr->path ()).filename () + "/";
+#endif
+
+          bf::path curr_path = itr->path();
+          getFilesInDirectory(curr_path, so_far, relative_paths, ext);
+        } else {
+          //check that it is a ply file and then add, otherwise ignore..
+          std::vector<std::string> strs;
+#if BOOST_FILESYSTEM_VERSION == 3
+          std::string file = (itr->path().filename()).string();
+#else
+            std::string file = (itr->path ()).filename ();
+#endif
+
+          boost::split(strs, file, boost::is_any_of("."));
+          std::string extension = strs[strs.size() - 1];
+
+          if(extension.compare(ext) == 0) {
+#if BOOST_FILESYSTEM_VERSION == 3
+            std::string path = rel_path_so_far + (itr->path().filename()).string();
+#else
+              std::string path = rel_path_so_far + (itr->path ()).filename ();
+#endif
+
+            relative_paths.push_back(path);
+          }
+        }
+      }
+    }
+
+    static void createTrainingDir(std::string &training_dir)
+    {
+      bf::path trained_dir = training_dir;
+      if(!bf::exists(trained_dir))
+        bf::create_directory(trained_dir);
+    }
+
+    static void getArgvArgc(std::string const &commandline, char ***argv, int &argc)
+    {
+      enum
+      {
+        kMaxArgs = 64
+      };
+
+      argc = 0;
+      *argv = new char *[kMaxArgs];
+      (*argv)[argc++] = (char *) "program";
+
+      char *p;
+      p = strtok((char *) commandline.c_str(), " ");
+      while(p && argc < kMaxArgs) {
+        (*argv)[argc++] = p;
+        p = strtok(0, " ");
+      }
+    }
+  };
 }
 #endif //OPENDETECTION_UTILS_H

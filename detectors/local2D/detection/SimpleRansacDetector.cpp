@@ -65,7 +65,7 @@ namespace od
 
       char **argv;
       int argc;
-      getArgvArgc(parameter_string, &argv, argc);
+      FileUtils::getArgvArgc(parameter_string, &argv, argc);
 
       CommandLineParser parser(argc, argv, keys);
       if(parser.has("help"))
@@ -104,7 +104,7 @@ namespace od
       // get all trained models
       string start_path = "";
       boost::filesystem::path dir(training_data_location_);
-      getFilesInDirectory(dir, start_path, model_names, "xml");
+      FileUtils::getFilesInDirectory(dir, start_path, model_names, "xml");
 
       for(int i = 0; i < model_names.size(); i++)
       {

@@ -161,14 +161,14 @@ namespace od
 
     int SnapshotCorrTrainer::train()
     {
-      createTrainingDir(training_data_location_);
+      FileUtils::createTrainingDir(training_data_location_);
 
       //get models in the directory
       std::vector<std::string> files;
       std::string start = "";
       std::string ext = std::string("obj");
       bf::path dir = training_input_location_;
-      getFilesInDirectory(dir, start, files, ext);
+      FileUtils::getFilesInDirectory(dir, start, files, ext);
 
       //for each models in the train_input_directory, train them and put them on the training_directory
 
