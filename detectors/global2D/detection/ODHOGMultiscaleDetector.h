@@ -31,13 +31,16 @@ namespace od
     {
     public:
 
-      OD_DEFINE_ENUM_WITH_STRING_CONVERSIONS(SVMType, (OD_CUSTOM)(OD_DEFAULT_PEOPLE)(OD_DAIMLER_PEOPLE))
+      OD_DEFINE_ENUM_WITH_STRING_CONVERSIONS(SVMType, (OD_CUSTOM)(OD_DEFAULT_PEOPLE)(OD_DAIMLER_PEOPLE)(OD_FILE))
 
-      ODHOGMultiscaleDetector()
+      ODHOGMultiscaleDetector(std::string const &training_data_location_ = ""): ODDetector(training_data_location_)
       {
+        TRAINED_DATA_IDENTIFIER_ = "HOG";
+        TRAINED_DATA_EXT_ = "hog.xml";
         metainfo_ = true;
         svmtype_ = OD_DEFAULT_PEOPLE;
       }
+
 
       void init()
       {
@@ -45,11 +48,19 @@ namespace od
         {
           case OD_DEFAULT_PEOPLE:
             hog_.setSVMDetector(cv::HOGDescriptor::getDefaultPeopleDetector());
+
+            FileUtils::createTrainingDir(getSpecificTrainingDataLocation());
+            hog_.save(getSpecificTrainingDataLocation() + "/defaultpeople." + TRAINED_DATA_EXT_);
             break;
           case OD_DAIMLER_PEOPLE:
             hog_.setSVMDetector(cv::HOGDescriptor::getDaimlerPeopleDetector());
+
+            FileUtils::createTrainingDir(getSpecificTrainingDataLocation());
+            hog_.save(getSpecificTrainingDataLocation() + "/daimlerpeople." + TRAINED_DATA_EXT_);
+          case OD_FILE:
+            hog_.load(FileUtils::getFirstFile(getSpecificTrainingDataLocation(), TRAINED_DATA_EXT_));
             break;
-            //dont set anything for custom, it is to be set by the user
+            //dont set anything for custom, it is to be set by the user by setSVMDetector
         }
       }
 
@@ -63,7 +74,17 @@ namespace od
       int detect(ODScene *scene, vector<ODDetection *> &detections)
       { }
 
-    private:
+      SVMType const &getSvmtype() const
+      {
+        return svmtype_;
+      }
+
+      void setSvmtype(SVMType const &svmtype_)
+      {
+        ODHOGMultiscaleDetector::svmtype_ = svmtype_;
+      }
+
+    protected:
       cv::HOGDescriptor hog_;
       SVMType svmtype_;
     };

@@ -26,8 +26,10 @@ namespace od
 
     public:
       ODImageLocalMatchingTrainer(string const &training_input_location_, string const &training_data_location_) : ODTrainer(training_input_location_, training_data_location_)
-      { }
-
+      {
+        TRAINED_DATA_IDENTIFIER_ = "FEATCORR";
+        TRAINED_DATA_EXT_ = "corr.xml";
+      }
     };
 
     /** \brief ODImageLocalMatchingDetector
@@ -40,7 +42,10 @@ namespace od
 
     public:
       ODImageLocalMatchingDetector(string const &training_data_location_) : ODDetector(training_data_location_)
-      { }
+      {
+        TRAINED_DATA_IDENTIFIER_ = "FEATCORR";
+        TRAINED_DATA_EXT_ = "corr.xml";
+      }
     };
 
     /** \brief ODImageLocalMatching
@@ -76,6 +81,7 @@ namespace od
 
       ODImageLocalMatching()
       {
+        TRAINED_DATA_EXT_ = "corr.xml";
       }
 
       void init()

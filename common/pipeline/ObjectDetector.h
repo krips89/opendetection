@@ -79,6 +79,11 @@ namespace od
       this->training_data_location_ = training_data_location_;
     }
 
+    string getSpecificTrainingDataLocation()
+    {
+      return training_data_location_ + "/" + "TD_" + TRAINED_DATA_IDENTIFIER_;
+    }
+
     virtual void init() = 0;
 
     virtual void initDetector(){}
@@ -97,6 +102,8 @@ namespace od
     bool always_train_;
     bool trained_;
     string training_input_location_, training_data_location_;
+
+    std::string TRAINED_DATA_EXT_, TRAINED_DATA_IDENTIFIER_;
   };
 
 }

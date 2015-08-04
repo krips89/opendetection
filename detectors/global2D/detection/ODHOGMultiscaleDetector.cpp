@@ -12,6 +12,9 @@ namespace od
 
     ODDetections2D *ODHOGMultiscaleDetector::detectOmni(ODSceneImage *scene)
     {
+      //always create a detection
+      ODDetections2D *detections = new ODDetections2D;
+
 
       vector<cv::Rect> found, found_filtered;
       hog_.detectMultiScale(scene->getCVImage(), found, 0, cv::Size(8, 8), cv::Size(32, 32), 1.05, 2);
@@ -27,18 +30,16 @@ namespace od
           found_filtered.push_back(r);
       }
 
-      //always create detections
-      ODDetections2D *detections = new ODDetections2D;
-
       cv::Mat viz = scene->getCVImage().clone();
       for(i = 0; i < found_filtered.size(); i++)
       {
 
-        ODDetection2D *detections2D = new ODDetection2D;
-        detections2D->setBoundingBox(found_filtered[i]);
-        detections2D->setId("PEOPLE");
-        detections2D->setType(ODDetection::OD_DETECTION_CLASS);
-        detections->push_back(detections2D);
+        ODDetection2D *detection2D = new ODDetection2D;
+        detection2D->setBoundingBox(found_filtered[i]);
+        detection2D->setId("PEOPLE");
+        detection2D->setType(ODDetection::OD_DETECTION_CLASS);
+        detections->push_back(detection2D);
+
 
         if(metainfo_)
         {
@@ -50,6 +51,9 @@ namespace od
           rectangle(viz, r.tl(), r.br(), cv::Scalar(0, 255, 0), 2);
         }
       }
+      detections->setMetainfoImage(viz);
+
+      return detections;
     }
 
 

@@ -249,7 +249,7 @@ namespace od
 
     void setMetainfoImage(cv::Mat const &metainfo_image_)
     {
-      this->metainfo_image_ = metainfo_image_;
+      this->metainfo_image_ = metainfo_image_.clone();
     }
 
     typename pcl::PointCloud<pcl::PointXYZ>::Ptr const &getMetainfoCluster() const

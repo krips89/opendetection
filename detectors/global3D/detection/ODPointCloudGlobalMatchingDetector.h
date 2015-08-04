@@ -38,7 +38,9 @@ namespace od
     public:
       ODPointCloudGlobalMatchingDetector(string const &training_data_location_ = "") : ODDetector(
           training_data_location_), NN(2), desc_name("esf")
-      { }
+      {
+        TRAINED_DATA_IDENTIFIER_ = "GLOBAL3DVFH";
+      }
 
       void init();
 
@@ -85,7 +87,8 @@ namespace od
 
       boost::shared_ptr<pcl::rec_3d_framework::MeshSource<pcl::PointXYZ> > mesh_source(new pcl::rec_3d_framework::MeshSource<pcl::PointXYZ>);
       mesh_source->setPath(training_input_location_);
-      mesh_source->generate(training_data_location_);
+      std::string training_dir_specific =  getSpecificTrainingDataLocation();
+      mesh_source->generate(training_dir_specific);
 
       boost::shared_ptr<pcl::rec_3d_framework::Source<pcl::PointXYZ> > cast_source;
       cast_source = boost::static_pointer_cast<pcl::rec_3d_framework::MeshSource<pcl::PointXYZ> >(mesh_source);
@@ -110,7 +113,7 @@ namespace od
         boost::shared_ptr<pcl::rec_3d_framework::GlobalNNPipeline<flann::L1, pcl::PointXYZ, pcl::VFHSignature308> > global(
             new pcl::rec_3d_framework::GlobalNNPipeline<flann::L1, pcl::PointXYZ, pcl::VFHSignature308>());
         global->setDataSource(cast_source);
-        global->setTrainingDir(training_data_location_);
+        global->setTrainingDir(training_dir_specific);
         global->setDescriptorName(desc_name);
         global->setNN(NN);
         global->setFeatureEstimator(cast_estimator);
@@ -130,7 +133,7 @@ namespace od
         boost::shared_ptr<pcl::rec_3d_framework::GlobalNNPipeline<Metrics::HistIntersectionUnionDistance, pcl::PointXYZ, pcl::VFHSignature308> > global(
             new pcl::rec_3d_framework::GlobalNNPipeline<Metrics::HistIntersectionUnionDistance, pcl::PointXYZ, pcl::VFHSignature308>());
         global->setDataSource(cast_source);
-        global->setTrainingDir(training_data_location_);
+        global->setTrainingDir(training_dir_specific);
         global->setDescriptorName(desc_name);
         global->setFeatureEstimator(cast_estimator);
         global->setNN(NN);
@@ -148,7 +151,7 @@ namespace od
         boost::shared_ptr<pcl::rec_3d_framework::GlobalNNPipeline<flann::L1, pcl::PointXYZ, pcl::ESFSignature640> > global(
             new pcl::rec_3d_framework::GlobalNNPipeline<flann::L1, pcl::PointXYZ, pcl::ESFSignature640>());
         global->setDataSource(cast_source);
-        global->setTrainingDir(training_data_location_);
+        global->setTrainingDir(training_dir_specific);
         global->setDescriptorName(desc_name);
         global->setFeatureEstimator(cast_estimator);
         global->setNN(NN);
@@ -178,13 +181,13 @@ namespace od
       dps.setInputCloud(xyz_points);
       dps.setMaxZBounds(Z_DIST_);
       dps.setObjectMinHeight(0.005);
-      dps.setMinClusterSize(50);
+      dps.setMinClusterSize(1000);
       dps.setWSize(9);
-      dps.setDistanceBetweenClusters(0.01f);
+      dps.setDistanceBetweenClusters(0.1f);
 
       std::vector<pcl::PointCloud<pcl::PointXYZ>::Ptr> clusters;
       std::vector<pcl::PointIndices> indices;
-      dps.setDownsamplingSize(0.002f);
+      dps.setDownsamplingSize(0.02f);
       dps.compute_full(clusters);
       dps.getIndicesClusters(indices);
       Eigen::Vector4f table_plane_;

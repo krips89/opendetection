@@ -55,9 +55,15 @@ namespace od
       this->training_data_location_ = training_data_location_;
     }
 
+    string getSpecificTrainingDataLocation()
+    {
+      return training_data_location_ + "/" + "TD_" + TRAINED_DATA_IDENTIFIER_;
+    }
+
     bool metainfo_;
   protected:
     std::string training_input_location_, training_data_location_;
+    std::string TRAINED_DATA_EXT_, TRAINED_DATA_IDENTIFIER_;
 
   };
 

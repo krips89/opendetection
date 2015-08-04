@@ -25,6 +25,7 @@ int od::g3d::ODPointCloudGlobalMatchingTrainer::train()
   mesh_source->setViewAngle (57.f);
   mesh_source->setRadiusSphere (1.5f);
   mesh_source->setModelScale (1.f);
-  mesh_source->generate (training_data_location_);
+  std::string training_dir =  getSpecificTrainingDataLocation();
+  mesh_source->generate (training_dir);
   return 1;
 }

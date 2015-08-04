@@ -32,12 +32,14 @@ namespace od
       ODCascadeDetector(double scaleFactor = 1.1, int minNeighbors = 3, int flags = 0, cv::Size minSize = cv::Size(), cv::Size maxSize = cv::Size())
           : scaleFactor_(scaleFactor), minNeighbors_(minNeighbors), minSize_(minSize), maxSize_(maxSize)
       {
+        TRAINED_DATA_IDENTIFIER_ = "CASCADE";
+        TRAINED_DATA_EXT_ = "cascade.xml";
         metainfo_ = true;
       }
 
       void init()
       {
-        haar_cascade_ = boost::make_shared<cv::CascadeClassifier>(training_data_location_);
+        haar_cascade_ = boost::make_shared<cv::CascadeClassifier>(FileUtils::getFirstFile(getSpecificTrainingDataLocation(), TRAINED_DATA_EXT_));
       }
 
       ODDetections2D *detectOmni(ODSceneImage *scene);

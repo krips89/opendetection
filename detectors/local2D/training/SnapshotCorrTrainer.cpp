@@ -105,7 +105,9 @@ namespace od
           //after getting all snaps, write everything together
           cout << "Processing finished... Writing the final descriptors" << endl;
 
-          string filename = boost::filesystem::path(input_file).filename().replace_extension(feature_type + ".xml").c_str();
+          string filename = boost::filesystem::path(input_file).filename().replace_extension(feature_type + "." + output_extension).c_str();
+          FileUtils::createTrainingDir(output_dir);
+
           write_pairs(pairs_3d_2d, common_descriptors, output_dir + "/" + filename);
           write_pairs_xml(pairs_3d_2d, common_descriptors, output_dir + "/" + filename);
 
@@ -151,7 +153,7 @@ namespace od
       cv::Mat common_descriptors;
       map<cv::Point3f, cv::KeyPoint, fcomp3d_euclidian> map_3d_2d;
       string feature_type;
-      string input_file, input_dir, output_dir;
+      string input_file, input_dir, output_dir, output_extension;
 
 
       vtkActor *actor;
@@ -189,7 +191,8 @@ namespace od
 
       boost::filesystem::path p(objname);
       cb->input_dir = boost::filesystem::path(objname).parent_path().c_str();
-      cb->output_dir = training_data_location_;
+      cb->output_dir = getSpecificTrainingDataLocation();
+      cb->output_extension = TRAINED_DATA_EXT_;
 
       vtkSmartPointer<vtkOBJReader> reader = vtkSmartPointer<vtkOBJReader>::New();
       reader->SetFileName(objname.c_str());

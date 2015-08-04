@@ -35,7 +35,19 @@ namespace od
       if(!trained_)
       {
         init();
-        cvrecognizer_->load(training_data_location_);
+
+        //get models in the directory
+        std::vector<std::string> files;
+        FileUtils::getFilesInDirectoryRec(getSpecificTrainingDataLocation(), TRAINED_DATA_EXT_, files);
+
+        if (files.size() == 0)
+        {
+          std::cout << "FATAL: Trained data not found" << endl;
+          exit(1);
+        }
+
+        //choose the first
+        cvrecognizer_->load(files[0]);
       }
     }
 
@@ -52,7 +64,9 @@ namespace od
         exit(1);
       }
       cvrecognizer_->train(images, labels);
-      cvrecognizer_->save(training_data_location_);
+      FileUtils::createTrainingDir(getSpecificTrainingDataLocation());
+
+      cvrecognizer_->save(getSpecificTrainingDataLocation() + "/trained." + TRAINED_DATA_EXT_);
       trained_ = true;
 
       //the training set has atleast one image

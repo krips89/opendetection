@@ -43,6 +43,8 @@ namespace od
       ODFaceRecognizer(FaceRecogType recogtype = OD_FACE_EIGEN, int num_components = 0, double threshold = DBL_MAX)
           : recogtype_(recogtype), num_components_(num_components), threshold_(threshold), im_height_(0), im_width_(0)
       {
+        TRAINED_DATA_IDENTIFIER_ = "FACERECOG";
+        TRAINED_DATA_EXT_ = "facerec.xml";
       }
 
       void init();

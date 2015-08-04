@@ -102,14 +102,12 @@ namespace od
       pnp_detection = PnPProblem(cam_man, dist_coeff);
 
       // get all trained models
-      string start_path = "";
-      boost::filesystem::path dir(training_data_location_);
-      FileUtils::getFilesInDirectory(dir, start_path, model_names, "xml");
+      FileUtils::getFilesInDirectoryRec(getSpecificTrainingDataLocation(),TRAINED_DATA_EXT_, model_names);
 
       for(int i = 0; i < model_names.size(); i++)
       {
         Model model;
-        model.load_new_xml(training_data_location_ + "/" + model_names[i]);
+        model.load_new_xml(model_names[i]);
         models.push_back(model);
       }
       if(models.size() > 0)
