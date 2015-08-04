@@ -274,6 +274,7 @@ namespace od
   public:
 
     ODDetection2D * operator[](int i) { return static_cast<ODDetection2D *>(detections_[i]); }
+    ODDetection2D * at(int i) { return static_cast<ODDetection2D *>(detections_[i]); }
 
   };
 
@@ -282,7 +283,7 @@ namespace od
   public:
 
     ODDetection3D * operator[](int i) { return static_cast<ODDetection3D *>(detections_[i]); }
-
+    ODDetection3D * at(int i) { return static_cast<ODDetection3D *>(detections_[i]); }
   };
 }
 #endif //OPENDETECTION_ODDETECTION_H

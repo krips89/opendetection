@@ -53,6 +53,8 @@ namespace od
       //template<typename PointT>
       int detect(ODScenePointCloud<PointT> *scene, vector<ODDetection3D *> &detections);
 
+      ODDetections3D* detectOmni(ODScenePointCloud<PointT> *scene);
+
       int getNN() const
       {
         return NN;
@@ -165,8 +167,11 @@ namespace od
     }
 
     template<typename PointT>
-    int ODPointCloudGlobalMatchingDetector<PointT>::detect(ODScenePointCloud<PointT> *scene, vector<ODDetection3D *> &detections)
+    ODDetections3D* ODPointCloudGlobalMatchingDetector<PointT>::detectOmni(ODScenePointCloud<PointT> *scene)
     {
+      ODDetections3D *detections = new ODDetections3D;
+
+
       typename pcl::PointCloud<PointT>::Ptr frame;
       float Z_DIST_ = 1.25f;
       float text_scale = 0.015f;
@@ -188,7 +193,7 @@ namespace od
       std::vector<pcl::PointCloud<pcl::PointXYZ>::Ptr> clusters;
       std::vector<pcl::PointIndices> indices;
       dps.setDownsamplingSize(0.02f);
-      dps.compute_full(clusters);
+      dps.compute_fast(clusters);
       dps.getIndicesClusters(indices);
       Eigen::Vector4f table_plane_;
       Eigen::Vector3f normal_plane_ = Eigen::Vector3f(table_plane_[0], table_plane_[1], table_plane_[2]);
@@ -221,10 +226,10 @@ namespace od
         detection->setId(categories[0]);
         detection->setLocation(centroid);
         detection->setMetainfoCluster(clusters[i]);
-        detections.push_back(detection);
+        detections->push_back(detection);
       }
 
-
+      return detections;
     }
 
   }

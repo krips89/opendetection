@@ -60,22 +60,22 @@ int main(int argc, char *argv[])
 
 
     //Detect
-    vector<od::ODDetection3D *> detections;
-    detector->detect(frame, detections);
+
+    od::ODDetections3D * detections = detector->detectOmni(frame);
 
 
     //add all the detections in the visualizer with its id as text
-    for (size_t i = 0; i < detections.size (); i++)
+    for (size_t i = 0; i < detections->size (); i++)
     {
       std::stringstream cluster_name;
       cluster_name << "cluster_" << i;
-      pcl::visualization::PointCloudColorHandlerRandom<pcl::PointXYZ> random_handler (detections[i]->getMetainfoCluster());
-      vis.addPointCloud<pcl::PointXYZ> (detections[i]->getMetainfoCluster(), random_handler, cluster_name.str ());
+      pcl::visualization::PointCloudColorHandlerRandom<pcl::PointXYZ> random_handler (detections->at(i)->getMetainfoCluster());
+      vis.addPointCloud<pcl::PointXYZ> (detections->at(i)->getMetainfoCluster(), random_handler, cluster_name.str ());
 
-      pcl::PointXYZ pos; pos.x = detections[i]->getLocation()[0]; pos.x = detections[i]->getLocation()[0]; pos.x = detections[i]->getLocation()[0];
-      vis.addText3D (detections[i]->getId(), pos, 0.015f, 1, 0, 1, cluster_name.str() + "_txt", 0);
+      pcl::PointXYZ pos; pos.x = detections->at(i)->getLocation()[0]; pos.y = detections->at(i)->getLocation()[1]; pos.z = detections->at(i)->getLocation()[2];
+      vis.addText3D (detections->at(i)->getId(), pos, 0.015f, 1, 0, 1, cluster_name.str() + "_txt", 0);
     }
-    previous_cluster_size = detections.size ();
+    previous_cluster_size = detections->size ();
 
 
     vis.spinOnce ();
