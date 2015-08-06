@@ -25,12 +25,12 @@ namespace od
     *
     */
 
-    class ODCascadeDetector : public ODDetector
+    class ODCascadeDetector : public ODDetector2D
     {
     public:
 
-      ODCascadeDetector(double scaleFactor = 1.1, int minNeighbors = 3, int flags = 0, cv::Size minSize = cv::Size(), cv::Size maxSize = cv::Size())
-          : scaleFactor_(scaleFactor), minNeighbors_(minNeighbors), minSize_(minSize), maxSize_(maxSize)
+      ODCascadeDetector(std::string const &training_data_location_ = "", double scaleFactor = 1.1, int minNeighbors = 3, int flags = 0, cv::Size minSize = cv::Size(), cv::Size maxSize = cv::Size())
+          : ODDetector2D(training_data_location_), scaleFactor_(scaleFactor), minNeighbors_(minNeighbors), minSize_(minSize), maxSize_(maxSize)
       {
         TRAINED_DATA_IDENTIFIER_ = "CASCADE";
         TRAINED_DATA_EXT_ = "cascade.xml";
@@ -43,6 +43,7 @@ namespace od
       }
 
       ODDetections2D *detectOmni(ODSceneImage *scene);
+      ODDetections* detect(ODSceneImage *scene) {};
 
 
     private:

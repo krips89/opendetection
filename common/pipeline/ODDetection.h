@@ -7,11 +7,13 @@
 
 #include "iostream"
 #include "common/utils/utils.h"
+#include "ODScene.h"
 #include <Eigen/Core>
 #include <opencv2/core/eigen.hpp>
 
 #include <pcl/point_cloud.h>
 #include <pcl/point_types.h>
+#include <opencv2/imgproc.hpp>
 
 using namespace std;
 
@@ -30,6 +32,9 @@ namespace od
 
 
     OD_DEFINE_ENUM_WITH_STRING_CONVERSIONS(DetectionType, (OD_DETECTION_RECOG)(OD_DETECTION_CLASS)(OD_DETECTION_NULL))
+
+    virtual ~ODDetection()
+    { }
 
     ODDetection(DetectionType const &type_ = OD_DETECTION_NULL, string const &id_ = "", double confidence_ = 1) : type_(type_), id_(id_),
                                                                                      confidence_(confidence_)
@@ -83,33 +88,36 @@ namespace od
    * \author Kripasindhu Sarkar
    *
    */
-  class ODDetection2D : public ODDetection
+  class ODDetection2D : public virtual ODDetection
   {
   public:
 
+    virtual ~ODDetection2D()
+    { }
+
     ODDetection2D(DetectionType const &type_ = OD_DETECTION_NULL, string const &id_ = "", double confidence_ = 1) : ODDetection(type_, id_, confidence_)
     {
-      location_ = Eigen::Vector3d::UnitZ();
+      location_2d_ = Eigen::Vector3d::UnitZ();
     }
 
     Eigen::Vector3d const &getLocation() const
     {
-      return location_;
+      return location_2d_;
     }
 
     void setLocation(Eigen::Vector3d const &location_)
     {
-      ODDetection2D::location_ = location_;
+      ODDetection2D::location_2d_ = location_;
     }
 
     cv::Rect const &getBoundingBox() const
     {
-      return bounding_box_;
+      return bounding_box_2d_;
     }
 
     void setBoundingBox(cv::Rect const &bounding_box_)
     {
-      ODDetection2D::bounding_box_ = bounding_box_;
+      ODDetection2D::bounding_box_2d_ = bounding_box_;
     }
 
     cv::Mat const &getMetainfoImage() const
@@ -122,8 +130,9 @@ namespace od
       ODDetection2D::metainfo_image_ = metainfo_image_;
     }
 
-    Eigen::Vector3d location_;
-    cv::Rect bounding_box_;
+
+    Eigen::Vector3d location_2d_;
+    cv::Rect bounding_box_2d_;
     cv::Mat metainfo_image_;
   };
 
@@ -132,21 +141,24 @@ namespace od
    * \author Kripasindhu Sarkar
    *
    */
-  class ODDetection3D : public ODDetection
+  class ODDetection3D : public virtual ODDetection
   {
   public:
+    virtual ~ODDetection3D()
+    { }
+
     Eigen::Vector4d const &getLocation() const
     {
-      return location_;
+      return location_3d_;
     }
 
     void setLocation(Eigen::Vector4d const &location_)
     {
-      ODDetection3D::location_ = location_;
+      ODDetection3D::location_3d_ = location_;
     }
     void setLocation(cv::Mat const &location_)
     {
-      cv::cv2eigen(location_, this->location_);
+      cv::cv2eigen(location_, this->location_3d_);
     }
 
     Eigen::Matrix3Xd const &getPose() const
@@ -195,7 +207,7 @@ namespace od
 
     ODDetection3D(DetectionType const &type_ = OD_DETECTION_NULL, string const &id_ = "", double confidence_ = 1) : ODDetection(type_, id_, confidence_)
     {
-      location_ = Eigen::Vector4d::UnitW();
+      location_3d_ = Eigen::Vector4d::UnitW();
       orientation_.setIdentity();
       scale_ = 1;
     }
@@ -203,18 +215,21 @@ namespace od
     void printSelf()
     {
       ODDetection::printSelf();
-      cout << "Location: " << location_ << endl;
+      cout << "Location: " << location_3d_ << endl;
       cout << "Pose: " << orientation_ << endl;
       cout << "Scale: " << scale_ << endl;
     }
 
-    Eigen::Vector4d location_;
+    Eigen::Vector4d location_3d_;
     Eigen::Matrix3Xd orientation_;
     double scale_;
     cv::Mat metainfo_image_;
     typename pcl::PointCloud<pcl::PointXYZ>::Ptr metainfo_cluster_;
   };
 
+  class ODDetectionComplete: public ODDetection2D, public ODDetection3D
+  {
+  };
 
   class ODDetections
   {
@@ -236,6 +251,12 @@ namespace od
     void push_back(ODDetection* detection)
     {
       detections_.push_back(detection);
+    }
+
+    void append(ODDetections* detections)
+    {
+      detections_.insert(detections_.end(), detections->detections_.begin(), detections->detections_.end());
+      //note the meta information of the appended detections are lost here.
     }
 
     ODDetection * operator[](int i) { return detections_[i]; }
@@ -272,8 +293,19 @@ namespace od
   {
   public:
 
-    ODDetection2D * operator[](int i) { return static_cast<ODDetection2D *>(detections_[i]); }
-    ODDetection2D * at(int i) { return static_cast<ODDetection2D *>(detections_[i]); }
+    ODSceneImage renderMetainfo(ODSceneImage input)
+    {
+      cv::Mat image = input.getCVImage().clone();
+      for(int i = 0; i < detections_.size(); i++)
+      {
+        ODDetection2D * detection = dynamic_cast<ODDetection2D *>(detections_[i]);
+        cv::rectangle(image, detection->bounding_box_2d_,CV_RGB(0, 255, 0), 2);
+      }
+      return ODSceneImage(image);
+    }
+
+    ODDetection2D * operator[](int i) { return dynamic_cast<ODDetection2D *>(detections_[i]); }
+    ODDetection2D * at(int i) { return dynamic_cast<ODDetection2D *>(detections_[i]); }
 
   };
 
@@ -281,8 +313,17 @@ namespace od
   {
   public:
 
-    ODDetection3D * operator[](int i) { return static_cast<ODDetection3D *>(detections_[i]); }
-    ODDetection3D * at(int i) { return static_cast<ODDetection3D *>(detections_[i]); }
+    ODDetection3D * operator[](int i) { return dynamic_cast<ODDetection3D *>(detections_[i]); }
+    ODDetection3D * at(int i) { return dynamic_cast<ODDetection3D *>(detections_[i]); }
   };
+
+  class ODDetectionsComplete: public ODDetections
+  {
+  public:
+
+    ODDetectionComplete * operator[](int i) { return dynamic_cast<ODDetectionComplete *>(detections_[i]); }
+    ODDetectionComplete * at(int i) { return dynamic_cast <ODDetectionComplete *>(detections_[i]); }
+  };
+
 }
 #endif //OPENDETECTION_ODDETECTION_H

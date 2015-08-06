@@ -78,10 +78,10 @@ namespace od
       return detections;
     }
 
-    ODDetections2D *ODHOGMultiscaleDetector::detect(ODSceneImage *scene)
+    ODDetections *ODHOGMultiscaleDetector::detect(ODSceneImage *scene)
     {
       //always create a detection
-      ODDetections2D *detections = new ODDetections2D;
+      ODDetections *detections = new ODDetections;
 
       cv::Mat scaledwindow;
       cv::resize(scene->getCVImage(), scaledwindow, hog_.winSize);

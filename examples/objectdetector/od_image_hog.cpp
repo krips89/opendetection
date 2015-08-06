@@ -17,8 +17,10 @@ using namespace od;
 
 int main(int argc, char *argv[])
 {
-   //detector
-  g2d::ODHOGMultiscaleDetector *detector = new g2d::ODHOGMultiscaleDetector;
+
+  string trained_data_dir(argv[1]);
+  //detector
+  g2d::ODHOGMultiscaleDetector *detector = new g2d::ODHOGMultiscaleDetector(trained_data_dir);
   detector->init();
 
   //get scenes
@@ -33,7 +35,7 @@ int main(int argc, char *argv[])
     ODDetections2D *detections =  detector->detectOmni(scene);
 
     if(detections->size() > 0)
-      cv::imshow("Overlay", detections->getMetainfoImage());
+      cv::imshow("Overlay", detections->renderMetainfo(*scene).getCVImage());
     else
       cv::imshow("Overlay", scene->getCVImage());
 

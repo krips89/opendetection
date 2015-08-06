@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
   od::ODFrameGenerator<od::ODSceneImage, od::GENERATOR_TYPE_FILE_LIST> frameGenerator(query_images);
   //GUI
   cv::namedWindow("Overlay", cv::WINDOW_NORMAL);
-  while(frameGenerator.isValid() && cv::waitKey(300) != 27)
+  while(frameGenerator.isValid() && cv::waitKey(30) != 27)
   {
     od::ODSceneImage * scene = frameGenerator.getNextFrame();
     cv::imshow("Overlay", scene->getCVImage());
@@ -40,6 +40,7 @@ int main(int argc, char *argv[])
       cv::imshow("Overlay", detections->getMetainfoImage()); //only showing the first detection
     else
       cv::imshow("Overlay", scene->getCVImage());
+
 
     delete scene;
 

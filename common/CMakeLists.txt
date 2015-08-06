@@ -25,7 +25,6 @@ if(build)
 
         "pipeline/ODTrainer.h"
         "pipeline/ODDetector.h"
-        "pipeline/ODDetectorMultiAlgo.h"
 
         "utils/ODFrameGenerator.h"
         "utils/utils.h"

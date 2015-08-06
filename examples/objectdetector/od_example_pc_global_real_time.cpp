@@ -58,7 +58,6 @@ int main(int argc, char *argv[])
       vis.removeShape (cluster_name.str ());
     }
 
-
     //Detect
 
     od::ODDetections3D * detections = detector->detectOmni(frame);

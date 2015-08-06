@@ -27,13 +27,13 @@ namespace od
    * \author Kripasindhu Sarkar
    *
    */
-    class ODHOGMultiscaleDetector : ODDetector
+    class ODHOGMultiscaleDetector : public ODDetector2D
     {
     public:
 
       OD_DEFINE_ENUM_WITH_STRING_CONVERSIONS(SVMType, (OD_CUSTOM)(OD_DEFAULT_PEOPLE)(OD_DAIMLER_PEOPLE)(OD_FILE))
 
-      ODHOGMultiscaleDetector(std::string const &training_data_location_ = ""): ODDetector(training_data_location_)
+      ODHOGMultiscaleDetector(std::string const &training_data_location_ = ""): ODDetector2D(training_data_location_)
       {
         TRAINED_DATA_IDENTIFIER_ = "HOG";
         TRAINED_DATA_EXT_ = "hog.xml";
@@ -50,7 +50,7 @@ namespace od
       }
 
       ODDetections2D *detectOmni(ODSceneImage *scene);
-      ODDetections2D *detect(ODSceneImage *scene);
+      ODDetections *detect(ODSceneImage *scene);
 
       int detect(ODScene *scene, vector<ODDetection *> &detections)
       { }

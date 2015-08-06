@@ -37,3 +37,8 @@ OD_ADD_EXAMPLE(od_example_pc_global_real_time FILES od_example_pc_global_real_ti
 OD_ADD_EXAMPLE(od_example_framegenerator FILES od_example_framegenerator.cpp
                 LINK_WITH od_common)
 
+
+
+OD_ADD_EXAMPLE(od_multialgo_files FILES od_multialgo_files.cpp
+                LINK_WITH od_miscellaneous_detector)
+

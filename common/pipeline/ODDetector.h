@@ -23,9 +23,6 @@ namespace od
   {
   public:
 
-    ODDetector()
-    { }
-
     ODDetector(std::string const &training_data_location_) : training_data_location_(training_data_location_)
     { }
 
@@ -33,7 +30,7 @@ namespace od
 
     virtual ODDetection* detect(ODScene *scene) {}
 
-    virtual ODDetections* detectOmni(ODScene *scene) {}
+    //virtual ODDetections* detectOmni(ODScene *scene) {}
 
     std::string getTrainingInputLocation() const
     {
@@ -65,6 +62,16 @@ namespace od
     std::string training_input_location_, training_data_location_;
     std::string TRAINED_DATA_EXT_, TRAINED_DATA_IDENTIFIER_;
 
+  };
+
+  class ODDetector2D: public ODDetector
+  {
+  public:
+    ODDetector2D(std::string const &training_data_location_) : ODDetector(training_data_location_)
+    { }
+
+    virtual ODDetections* detect(ODSceneImage *scene) {};
+    virtual ODDetections2D* detectOmni(ODSceneImage *scene) {};
   };
 
 }
