@@ -193,12 +193,11 @@ namespace od
       ODDetection3D::metainfo_cluster_ = metainfo_cluster_;
     }
 
-    ODDetection3D()
+    ODDetection3D(DetectionType const &type_ = OD_DETECTION_NULL, string const &id_ = "", double confidence_ = 1) : ODDetection(type_, id_, confidence_)
     {
       location_ = Eigen::Vector4d::UnitW();
       orientation_.setIdentity();
       scale_ = 1;
-
     }
 
     void printSelf()

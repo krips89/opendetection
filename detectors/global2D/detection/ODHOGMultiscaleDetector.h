@@ -42,27 +42,7 @@ namespace od
       }
 
 
-      void init()
-      {
-        switch(svmtype_)
-        {
-          case OD_DEFAULT_PEOPLE:
-            hog_.setSVMDetector(cv::HOGDescriptor::getDefaultPeopleDetector());
-
-            FileUtils::createTrainingDir(getSpecificTrainingDataLocation());
-            hog_.save(getSpecificTrainingDataLocation() + "/defaultpeople." + TRAINED_DATA_EXT_);
-            break;
-          case OD_DAIMLER_PEOPLE:
-            hog_.setSVMDetector(cv::HOGDescriptor::getDaimlerPeopleDetector());
-
-            FileUtils::createTrainingDir(getSpecificTrainingDataLocation());
-            hog_.save(getSpecificTrainingDataLocation() + "/daimlerpeople." + TRAINED_DATA_EXT_);
-          case OD_FILE:
-            hog_.load(FileUtils::getFirstFile(getSpecificTrainingDataLocation(), TRAINED_DATA_EXT_));
-            break;
-            //dont set anything for custom, it is to be set by the user by setSVMDetector
-        }
-      }
+      void init();
 
       void setSVMDetector(std::vector<float> svmdetector)
       {
@@ -70,6 +50,7 @@ namespace od
       }
 
       ODDetections2D *detectOmni(ODSceneImage *scene);
+      ODDetections2D *detect(ODSceneImage *scene);
 
       int detect(ODScene *scene, vector<ODDetection *> &detections)
       { }

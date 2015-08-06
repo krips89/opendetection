@@ -50,6 +50,8 @@ namespace od
         return detect(scene_pc, detections);
       }
 
+      ODDetections3D* detect(ODScenePointCloud<PointT> *scene);
+
       //template<typename PointT>
       int detect(ODScenePointCloud<PointT> *scene, vector<ODDetection3D *> &detections);
 
@@ -232,6 +234,42 @@ namespace od
       return detections;
     }
 
+    template<typename PointT>
+    ODDetections3D* ODPointCloudGlobalMatchingDetector<PointT>::detect(ODScenePointCloud<PointT> *scene)
+    {
+      ODDetections3D *detections = new ODDetections3D;
+
+
+      typename pcl::PointCloud<PointT>::Ptr frame;
+      float Z_DIST_ = 1.25f;
+      float text_scale = 0.015f;
+
+      frame = scene->getPointCloud();
+      pcl::PointCloud<pcl::PointXYZ>::Ptr xyz_points(new pcl::PointCloud<pcl::PointXYZ>);
+      pcl::copyPointCloud(*frame, *xyz_points);
+
+      global_->setInputCloud(xyz_points);
+      //no indices set, so it would try to classify the entire PC
+      global_->classify();
+
+      std::vector<std::string> categories;
+      std::vector<float> conf;
+      global_->getCategory(categories);
+      global_->getConfidence(conf);
+      //detection done!
+
+      std::string category = categories[0];
+      Eigen::Vector4d centroid;
+      pcl::compute3DCentroid(*xyz_points, centroid);
+      //position at 3D identified!
+
+      //now fill up the detection:
+      ODDetection3D *detection = new ODDetection3D(ODDetection::OD_DETECTION_CLASS, categories[0], conf[0]);
+      detection->setLocation(centroid);
+      detections->push_back(detection);
+
+      return detections;
+    }
   }
 }
 #endif //OPENDETECTION_ODPOINTCLOUDGLOBALMATCHINGDETECTOR_H

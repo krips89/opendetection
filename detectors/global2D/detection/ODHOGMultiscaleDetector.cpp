@@ -10,6 +10,28 @@ namespace od
   {
 
 
+    void ODHOGMultiscaleDetector::init()
+    {
+      switch(svmtype_)
+      {
+        case OD_DEFAULT_PEOPLE:
+          hog_.setSVMDetector(cv::HOGDescriptor::getDefaultPeopleDetector());
+
+          FileUtils::createTrainingDir(getSpecificTrainingDataLocation());
+          hog_.save(getSpecificTrainingDataLocation() + "/defaultpeople." + TRAINED_DATA_EXT_);
+          break;
+        case OD_DAIMLER_PEOPLE:
+          hog_.setSVMDetector(cv::HOGDescriptor::getDaimlerPeopleDetector());
+
+          FileUtils::createTrainingDir(getSpecificTrainingDataLocation());
+          hog_.save(getSpecificTrainingDataLocation() + "/daimlerpeople." + TRAINED_DATA_EXT_);
+        case OD_FILE:
+          hog_.load(FileUtils::getFirstFile(getSpecificTrainingDataLocation(), TRAINED_DATA_EXT_));
+          break;
+          //dont set anything for custom, it is to be set by the user by setSVMDetector
+      }
+    }
+
     ODDetections2D *ODHOGMultiscaleDetector::detectOmni(ODSceneImage *scene)
     {
       //always create a detection
@@ -56,6 +78,27 @@ namespace od
       return detections;
     }
 
+    ODDetections2D *ODHOGMultiscaleDetector::detect(ODSceneImage *scene)
+    {
+      //always create a detection
+      ODDetections2D *detections = new ODDetections2D;
+
+      cv::Mat scaledwindow;
+      cv::resize(scene->getCVImage(), scaledwindow, hog_.winSize);
+
+      std::vector<cv::Point> foundLocations;
+
+      hog_.detect(scene->getCVImage(), foundLocations);
+      if (!foundLocations.empty())
+      {
+        ODDetection2D *detection2D = new ODDetection2D;
+        detection2D->setId("PEOPLE");
+        detection2D->setType(ODDetection::OD_DETECTION_CLASS);
+        detections->push_back(detection2D);
+      }
+
+      return detections;
+    }
 
   }
 }

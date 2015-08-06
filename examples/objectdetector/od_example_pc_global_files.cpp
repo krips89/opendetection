@@ -41,11 +41,13 @@ int main(int argc, char *argv[])
   {
     //get frame
     frame = frameGenerator.getNextFrame();
-    detector->detect(frame, detections);
 
-    for(int i = 0; i < detections.size(); i++)
+
+    od::ODDetections3D * detections = detector->detectOmni(frame);
+
+    for(int i = 0; i < detections->size(); i++)
     {
-      detections[i]->printSelf();
+      detections->at(i)->printSelf();
     }
 
     //vis.removePointCloud ("frame");

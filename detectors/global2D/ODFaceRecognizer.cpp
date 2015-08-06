@@ -87,7 +87,6 @@ namespace od
       int label = 100;
       double confidence;
       cvrecognizer_->predict(face_edited, label, confidence);
-      //label = cvrecognizer_->predict(face_edited);
 
       //fill in the detection
       ODDetection2D *detection = new ODDetection2D(ODDetection::OD_DETECTION_CLASS, toString(label), confidence);

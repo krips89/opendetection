@@ -32,16 +32,14 @@ int main(int argc, char *argv[])
 
 
   //Get a scene
-  od::ODScenePointCloud<> scene(pointcloud_file);
-  vector<od::ODDetection3D *> detections;
+  od::ODScenePointCloud<> *scene = new od::ODScenePointCloud<>(pointcloud_file);
 
-  //Detect
-  detector->detect(&scene, detections);
+  od::ODDetections3D * detections = detector->detectOmni(scene);
 
   //feedback
-  for(int i = 0; i < detections.size(); i++)
+  for(int i = 0; i < detections->size(); i++)
   {
-    detections[i]->printSelf();
+    detections->at(i)->printSelf();
   }
 
   return 0;
