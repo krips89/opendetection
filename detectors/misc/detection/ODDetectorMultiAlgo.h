@@ -12,21 +12,29 @@ namespace od
 {
 
 
-  class ODDetectorMultiAlgo : public ODDetector2D
+  class ODDetectorMultiAlgo : public ODDetector
   {
   public:
-    ODDetectorMultiAlgo(string const &training_data_location_) : ODDetector2D(training_data_location_)
+    ODDetectorMultiAlgo(string const &training_data_location_) : ODDetector(training_data_location_)
     { }
 
 
-    ODDetections *detect(ODSceneImage *scene) ;
+    typedef pcl::PointXYZRGBA PointT;
 
+
+
+    ODDetections *detect(ODSceneImage *scene) ;
     ODDetections2D *detectOmni(ODSceneImage *scene);
+
+    ODDetections* detect(ODScenePointCloud<PointT> *scene);
+    ODDetections3D* detectOmni(ODScenePointCloud<PointT> *scene);
+
 
     void init();
 
   private:
-    std::vector<ODDetector2D *> detectors_;
+    std::vector<ODDetector2D *> detectors_2d_;
+    std::vector<ODDetector3D<PointT> *> detectors_3d_;
   };
 
 

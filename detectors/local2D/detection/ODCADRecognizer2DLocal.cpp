@@ -107,14 +107,14 @@ namespace od
 
 
 
-    ODDetections *ODCADRecognizer2DLocal::detect(ODSceneImage *scene)
+    ODDetections* ODCADRecognizer2DLocal::detect(ODSceneImage *scene)
     {
       ODDetections3D *detections = detectOmni(scene);
       return detections;
     }
 
 
-    ODDetections3D*ODCADRecognizer2DLocal::detectOmni(ODSceneImage *scene)
+    ODDetections3D* ODCADRecognizer2DLocal::detectOmni(ODSceneImage *scene)
     {
 
       vector<KeyPoint> keypoints_scene;

@@ -36,10 +36,11 @@ namespace od
     {
 
     public:
-      ODCADDetector3DGlobal(string const &training_data_location_ = "") : ODDetector3D<PointT>(training_data_location_),
+      ODCADDetector3DGlobal(string const &training_data_location = "", string const &training_input_location = "") : ODDetector3D<PointT>(training_data_location),
                                                                           NN(2), desc_name("esf")
       {
         this->TRAINED_DATA_IDENTIFIER_ = "GLOBAL3DVFH";
+        this->training_input_location_ = training_input_location;
       }
 
       void init();

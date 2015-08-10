@@ -18,6 +18,7 @@ namespace od
       boost::shared_ptr<pcl::rec_3d_framework::MeshSource<pcl::PointXYZ> > mesh_source(new pcl::rec_3d_framework::MeshSource<pcl::PointXYZ>);
       mesh_source->setPath(this->training_input_location_);
       std::string training_dir_specific =  this->getSpecificTrainingDataLocation();
+      mesh_source->setModelScale (1.f);
       mesh_source->generate(training_dir_specific);
 
       boost::shared_ptr<pcl::rec_3d_framework::Source<pcl::PointXYZ> > cast_source;
