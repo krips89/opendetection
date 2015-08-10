@@ -18,7 +18,7 @@ namespace od
 
   namespace g2d
   {
-    /** \brief ODHOGMultiscaleDetector: A linear classifier detector for HOG features
+    /** \brief ODHOGDetector: A linear classifier detector for HOG features
    * User can set any linear classifier through setSVMDetector function or one of the default available detectors like OD_DEFAULT_PEOPLE
    * This class will then find HOG features in the scene and use the liniar classification model as an input to classify the scene
    * It covers both simple region detection and omni detection (multiscale mitilocation detection on the entire scene)
@@ -27,13 +27,13 @@ namespace od
    * \author Kripasindhu Sarkar
    *
    */
-    class ODHOGMultiscaleDetector : public ODDetector2D
+    class ODHOGDetector : public ODDetector2D
     {
     public:
 
       OD_DEFINE_ENUM_WITH_STRING_CONVERSIONS(SVMType, (OD_CUSTOM)(OD_DEFAULT_PEOPLE)(OD_DAIMLER_PEOPLE)(OD_FILE))
 
-      ODHOGMultiscaleDetector(std::string const &training_data_location_ = ""): ODDetector2D(training_data_location_)
+      ODHOGDetector(std::string const &training_data_location_ = ""): ODDetector2D(training_data_location_)
       {
         TRAINED_DATA_IDENTIFIER_ = "HOG";
         TRAINED_DATA_EXT_ = "hog.xml";
@@ -62,7 +62,7 @@ namespace od
 
       void setSvmtype(SVMType const &svmtype_)
       {
-        ODHOGMultiscaleDetector::svmtype_ = svmtype_;
+        ODHOGDetector::svmtype_ = svmtype_;
       }
 
     protected:

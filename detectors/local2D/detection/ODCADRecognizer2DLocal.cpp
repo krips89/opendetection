@@ -2,7 +2,7 @@
 // Created by sarkar on 08.06.15.
 //
 
-#include "SimpleRansacDetector.h"
+#include "ODCADRecognizer2DLocal.h"
 
 
 #include <opencv2/highgui/highgui.hpp>
@@ -32,19 +32,7 @@ namespace od
   namespace l2d
   {
 
-    int SimpleRansacDetector::detect(ODScene *scene, vector<ODDetection *> &detections)
-    {
-      ODSceneImage *sceneimage = dynamic_cast<ODSceneImage *>(scene);
-      return detect(sceneimage, detections);
-    }
-
-    ODDetections* SimpleRansacDetector::detectOmni(ODScene *scene)
-    {
-      ODSceneImage *sceneimage = dynamic_cast<ODSceneImage *>(scene);
-      return detectOmni(sceneimage);
-    }
-
-    void SimpleRansacDetector::parseParameterString(string parameter_string)
+    void ODCADRecognizer2DLocal::parseParameterString(string parameter_string)
     {
       const String keys = "{help h        |      | print this message                   }"
           "{video v       |      | path to recorded video               }"
@@ -93,7 +81,7 @@ namespace od
 
     }
 
-    void SimpleRansacDetector::init()
+    void ODCADRecognizer2DLocal::init()
     {
       FileStorage fs(camera_intrinsic_file, FileStorage::READ);
       Mat cam_man, dist_coeff;
@@ -102,7 +90,7 @@ namespace od
       pnp_detection = PnPProblem(cam_man, dist_coeff);
 
       // get all trained models
-      FileUtils::getFilesInDirectoryRec(getSpecificTrainingDataLocation(),TRAINED_DATA_EXT_, model_names);
+      FileUtils::getFilesInDirectoryRec(getSpecificTrainingDataLocation(), TRAINED_DATA_EXT_, model_names);
 
       for(int i = 0; i < model_names.size(); i++)
       {
@@ -117,29 +105,16 @@ namespace od
 
     }
 
-    int SimpleRansacDetector::detect(ODSceneImage *scene, vector<ODDetection3D *> &detections)
+
+
+    ODDetections *ODCADRecognizer2DLocal::detect(ODSceneImage *scene)
     {
-
-
-      vector<KeyPoint> keypoints_scene;
-      Mat descriptor_scene;
-      featureDetector->computeKeypointsAndDescriptors(scene->getCVImage(), descriptor_scene, keypoints_scene);
-      scene->setDescriptors(descriptor_scene);
-      scene->setKeypoints(keypoints_scene);
-
-      cv::Mat viz = scene->getCVImage().clone();
-      for(int i = 0; i < models.size(); i++)
-      {
-
-        ODDetection3D *detection;
-        if(detectSingleModel(scene, models[i], detection, viz))
-          detections.push_back(detection);
-      }
-
-      return 1;
+      ODDetections3D *detections = detectOmni(scene);
+      return detections;
     }
 
-    ODDetections3D* SimpleRansacDetector::detectOmni(ODSceneImage *scene)
+
+    ODDetections3D*ODCADRecognizer2DLocal::detectOmni(ODSceneImage *scene)
     {
 
       vector<KeyPoint> keypoints_scene;
@@ -162,7 +137,7 @@ namespace od
       return detections;
     }
 
-    bool SimpleRansacDetector::detectSingleModel(ODSceneImage *scene, Model const &model, ODDetection3D *&detection3D, Mat & frame_vis)
+    bool ODCADRecognizer2DLocal::detectSingleModel(ODSceneImage *scene, Model const &model, ODDetection3D *&detection3D, Mat & frame_vis)
     {
       vector<Point3f> list_points3d_model = model.get_points3d();  // list with model 3D coordinates
       vector<KeyPoint> list_keypoints_model = model.get_keypoints();  // list with model 3D coordinates

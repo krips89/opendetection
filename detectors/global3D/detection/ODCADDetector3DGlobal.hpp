@@ -1,97 +1,23 @@
 //
-// Created by sarkar on 16.06.15.
+// Created by sarkar on 10.08.15.
 //
 
-#ifndef OPENDETECTION_ODPOINTCLOUDGLOBALMATCHINGDETECTOR_H
-#define OPENDETECTION_ODPOINTCLOUDGLOBALMATCHINGDETECTOR_H
+#ifndef OPENDETECTION_ODCADDETECTOR3DGLOBAL_HPP
+#define OPENDETECTION_ODCADDETECTOR3DGLOBAL_HPP
 
-#include <common/pipeline/ODDetector.h>
-
-
-
-
-#include <pcl/pcl_macros.h>
-#include <pcl/apps/3d_rec_framework/pipeline/global_nn_classifier.h>
-#include <pcl/apps/3d_rec_framework/pc_source/mesh_source.h>
-#include <pcl/apps/3d_rec_framework/feature_wrapper/global/vfh_estimator.h>
-#include <pcl/apps/3d_rec_framework/feature_wrapper/global/esf_estimator.h>
-#include <pcl/apps/3d_rec_framework/feature_wrapper/global/cvfh_estimator.h>
-//#include <pcl/apps/3d_rec_framework/tools/openni_frame_source.h>
-#include <pcl/apps/3d_rec_framework/utils/metrics.h>
-#include <pcl/visualization/pcl_visualizer.h>
-#include <pcl/apps/dominant_plane_segmentation.h>
-#include <pcl/console/parse.h>
 
 namespace od
 {
   namespace g3d
   {
-/** \brief ODPointCloudGlobalMatchingDetector
-  *
-  * \author Kripasindhu Sarkar
-  *
-  */
-    template<typename PointT = pcl::PointXYZRGBA>
-    class ODPointCloudGlobalMatchingDetector : public ODDetector
-    {
-
-    public:
-      ODPointCloudGlobalMatchingDetector(string const &training_data_location_ = "") : ODDetector(
-          training_data_location_), NN(2), desc_name("esf")
-      {
-        TRAINED_DATA_IDENTIFIER_ = "GLOBAL3DVFH";
-      }
-
-      void init();
-
-      int detect(ODScene *scene, vector<ODDetection *> &detections)
-      {
-        ODScenePointCloud<PointT> *scene_pc = dynamic_cast<ODScenePointCloud<PointT> *>(scene);
-        return detect(scene_pc, detections);
-      }
-
-      ODDetections3D* detect(ODScenePointCloud<PointT> *scene);
-
-      //template<typename PointT>
-      int detect(ODScenePointCloud<PointT> *scene, vector<ODDetection3D *> &detections);
-
-      ODDetections3D* detectOmni(ODScenePointCloud<PointT> *scene);
-
-      int getNN() const
-      {
-        return NN;
-      }
-
-      void setNN(int NN)
-      {
-        ODPointCloudGlobalMatchingDetector::NN = NN;
-      }
-
-      string const &getDescName() const
-      {
-        return desc_name;
-      }
-
-      void setDescName(string const &desc_name)
-      {
-        ODPointCloudGlobalMatchingDetector::desc_name = desc_name;
-      }
-
-    protected:
-      int NN;
-      string desc_name;
-      boost::shared_ptr<pcl::rec_3d_framework::GlobalClassifier<pcl::PointXYZ> > global_;
-
-    };
-
 
     template<typename PointT>
-    void ODPointCloudGlobalMatchingDetector<PointT>::init()
+    void ODCADDetector3DGlobal<PointT>::init()
     {
 
       boost::shared_ptr<pcl::rec_3d_framework::MeshSource<pcl::PointXYZ> > mesh_source(new pcl::rec_3d_framework::MeshSource<pcl::PointXYZ>);
-      mesh_source->setPath(training_input_location_);
-      std::string training_dir_specific =  getSpecificTrainingDataLocation();
+      mesh_source->setPath(this->training_input_location_);
+      std::string training_dir_specific =  this->getSpecificTrainingDataLocation();
       mesh_source->generate(training_dir_specific);
 
       boost::shared_ptr<pcl::rec_3d_framework::Source<pcl::PointXYZ> > cast_source;
@@ -169,7 +95,7 @@ namespace od
     }
 
     template<typename PointT>
-    ODDetections3D* ODPointCloudGlobalMatchingDetector<PointT>::detectOmni(ODScenePointCloud<PointT> *scene)
+    ODDetections3D* ODCADDetector3DGlobal<PointT>::detectOmni(ODScenePointCloud<PointT> *scene)
     {
       ODDetections3D *detections = new ODDetections3D;
 
@@ -235,9 +161,9 @@ namespace od
     }
 
     template<typename PointT>
-    ODDetections3D* ODPointCloudGlobalMatchingDetector<PointT>::detect(ODScenePointCloud<PointT> *scene)
+    ODDetections* ODCADDetector3DGlobal<PointT>::detect(ODScenePointCloud<PointT> *scene)
     {
-      ODDetections3D *detections = new ODDetections3D;
+      ODDetections *detections = new ODDetections;
 
 
       typename pcl::PointCloud<PointT>::Ptr frame;
@@ -259,17 +185,15 @@ namespace od
       //detection done!
 
       std::string category = categories[0];
-      Eigen::Vector4d centroid;
-      pcl::compute3DCentroid(*xyz_points, centroid);
-      //position at 3D identified!
 
       //now fill up the detection:
-      ODDetection3D *detection = new ODDetection3D(ODDetection::OD_DETECTION_CLASS, categories[0], conf[0]);
-      detection->setLocation(centroid);
+      ODDetection *detection = new ODDetection3D(ODDetection::OD_DETECTION_CLASS, categories[0], conf[0]);
       detections->push_back(detection);
 
       return detections;
     }
   }
 }
-#endif //OPENDETECTION_ODPOINTCLOUDGLOBALMATCHINGDETECTOR_H
+
+
+#endif //OPENDETECTION_ODCADDETECTOR3DGLOBAL_HPP

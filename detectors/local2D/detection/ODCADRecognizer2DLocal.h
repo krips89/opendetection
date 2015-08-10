@@ -43,7 +43,7 @@ namespace od
    * \author Kripasindhu Sarkar
    *
    */
-    class SimpleRansacDetector : public ODImageLocalMatchingDetector
+    class ODCADRecognizer2DLocal : public ODImageLocalMatchingDetector
     {
     public:
       string const &getCameraIntrinsicFile() const
@@ -53,7 +53,7 @@ namespace od
 
       void setCameraIntrinsicFile(string const &camera_intrinsic_file)
       {
-        SimpleRansacDetector::camera_intrinsic_file = camera_intrinsic_file;
+        ODCADRecognizer2DLocal::camera_intrinsic_file = camera_intrinsic_file;
       }
 
       int getNumKeyPoints() const
@@ -63,7 +63,7 @@ namespace od
 
       void setNumKeyPoints(int numKeyPoints)
       {
-        SimpleRansacDetector::numKeyPoints = numKeyPoints;
+        ODCADRecognizer2DLocal::numKeyPoints = numKeyPoints;
       }
 
       float getRatioTest() const
@@ -73,7 +73,7 @@ namespace od
 
       void setRatioTest(float ratioTest)
       {
-        SimpleRansacDetector::ratioTest = ratioTest;
+        ODCADRecognizer2DLocal::ratioTest = ratioTest;
       }
 
       bool isFast_match() const
@@ -83,7 +83,7 @@ namespace od
 
       void setFast_match(bool fast_match)
       {
-        SimpleRansacDetector::fast_match = fast_match;
+        ODCADRecognizer2DLocal::fast_match = fast_match;
       }
 
       bool isUse_gpu() const
@@ -93,7 +93,7 @@ namespace od
 
       void setUse_gpu(bool use_gpu)
       {
-        SimpleRansacDetector::use_gpu = use_gpu;
+        ODCADRecognizer2DLocal::use_gpu = use_gpu;
       }
 
       bool isUse_gpu_match() const
@@ -103,7 +103,7 @@ namespace od
 
       void setUse_gpu_match(bool use_gpu_match)
       {
-        SimpleRansacDetector::use_gpu_match = use_gpu_match;
+        ODCADRecognizer2DLocal::use_gpu_match = use_gpu_match;
       }
 
       bool isMetainfo() const
@@ -113,7 +113,7 @@ namespace od
 
       void setMetainfo(bool metainfo)
       {
-        SimpleRansacDetector::metainfo = metainfo;
+        ODCADRecognizer2DLocal::metainfo = metainfo;
       }
 
       int getIterationsCount() const
@@ -123,7 +123,7 @@ namespace od
 
       void setIterationsCount(int iterationsCount)
       {
-        SimpleRansacDetector::iterationsCount = iterationsCount;
+        ODCADRecognizer2DLocal::iterationsCount = iterationsCount;
       }
 
       float getReprojectionError() const
@@ -133,7 +133,7 @@ namespace od
 
       void setReprojectionError(float reprojectionError)
       {
-        SimpleRansacDetector::reprojectionError = reprojectionError;
+        ODCADRecognizer2DLocal::reprojectionError = reprojectionError;
       }
 
       double getConfidence() const
@@ -143,7 +143,7 @@ namespace od
 
       void setConfidence(double confidence)
       {
-        SimpleRansacDetector::confidence = confidence;
+        ODCADRecognizer2DLocal::confidence = confidence;
       }
 
       int getMinInliers() const
@@ -153,7 +153,7 @@ namespace od
 
       void setMinInliers(int minInliers)
       {
-        SimpleRansacDetector::minInliers = minInliers;
+        ODCADRecognizer2DLocal::minInliers = minInliers;
       }
 
       int getPnpMethod() const
@@ -163,10 +163,10 @@ namespace od
 
       void setPnpMethod(int pnpMethod)
       {
-        SimpleRansacDetector::pnpMethod = pnpMethod;
+        ODCADRecognizer2DLocal::pnpMethod = pnpMethod;
       }
 
-      SimpleRansacDetector(string const &training_data_location_ = 0) : ODImageLocalMatchingDetector(
+      ODCADRecognizer2DLocal(string const &training_data_location_ = 0) : ODImageLocalMatchingDetector(
           training_data_location_)
       {
         camera_intrinsic_file = "Data/out_camera_data_lion_old.yml";         // mesh
@@ -198,11 +198,7 @@ namespace od
 
       void init();
 
-      int detect(ODScene *scene, vector<ODDetection *> &detections);
-
-      int detect(ODSceneImage *scene, vector<ODDetection3D *> &detections);
-
-      ODDetections* detectOmni(ODScene *scene);
+      ODDetections* detect(ODSceneImage *scene);
 
       ODDetections3D* detectOmni(ODSceneImage *scene);
 

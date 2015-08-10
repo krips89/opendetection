@@ -12,16 +12,16 @@ namespace od
 {
   namespace g3d
   {
-/** \brief ODPointCloudGlobalMatchingTrainer
+/** \brief ODCADDetectTrainer3DGlobal
    *
    * \author Kripasindhu Sarkar
    *
    */
-    class ODPointCloudGlobalMatchingTrainer : public ODTrainer
+    class ODCADDetectTrainer3DGlobal : public ODTrainer
     {
 
     public:
-      ODPointCloudGlobalMatchingTrainer(std::string const &training_input_location_ = "", std::string const &training_data_location_ = "") : ODTrainer(
+      ODCADDetectTrainer3DGlobal(std::string const &training_input_location_ = "", std::string const &training_data_location_ = "") : ODTrainer(
           training_input_location_, training_data_location_)
       {
         desc_name = "esf";
@@ -37,7 +37,7 @@ namespace od
 
       void setDescName(std::string const &desc_name)
       {
-        ODPointCloudGlobalMatchingTrainer::desc_name = desc_name;
+        ODCADDetectTrainer3DGlobal::desc_name = desc_name;
       }
 
     protected:

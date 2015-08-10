@@ -26,11 +26,11 @@ namespace od
     ODDetector(std::string const &training_data_location_) : training_data_location_(training_data_location_)
     { }
 
-    virtual int detect(ODScene *scene, std::vector<ODDetection *> &detections) {};
 
     virtual ODDetection* detect(ODScene *scene) {}
 
-    //virtual ODDetections* detectOmni(ODScene *scene) {}
+    virtual void init() = 0;
+    virtual ODDetections* detectOmni(ODScene *scene) {}
 
     std::string getTrainingInputLocation() const
     {
@@ -64,14 +64,36 @@ namespace od
 
   };
 
+
   class ODDetector2D: public ODDetector
   {
   public:
     ODDetector2D(std::string const &training_data_location_) : ODDetector(training_data_location_)
     { }
 
-    virtual ODDetections* detect(ODSceneImage *scene) {};
-    virtual ODDetections2D* detectOmni(ODSceneImage *scene) {};
+    virtual ODDetections* detect(ODSceneImage *scene) {}
+    virtual ODDetections2D* detectOmni(ODSceneImage *scene) {}
+  };
+
+  template<typename PointT = pcl::PointXYZRGBA>
+  class ODDetector3D: public ODDetector
+  {
+  public:
+    ODDetector3D(std::string const &training_data_location_) : ODDetector(training_data_location_)
+    { }
+
+    virtual ODDetections* detect(ODScenePointCloud<PointT> *scene) {}
+    virtual ODDetections3D* detectOmni(ODScenePointCloud<PointT> *scene) {}
+  };
+
+  class ODDetector2DComplete: public ODDetector
+  {
+  public:
+    ODDetector2DComplete(std::string const &training_data_location_) : ODDetector(training_data_location_)
+    { }
+
+    virtual ODDetections* detect(ODSceneImage *scene) {}
+    virtual ODDetections3D* detectOmni(ODSceneImage *scene) {}
   };
 
 }

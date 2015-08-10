@@ -21,12 +21,12 @@ int main(int argc, char *argv[])
   string training_input_dir(argv[1]), trained_data_dir(argv[2]), pointcloud_file(argv[3]);
 
   //trainer
-  od::ODTrainer *trainer = new od::g3d::ODPointCloudGlobalMatchingTrainer(training_input_dir, trained_data_dir);
+  od::ODTrainer *trainer = new od::g3d::ODCADDetectTrainer3DGlobal(training_input_dir, trained_data_dir);
   trainer->train();
 
 
   //detector
-  od::g3d::ODPointCloudGlobalMatchingDetector<> *detector = new od::g3d::ODPointCloudGlobalMatchingDetector<>();
+  od::g3d::ODCADDetector3DGlobal<> *detector = new od::g3d::ODCADDetector3DGlobal<>();
   detector->setTrainingInputLocation(training_input_dir);
   detector->setTrainingDataLocation(trained_data_dir);
   detector->init();

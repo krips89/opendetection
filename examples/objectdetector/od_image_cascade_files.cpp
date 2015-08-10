@@ -1,6 +1,11 @@
+/** \brief Example of the usage of cascade detector
+   *
+   * \author Kripasindhu Sarkar
+   *
+   */
 
-#include <detectors/misc/detection/ODDetectorMultiAlgo.h>
-#include <opencv2/highgui.hpp>
+#include <detectors/global2D/detection/ODCascadeDetector.h>
+//#include "detectors/global2D/detection/ODHOGDetector.h"
 #include "common/utils/ODFrameGenerator.h"
 
 #include "common/pipeline/ObjectDetector.h"
@@ -11,17 +16,19 @@ using namespace od;
 
 int main(int argc, char *argv[])
 {
-  string trained_data_dir(argv[1]), query_images(argv[2]);;
+  string trained_cascade(argv[1]), images(argv[2]);
 
   //detector
-  od::ODDetectorMultiAlgo *detector = new od::ODDetectorMultiAlgo(trained_data_dir);
+  od::g2d::ODCascadeDetector *detector = new od::g2d::ODCascadeDetector;
+  detector->setTrainingDataLocation(trained_cascade);
+  //detector->setSvmtype(g2d::ODCascadeDetector::OD_DAIMLER_PEOPLE);
   detector->init();
 
   //get scenes
-  od::ODFrameGenerator<od::ODSceneImage, od::GENERATOR_TYPE_FILE_LIST> frameGenerator(query_images);
+  od::ODFrameGenerator<od::ODSceneImage, od::GENERATOR_TYPE_FILE_LIST> frameGenerator(images);
   //GUI
   cv::namedWindow("Overlay", cv::WINDOW_NORMAL);
-  while(frameGenerator.isValid() && cv::waitKey(3000) != 27)
+  while(frameGenerator.isValid() && cv::waitKey(2000) != 27)
   {
     od::ODSceneImage * scene = frameGenerator.getNextFrame();
 
@@ -34,7 +41,6 @@ int main(int argc, char *argv[])
       cv::imshow("Overlay", scene->getCVImage());
 
     delete scene;
-
   }
 
   return 0;

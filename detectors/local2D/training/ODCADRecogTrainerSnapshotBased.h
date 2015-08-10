@@ -22,17 +22,17 @@ namespace od
 {
   namespace l2d
   {
-    /** \brief ODImageLocalMatchingTrainer; One of the new algorithm; details will be explained later
+    /** \brief ODCADRecogTrainerSnapshotBased; One of the new algorithm; details will be explained later
    *
    * \author Kripasindhu Sarkar
    *
    */
 
-    class SnapshotCorrTrainer : public ODImageLocalMatchingTrainer
+    class ODCADRecogTrainerSnapshotBased : public ODImageLocalMatchingTrainer
     {
 
     public:
-      SnapshotCorrTrainer(std::string const &training_input_location_ = "", std::string const &training_data_location_ = "") : ODImageLocalMatchingTrainer(
+      ODCADRecogTrainerSnapshotBased(std::string const &training_input_location_ = "", std::string const &training_data_location_ = "") : ODImageLocalMatchingTrainer(
           training_input_location_, training_data_location_)
       { }
 

@@ -5,7 +5,6 @@
    */
 
 
-#include <detectors/global2D/detection/ODHOGMultiscaleDetector.h>
 #include <detectors/global2D/ODFaceRecognizer.h>
 
 #include "common/utils/ODFrameGenerator.h"
@@ -38,7 +37,7 @@ int main(int argc, char *argv[])
     od::ODSceneImage * scene = frameGenerator.getNextFrame();
 
     //Detect
-    ODDetections2D *detections =  objdetector->detectOmni(scene);
+    ODDetections *detections =  objdetector->detect(scene);
     (*detections)[0]->printSelf();
 
     cv::imshow("Overlay", scene->getCVImage());

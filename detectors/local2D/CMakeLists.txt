@@ -18,8 +18,8 @@ if(build)
     set(incs
         "ODImageLocalMatching.h"
 
-        "training/SnapshotCorrTrainer.h"
-        "detection/SimpleRansacDetector.h"
+        "training/ODCADRecogTrainerSnapshotBased.h"
+        "detection/ODCADRecognizer2DLocal.h"
 
         )
 
@@ -28,8 +28,8 @@ if(build)
 
     set(srcs
         "ODImageLocalMatching.cpp"
-        "training/SnapshotCorrTrainer.cpp"
-        "detection/SimpleRansacDetector.cpp"
+        "training/ODCADRecogTrainerSnapshotBased.cpp"
+        "detection/ODCADRecognizer2DLocal.cpp"
 
         ${SUB_IMPL_SRCS}
         )

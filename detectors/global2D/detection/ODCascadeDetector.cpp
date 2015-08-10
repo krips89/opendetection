@@ -41,5 +41,30 @@ namespace od
 
       return detections;
     }
+
+    ODDetections* ODCascadeDetector::detect(ODSceneImage *scene)
+    {
+      //always create detections
+      ODDetections *detections = new ODDetections;
+
+      Mat gray;
+      cvtColor(scene->getCVImage(), gray, CV_BGR2GRAY);
+      // Find the faces in the frame:
+      vector<Rect_<int> > faces;
+
+
+      cv::Size imsize = gray.size();
+      //hack for single detection,
+      //note: maxsize = minsize = size of input image for single window detection
+      //todo: implement in some other way of fast single detection; currently this will work, but maynot be fast
+      haar_cascade_->detectMultiScale(gray, faces, 5, minNeighbors_, 0, gray.size(), gray.size());
+      if (faces.size() > 0)
+      {
+        ODDetection *detection = new ODDetection(ODDetection::OD_DETECTION_CLASS, "FACE", 1);
+        detections->push_back(detection);
+      }
+      return detections;
+    }
+
   }
 }

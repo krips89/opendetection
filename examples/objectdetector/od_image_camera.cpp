@@ -5,8 +5,8 @@
    *
    */
 
-#include <detectors/local2D/training/SnapshotCorrTrainer.h>
-#include <detectors/local2D/detection/SimpleRansacDetector.h>
+#include "detectors/local2D/training/ODCADRecogTrainerSnapshotBased.h"
+#include "detectors/local2D/detection/ODCADRecognizer2DLocal.h"
 #include "common/utils/ODFrameGenerator.h"
 
 #include "common/pipeline/ObjectDetector.h"
@@ -21,11 +21,11 @@ int main(int argc, char *argv[])
   string training_input_dir(argv[1]), trained_data_dir(argv[2]);
 
   //trainer
-  od::l2d::SnapshotCorrTrainer *trainer = new od::l2d::SnapshotCorrTrainer(training_input_dir, trained_data_dir);
+  od::l2d::ODCADRecogTrainerSnapshotBased *trainer = new od::l2d::ODCADRecogTrainerSnapshotBased(training_input_dir, trained_data_dir);
   //trainer->train();
 
   //detector
-  od::l2d::SimpleRansacDetector *detector = new od::l2d::SimpleRansacDetector(trained_data_dir);
+  od::l2d::ODCADRecognizer2DLocal *detector = new od::l2d::ODCADRecognizer2DLocal(trained_data_dir);
   //set commandline options type inputs
   detector->parseParameterString("--use_gpu --fast --method=1 --error=2 --confidence=0.9 --iterations=500 --inliers=20 --metainfo");
   detector->setCameraIntrinsicFile("image_local_scenes/camera_webcam_fixed.xml");   //set some other inputs

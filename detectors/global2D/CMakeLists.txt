@@ -14,7 +14,7 @@ if(build)
 
     set(incs
         "ODFaceRecognizer.h"
-        "detection/ODHOGMultiscaleDetector.h"
+        "detection/ODHOGDetector.h"
         "detection/ODCascadeDetector.h"
 
         )
@@ -24,7 +24,7 @@ if(build)
 
     set(srcs
         ODFaceRecognizer.cpp
-        "detection/ODHOGMultiscaleDetector.cpp"
+        "detection/ODHOGDetector.cpp"
         "detection/ODCascadeDetector.cpp"
         )
 

@@ -15,18 +15,19 @@ if(build)
     set(incs
         "ODPointCloudGlobalMatching.h"
 
-        "detection/ODPointCloudGlobalMatchingDetector.h"
-        "training/ODPointCloudGlobalMatchingTrainer.h"
+        "detection/ODCADDetector3DGlobal.h"
+        "training/ODCADDetectTrainer3DGlobal.h"
         )
 
     set(impl_incs
+        "detection/ODCADDetector3DGlobal.hpp"
         )
 
     set(srcs
         "ODPointCloudGlobalMatching.cpp"
 
-        "detection/ODPointCloudGlobalMatchingDetector.cpp"
-        "training/ODPointCloudGlobalMatchingTrainer.cpp"
+        "detection/ODCADDetector3DGlobal.cpp"
+        "training/ODCADDetectTrainer3DGlobal.cpp"
 
         #${SUB_IMPL_SRCS}
         )

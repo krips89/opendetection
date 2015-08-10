@@ -8,8 +8,6 @@
 #include <common/pipeline/ODDetector.h>
 #include <common/pipeline/ODTrainer.h>
 #include <common/utils/utils.h>
-#include <detectors/global3D/training/ODPointCloudGlobalMatchingTrainer.h>
-#include <detectors/global3D/detection/ODPointCloudGlobalMatchingDetector.h>
 
 #include "opencv2/core.hpp"
 #include "opencv2/face.hpp"
@@ -55,7 +53,7 @@ namespace od
 
       int train();
 
-      ODDetections2D *detectOmni(ODSceneImage *scene);
+      ODDetections *detect(ODSceneImage *scene);
 
 
       FaceRecogType const &getRecogtype() const

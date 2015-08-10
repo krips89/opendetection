@@ -1,4 +1,4 @@
-#include "SnapshotCorrTrainer.h"
+#include "ODCADRecogTrainerSnapshotBased.h"
 //simplecube/newcube.obj  simplecube/flower.jpeg
 //Lion/Final.obj Lion/Texture.png
 //BigDaddy/Param.obj BigDaddy/Parameterization.png
@@ -161,7 +161,7 @@ namespace od
       bool snap_mode;
     };
 
-    int SnapshotCorrTrainer::train()
+    int ODCADRecogTrainerSnapshotBased::train()
     {
       FileUtils::createTrainingDir(training_data_location_);
 
@@ -182,7 +182,7 @@ namespace od
       return 1;
     }
 
-    void SnapshotCorrTrainer::trainSingleModel(std::string objname)
+    void ODCADRecogTrainerSnapshotBased::trainSingleModel(std::string objname)
     {
       ///////////setup object
 

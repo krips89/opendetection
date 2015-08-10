@@ -2,7 +2,7 @@
 // Created by sarkar on 15.07.15.
 //
 
-#include "ODHOGMultiscaleDetector.h"
+#include "ODHOGDetector.h"
 
 namespace od
 {
@@ -10,7 +10,7 @@ namespace od
   {
 
 
-    void ODHOGMultiscaleDetector::init()
+    void ODHOGDetector::init()
     {
       switch(svmtype_)
       {
@@ -21,10 +21,12 @@ namespace od
           hog_.save(getSpecificTrainingDataLocation() + "/defaultpeople." + TRAINED_DATA_EXT_);
           break;
         case OD_DAIMLER_PEOPLE:
+          hog_.winSize = cv::Size(48, 96);
           hog_.setSVMDetector(cv::HOGDescriptor::getDaimlerPeopleDetector());
 
           FileUtils::createTrainingDir(getSpecificTrainingDataLocation());
           hog_.save(getSpecificTrainingDataLocation() + "/daimlerpeople." + TRAINED_DATA_EXT_);
+          break;
         case OD_FILE:
           hog_.load(FileUtils::getFirstFile(getSpecificTrainingDataLocation(), TRAINED_DATA_EXT_));
           break;
@@ -32,7 +34,7 @@ namespace od
       }
     }
 
-    ODDetections2D *ODHOGMultiscaleDetector::detectOmni(ODSceneImage *scene)
+    ODDetections2D *ODHOGDetector::detectOmni(ODSceneImage *scene)
     {
       //always create a detection
       ODDetections2D *detections = new ODDetections2D;
@@ -78,7 +80,7 @@ namespace od
       return detections;
     }
 
-    ODDetections *ODHOGMultiscaleDetector::detect(ODSceneImage *scene)
+    ODDetections *ODHOGDetector::detect(ODSceneImage *scene)
     {
       //always create a detection
       ODDetections *detections = new ODDetections;

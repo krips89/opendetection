@@ -43,7 +43,7 @@ namespace od
       }
 
       ODDetections2D *detectOmni(ODSceneImage *scene);
-      ODDetections* detect(ODSceneImage *scene) {};
+      ODDetections* detect(ODSceneImage *scene);
 
 
     private:

@@ -7,8 +7,8 @@
 
 #include <common/pipeline/ODDetector.h>
 #include <common/pipeline/ODTrainer.h>
-#include <detectors/global3D/training/ODPointCloudGlobalMatchingTrainer.h>
-#include <detectors/global3D/detection/ODPointCloudGlobalMatchingDetector.h>
+#include "detectors/global3D/training/ODCADDetectTrainer3DGlobal.h"
+#include "detectors/global3D/detection/ODCADDetector3DGlobal.h"
 
 namespace od
 {
@@ -39,13 +39,14 @@ namespace od
 
       int detect(ODScene *scene, vector<ODDetection *> detections)
       {
-        detector_->detect(scene, detections);
+        //detector_->detect(scene, detections);
+        return 0;
       }
 
     protected:
       std::string desc_name;
-      ODPointCloudGlobalMatchingTrainer *trainer_;
-      ODPointCloudGlobalMatchingDetector<pcl::PointXYZ> *detector_;
+      ODCADDetectTrainer3DGlobal *trainer_;
+      ODCADDetector3DGlobal<pcl::PointXYZ> *detector_;
     };
   }
 }

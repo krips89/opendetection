@@ -23,7 +23,10 @@ namespace od
 
     ODDetections2D *detectOmni(ODSceneImage *scene);
 
+    void init();
 
+  private:
+    std::vector<ODDetector2D *> detectors_;
   };
 
 

@@ -2,7 +2,7 @@
 // Created by sarkar on 16.06.15.
 //
 
-#include "ODPointCloudGlobalMatchingTrainer.h"
+#include "ODCADDetectTrainer3DGlobal.h"
 
 #include <pcl/pcl_macros.h>
 #include <pcl/apps/3d_rec_framework/pipeline/global_nn_classifier.h>
@@ -16,7 +16,7 @@
 #include <pcl/console/parse.h>
 
 
-int od::g3d::ODPointCloudGlobalMatchingTrainer::train()
+int od::g3d::ODCADDetectTrainer3DGlobal::train()
 {
   boost::shared_ptr<pcl::rec_3d_framework::MeshSource<pcl::PointXYZ> > mesh_source (new pcl::rec_3d_framework::MeshSource<pcl::PointXYZ>);
   mesh_source->setPath (training_input_location_);

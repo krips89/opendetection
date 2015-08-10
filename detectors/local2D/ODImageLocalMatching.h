@@ -37,11 +37,11 @@ namespace od
    * \author Kripasindhu Sarkar
    *
    */
-    class ODImageLocalMatchingDetector : public ODDetector
+    class ODImageLocalMatchingDetector : public ODDetector2DComplete
     {
 
     public:
-      ODImageLocalMatchingDetector(string const &training_data_location_) : ODDetector(training_data_location_)
+      ODImageLocalMatchingDetector(string const &training_data_location_) : ODDetector2DComplete(training_data_location_)
       {
         TRAINED_DATA_IDENTIFIER_ = "FEATCORR";
         TRAINED_DATA_EXT_ = "corr.xml";
@@ -95,7 +95,8 @@ namespace od
 
       int detect(ODScene *scene, vector<ODDetection *> detections)
       {
-        detector_->detect(scene, detections);
+        //detector_->detect(scene, detections);
+        return 1;
       }
 
 

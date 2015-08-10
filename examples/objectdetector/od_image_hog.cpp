@@ -6,7 +6,7 @@
    */
 
 
-#include <detectors/global2D/detection/ODHOGMultiscaleDetector.h>
+#include "detectors/global2D/detection/ODHOGDetector.h"
 #include "common/utils/ODFrameGenerator.h"
 
 #include "common/pipeline/ObjectDetector.h"
@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
 
   string trained_data_dir(argv[1]);
   //detector
-  g2d::ODHOGMultiscaleDetector *detector = new g2d::ODHOGMultiscaleDetector(trained_data_dir);
+  g2d::ODHOGDetector *detector = new g2d::ODHOGDetector(trained_data_dir);
   detector->init();
 
   //get scenes

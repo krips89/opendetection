@@ -1,6 +1,3 @@
-OD_ADD_EXAMPLE(od_example_usage FILES od_example_usage.cpp
-                LINK_WITH od_common od_local_image_detector)
-
 OD_ADD_EXAMPLE(od_image_camera FILES od_image_camera.cpp
                 LINK_WITH od_common od_local_image_detector)
 
@@ -17,6 +14,9 @@ OD_ADD_EXAMPLE(od_image_customhog FILES od_image_customhog.cpp
                 LINK_WITH od_common od_global_image_detector)
 
 OD_ADD_EXAMPLE(od_image_cascade FILES od_image_cascade.cpp
+                LINK_WITH od_common od_global_image_detector)
+
+OD_ADD_EXAMPLE(od_image_cascade_files FILES od_image_cascade_files.cpp
                 LINK_WITH od_common od_global_image_detector)
 
 OD_ADD_EXAMPLE(od_image_facerecog FILES od_image_facerecog.cpp
