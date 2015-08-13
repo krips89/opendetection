@@ -30,6 +30,8 @@ namespace od
 
       int train();
 
+      void init() {};
+
       std::string const &getDescName() const
       {
         return desc_name;

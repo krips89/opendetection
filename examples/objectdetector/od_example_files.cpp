@@ -11,7 +11,7 @@ using namespace od;
 
 int main(int argc, char *argv[])
 {
-  string training_input_dir(argv[1]), trained_data_dir(argv[2]), query_images(argv[3]);
+  std::string training_input_dir(argv[1]), trained_data_dir(argv[2]), query_images(argv[3]);
 
   //trainer
   od::l2d::ODCADRecogTrainerSnapshotBased *trainer = new od::l2d::ODCADRecogTrainerSnapshotBased(training_input_dir, trained_data_dir);

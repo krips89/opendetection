@@ -10,6 +10,7 @@
 #include <boost/algorithm/string.hpp>
 
 #include "ODAlgorithmBase.h"
+#include "ObjectDetector.h"
 
 
 namespace bf = boost::filesystem;
@@ -21,44 +22,17 @@ namespace od
    * \author Kripasindhu Sarkar
    *
    */
-  class ODTrainer
+  class ODTrainer: public ODDetectorCommon
   {
   public:
 
-    ODTrainer(std::string const &training_input_location_ ="", std::string const &training_data_location_="") : training_input_location_(
-        training_input_location_), training_data_location_(training_data_location_)
-    { }
+    ODTrainer(std::string const &training_input_location ="", std::string const &training_data_location="") : ODDetectorCommon(training_data_location)
+    {
+      training_input_location_ = training_data_location;
+    }
 
     virtual int train() = 0;
 
-    std::string getTrainingInputLocation() const
-    {
-      return training_input_location_;
-    }
-
-    void setTrainingInputLocation(std::string training_input_location_)
-    {
-      this->training_input_location_ = training_input_location_;
-    }
-
-    std::string getTrainingDataLocation() const
-    {
-      return training_data_location_;
-    }
-
-    void setTrainingDataLocation(std::string training_data_location_)
-    {
-      this->training_data_location_ = training_data_location_;
-    }
-
-    std::string getSpecificTrainingDataLocation()
-    {
-      return training_data_location_ + "/" + "TD_" + TRAINED_DATA_IDENTIFIER_;
-    }
-
-  protected:
-    std::string training_input_location_, training_data_location_;
-    std::string TRAINED_DATA_EXT_, TRAINED_DATA_IDENTIFIER_;
   };
 
 }

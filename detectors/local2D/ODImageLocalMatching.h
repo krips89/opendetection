@@ -25,7 +25,7 @@ namespace od
     {
 
     public:
-      ODImageLocalMatchingTrainer(string const &training_input_location_, string const &training_data_location_) : ODTrainer(training_input_location_, training_data_location_)
+      ODImageLocalMatchingTrainer(std::string const &training_input_location_, std::string const &training_data_location_) : ODTrainer(training_input_location_, training_data_location_)
       {
         TRAINED_DATA_IDENTIFIER_ = "FEATCORR";
         TRAINED_DATA_EXT_ = "corr.xml";
@@ -41,7 +41,7 @@ namespace od
     {
 
     public:
-      ODImageLocalMatchingDetector(string const &training_data_location_) : ODDetector2DComplete(training_data_location_)
+      ODImageLocalMatchingDetector(std::string const &training_data_location_) : ODDetector2DComplete(training_data_location_)
       {
         TRAINED_DATA_IDENTIFIER_ = "FEATCORR";
         TRAINED_DATA_EXT_ = "corr.xml";
@@ -93,7 +93,7 @@ namespace od
         return trainer_->train();
       }
 
-      int detect(ODScene *scene, vector<ODDetection *> detections)
+      int detect(ODScene *scene, std::vector<ODDetection *> detections)
       {
         //detector_->detect(scene, detections);
         return 1;

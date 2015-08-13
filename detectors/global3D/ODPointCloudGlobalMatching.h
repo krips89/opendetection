@@ -37,7 +37,7 @@ namespace od
         return trainer_->train();
       }
 
-      int detect(ODScene *scene, vector<ODDetection *> detections)
+      int detect(ODScene *scene, std::vector<ODDetection *> detections)
       {
         //detector_->detect(scene, detections);
         return 0;

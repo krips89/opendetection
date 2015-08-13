@@ -5,6 +5,7 @@
    */
 
 #include <detectors/global2D/detection/ODCascadeDetector.h>
+#include <detectors/global2D/detection/ODHOGDetector.h>
 //#include "detectors/global2D/detection/ODHOGDetector.h"
 #include "common/utils/ODFrameGenerator.h"
 
@@ -13,16 +14,17 @@
 
 
 using namespace od;
-using namespace std;
 
 int main(int argc, char *argv[])
 {
-  string trained_cascade(argv[1]), images(argv[2]);
+  std::string trained_hog(argv[1]), images(argv[2]);
 
   //detector
-  od::g2d::ODCascadeDetector *detector = new od::g2d::ODCascadeDetector;
-  detector->setTrainingDataLocation(trained_cascade);
-  //detector->setSvmtype(g2d::ODCascadeDetector::OD_DAIMLER_PEOPLE);
+  od::g2d::ODHOGDetector *detector = new od::g2d::ODHOGDetector;
+  detector->setTrainingDataLocation(trained_hog);
+  //detector->setSvmtype(g2d::ODHOGDetector::OD_CUSTOM);
+  //detector->setSVMFromFile("/home/sarkar/exp/trainhog/trainHOG/build/descriptorvector.dat");
+  //detector->setHitThreshold(0.98612);
   detector->init();
 
   //get scenes

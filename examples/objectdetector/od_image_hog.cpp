@@ -18,7 +18,7 @@ using namespace od;
 int main(int argc, char *argv[])
 {
 
-  string trained_data_dir(argv[1]);
+  std::string trained_data_dir(argv[1]);
   //detector
   g2d::ODHOGDetector *detector = new g2d::ODHOGDetector(trained_data_dir);
   detector->init();

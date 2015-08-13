@@ -11,7 +11,7 @@ using namespace od;
 
 int main(int argc, char *argv[])
 {
-  string trained_data_dir(argv[1]), query_images(argv[2]);;
+  std::string trained_data_dir(argv[1]), query_images(argv[2]);;
 
   //detector
   od::ODDetectorMultiAlgo *detector = new od::ODDetectorMultiAlgo(trained_data_dir);

@@ -38,6 +38,8 @@ namespace od
 
       int train();
 
+      void init() {}
+
       void trainSingleModel(std::string objname);
 
     };

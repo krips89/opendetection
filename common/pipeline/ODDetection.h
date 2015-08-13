@@ -15,8 +15,6 @@
 #include <pcl/point_types.h>
 #include <opencv2/imgproc.hpp>
 
-using namespace std;
-
 namespace od
 {
 
@@ -36,14 +34,14 @@ namespace od
     virtual ~ODDetection()
     { }
 
-    ODDetection(DetectionType const &type_ = OD_DETECTION_NULL, string const &id_ = "", double confidence_ = 1) : type_(type_), id_(id_),
+    ODDetection(DetectionType const &type_ = OD_DETECTION_NULL, std::string const &id_ = "", double confidence_ = 1) : type_(type_), id_(id_),
                                                                                      confidence_(confidence_)
     { }
 
     void printSelf()
     {
-      cout << "--Detection-- \nType: " << enumToString(type_) << endl;
-      cout << "ID: " << id_ << endl;
+      std::cout << "--Detection-- \nType: " << enumToString(type_) << std::endl;
+      std::cout << "ID: " << id_ << std::endl;
     }
 
     DetectionType const &getType() const
@@ -56,12 +54,12 @@ namespace od
       ODDetection::type_ = type_;
     }
 
-    string const &getId() const
+    std::string const &getId() const
     {
       return id_;
     }
 
-    void setId(string const &id_)
+    void setId(std::string const &id_)
     {
       ODDetection::id_ = id_;
     }
@@ -79,7 +77,7 @@ namespace od
 
   private:
     DetectionType type_;
-    string id_;
+    std::string id_;
     double confidence_;
   };
 
@@ -95,7 +93,7 @@ namespace od
     virtual ~ODDetection2D()
     { }
 
-    ODDetection2D(DetectionType const &type_ = OD_DETECTION_NULL, string const &id_ = "", double confidence_ = 1) : ODDetection(type_, id_, confidence_)
+    ODDetection2D(DetectionType const &type_ = OD_DETECTION_NULL, std::string const &id_ = "", double confidence_ = 1) : ODDetection(type_, id_, confidence_)
     {
       location_2d_ = Eigen::Vector3d::UnitZ();
     }
@@ -205,7 +203,7 @@ namespace od
       ODDetection3D::metainfo_cluster_ = metainfo_cluster_;
     }
 
-    ODDetection3D(DetectionType const &type_ = OD_DETECTION_NULL, string const &id_ = "", double confidence_ = 1) : ODDetection(type_, id_, confidence_)
+    ODDetection3D(DetectionType const &type_ = OD_DETECTION_NULL, std::string const &id_ = "", double confidence_ = 1) : ODDetection(type_, id_, confidence_)
     {
       location_3d_ = Eigen::Vector4d::UnitW();
       orientation_.setIdentity();
@@ -215,9 +213,9 @@ namespace od
     void printSelf()
     {
       ODDetection::printSelf();
-      cout << "Location: " << location_3d_ << endl;
-      cout << "Pose: " << orientation_ << endl;
-      cout << "Scale: " << scale_ << endl;
+      std::cout << "Location: " << location_3d_ << std::endl;
+      std::cout << "Pose: " << orientation_ << std::endl;
+      std::cout << "Scale: " << scale_ << std::endl;
     }
 
     Eigen::Vector4d location_3d_;

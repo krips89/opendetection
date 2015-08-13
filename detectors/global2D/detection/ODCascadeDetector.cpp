@@ -5,6 +5,7 @@
 #include "ODCascadeDetector.h"
 
 using namespace cv;
+using namespace std;
 
 namespace od
 {

@@ -15,7 +15,7 @@ namespace od
   class ODDetectorMultiAlgo : public ODDetector
   {
   public:
-    ODDetectorMultiAlgo(string const &training_data_location_) : ODDetector(training_data_location_)
+    ODDetectorMultiAlgo(std::string const &training_data_location_) : ODDetector(training_data_location_)
     { }
 
 

@@ -5,7 +5,7 @@
 #ifndef OPENDETECTION_ODDETECTOR_H
 #define OPENDETECTION_ODDETECTOR_H
 
-//#include "ObjectDetector.h"
+#include "ObjectDetector.h"
 #include "ODScene.h"
 #include "ODDetection.h"
 #include "ObjectDetector.h"
@@ -19,44 +19,16 @@ namespace od
    * \author Kripasindhu Sarkar
    *
    */
-  class ODDetector
+  class ODDetector: public ODDetectorCommon
   {
   public:
 
-    ODDetector(std::string const &training_data_location_) : training_data_location_(training_data_location_)
+    ODDetector(std::string const &training_data_location_) : ODDetectorCommon(training_data_location_)
     { }
 
-    virtual void init() = 0;
-
-    std::string getTrainingInputLocation() const
-    {
-      return training_input_location_;
-    }
-
-    void setTrainingInputLocation(std::string training_input_location_)
-    {
-      this->training_input_location_ = training_input_location_;
-    }
-
-    std::string getTrainingDataLocation() const
-    {
-      return training_data_location_;
-    }
-
-    void setTrainingDataLocation(std::string training_data_location_)
-    {
-      this->training_data_location_ = training_data_location_;
-    }
-
-    string getSpecificTrainingDataLocation()
-    {
-      return training_data_location_ + "/" + "TD_" + TRAINED_DATA_IDENTIFIER_;
-    }
+    virtual ODDetections* detect(ODScene *scene){}
 
     bool metainfo_;
-  protected:
-    std::string training_input_location_, training_data_location_;
-    std::string TRAINED_DATA_EXT_, TRAINED_DATA_IDENTIFIER_;
 
   };
 
@@ -66,6 +38,11 @@ namespace od
   public:
     ODDetector2D(std::string const &training_data_location_) : ODDetector(training_data_location_)
     { }
+
+    ODDetections* detect(ODScene *scene)
+    {
+      return detect(dynamic_cast<ODSceneImage *>(scene));
+    }
 
     virtual ODDetections* detect(ODSceneImage *scene) = 0;
     virtual ODDetections2D* detectOmni(ODSceneImage *scene) = 0;

@@ -23,7 +23,7 @@
 int main(int argc, char *argv[])
 {
 
-  string training_input_dir(argv[1]), trained_data_dir(argv[2]);
+  std::string training_input_dir(argv[1]), trained_data_dir(argv[2]);
 
 
   //detector

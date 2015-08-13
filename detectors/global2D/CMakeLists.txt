@@ -17,6 +17,8 @@ if(build)
         "detection/ODHOGDetector.h"
         "detection/ODCascadeDetector.h"
 
+
+        "training/ODHOGTrainer.h"
         )
 
     set(impl_incs
@@ -26,6 +28,7 @@ if(build)
         ODFaceRecognizer.cpp
         "detection/ODHOGDetector.cpp"
         "detection/ODCascadeDetector.cpp"
+        "training/ODHOGTrainer.cpp"
         )
 
 

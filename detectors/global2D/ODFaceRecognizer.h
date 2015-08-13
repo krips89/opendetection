@@ -97,7 +97,7 @@ namespace od
 
 
     private:
-      static void read_csv(const string &filename, vector<cv::Mat> &images, vector<int> &labels, char separator = ';');
+      static void read_csv(const std::string &filename, std::vector<cv::Mat> &images, std::vector<int> &labels, char separator = ';');
 
     };
 

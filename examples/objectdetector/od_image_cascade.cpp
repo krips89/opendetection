@@ -15,7 +15,7 @@ using namespace od;
 
 int main(int argc, char *argv[])
 {
-  string trained_cascade(argv[1]);
+  std::string trained_cascade(argv[1]);
 
   //detector
   od::g2d::ODCascadeDetector *detector = new od::g2d::ODCascadeDetector;

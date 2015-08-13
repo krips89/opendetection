@@ -15,8 +15,6 @@
 
 #include <opencv2/cudafeatures2d.hpp>
 
-using namespace std;
-
 namespace od
 {
 
@@ -24,7 +22,7 @@ namespace od
   {
 
   public:
-    ODFeatureDetector2D(string feature_type, bool use_gpu);
+    ODFeatureDetector2D(std::string feature_type, bool use_gpu);
 
     enum FeatureType
     {
@@ -53,16 +51,16 @@ namespace od
         int argc = sizeof(argv) / sizeof(char *);
         sift_gpu_->ParseParam(argc, argv);
         if(sift_gpu_->CreateContextGL() != SiftGPU::SIFTGPU_FULL_SUPPORTED)
-          cout << "FATAL ERROR cannot create SIFTGPU context";
+          std::cout << "FATAL ERROR cannot create SIFTGPU context";
       }
     }
 
     //always return Opencv type keypoints
-    void computeKeypointsAndDescriptors(cv::Mat const &image, cv::Mat &descriptors, vector<cv::KeyPoint> &keypoints);
+    void computeKeypointsAndDescriptors(cv::Mat const &image, cv::Mat &descriptors, std::vector<cv::KeyPoint> &keypoints);
 
-    void findSiftGPUDescriptors(char const *image_name, cv::Mat &descriptors, vector<cv::KeyPoint> &keypoints);
+    void findSiftGPUDescriptors(char const *image_name, cv::Mat &descriptors, std::vector<cv::KeyPoint> &keypoints);
 
-    void findSiftGPUDescriptors(cv::Mat const &image, cv::Mat &descriptors, vector<cv::KeyPoint> &keypoints);
+    void findSiftGPUDescriptors(cv::Mat const &image, cv::Mat &descriptors, std::vector<cv::KeyPoint> &keypoints);
 
   private:
 
@@ -70,7 +68,7 @@ namespace od
     cv::Ptr<SiftGPU> sift_gpu_;
 
 
-    void findSiftGPUDescriptors1(cv::Mat const &image, cv::Mat &descriptors, vector<cv::KeyPoint> &keypoints);
+    void findSiftGPUDescriptors1(cv::Mat const &image, cv::Mat &descriptors, std::vector<cv::KeyPoint> &keypoints);
   };
 
 }

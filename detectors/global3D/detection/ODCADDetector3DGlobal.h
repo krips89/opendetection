@@ -36,7 +36,7 @@ namespace od
     {
 
     public:
-      ODCADDetector3DGlobal(string const &training_data_location = "", string const &training_input_location = "") : ODDetector3D<PointT>(training_data_location),
+      ODCADDetector3DGlobal(std::string const &training_data_location = "", std::string const &training_input_location = "") : ODDetector3D<PointT>(training_data_location),
                                                                           NN(2), desc_name("esf")
       {
         this->TRAINED_DATA_IDENTIFIER_ = "GLOBAL3DVFH";
@@ -59,19 +59,19 @@ namespace od
         ODCADDetector3DGlobal::NN = NN;
       }
 
-      string const &getDescName() const
+      std::string const &getDescName() const
       {
         return desc_name;
       }
 
-      void setDescName(string const &desc_name)
+      void setDescName(std::string const &desc_name)
       {
         ODCADDetector3DGlobal::desc_name = desc_name;
       }
 
     protected:
       int NN;
-      string desc_name;
+      std::string desc_name;
       boost::shared_ptr<pcl::rec_3d_framework::GlobalClassifier<pcl::PointXYZ> > global_;
 
     };

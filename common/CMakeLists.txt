@@ -29,6 +29,8 @@ if(build)
         "utils/ODFrameGenerator.h"
         "utils/utils.h"
         "utils/ODFeatureDetector2D.h"
+
+        "bindings/svmlight.h"
         )
 
     set(impl_incs

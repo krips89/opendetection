@@ -37,7 +37,7 @@ namespace od
   protected:
     int cameraID_;
     std::vector<std::string> file_list_;
-    string video_read_path_;
+    std::string video_read_path_;
     int curr_image_;
     cv::VideoCapture inputCapture_;
     bool exhausted_;
