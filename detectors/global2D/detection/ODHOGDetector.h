@@ -41,11 +41,13 @@ namespace od
         TRAINED_DATA_IDENTIFIER_ = "HOG";
         TRAINED_DATA_EXT_ = "hog.xml";
         metainfo_ = true;
-        svmtype_ = OD_DEFAULT_PEOPLE;
+        if(training_data_location_ == "") svmtype_ = OD_FILE;
+        else svmtype_ = OD_DEFAULT_PEOPLE;
       }
 
 
       void init();
+      void load(std::string filename);
 
       void setSVMFromFile(std::string fileName);
 

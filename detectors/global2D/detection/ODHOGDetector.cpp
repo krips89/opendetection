@@ -19,21 +19,27 @@ namespace od
         case OD_DEFAULT_PEOPLE:
           hog_.setSVMDetector(cv::HOGDescriptor::getDefaultPeopleDetector());
 
-          FileUtils::createTrainingDir(getSpecificTrainingDataLocation());
-          hog_.save(getSpecificTrainingDataLocation() + "/defaultpeople." + TRAINED_DATA_EXT_);
+          //hog_.save(getSpecificTrainingDataLocation() + "/defaultpeople." + TRAINED_DATA_EXT_);
           break;
         case OD_DAIMLER_PEOPLE:
           hog_.winSize = cv::Size(48, 96);
           hog_.setSVMDetector(cv::HOGDescriptor::getDaimlerPeopleDetector());
 
-          FileUtils::createTrainingDir(getSpecificTrainingDataLocation());
-          hog_.save(getSpecificTrainingDataLocation() + "/daimlerpeople." + TRAINED_DATA_EXT_);
+          //hog_.save(getSpecificTrainingDataLocation() + "/daimlerpeople." + TRAINED_DATA_EXT_);
           break;
         case OD_FILE:
-          hog_.load(FileUtils::getFirstFile(getSpecificTrainingDataLocation(), TRAINED_DATA_EXT_));
+          load(FileUtils::getFirstFile(getSpecificTrainingDataLocation(), TRAINED_DATA_EXT_));
           break;
           //dont set anything for custom, it is to be set by the user by setSVMDetector
       }
+    }
+
+    void ODHOGDetector::load(std::string filename)
+    {
+      cv::FileStorage fs(filename, cv::FileStorage::READ);
+      fs["hitThreshold"] >> hitThreshold;
+      cv::FileNode fn = fs[cv::FileStorage::getDefaultObjectName(filename)];
+      hog_.read(fn);
     }
 
     ODDetections2D *ODHOGDetector::detectOmni(ODSceneImage *scene)
@@ -49,7 +55,6 @@ namespace od
       cv::Mat viz = scene->getCVImage().clone();
       for(int i = 0; i < found.size(); i++)
       {
-
         ODDetection2D *detection2D = new ODDetection2D;
         detection2D->setBoundingBox(found[i]);
         detection2D->setId("PEOPLE");
@@ -82,7 +87,7 @@ namespace od
 
       std::vector<cv::Point> foundLocations;
 
-      hog_.detect(scene->getCVImage(), foundLocations);
+      hog_.detect(scene->getCVImage(), foundLocations, hitThreshold);
       if (!foundLocations.empty())
       {
         ODDetection2D *detection2D = new ODDetection2D;

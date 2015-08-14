@@ -1,1 +1,1 @@
-add_library(od_svmlight svm_classify.c  svm_common.c  svm_hideo.c  svm_learn.c)
+add_library(od_svmlight SHARED svm_classify.c  svm_common.c  svm_hideo.c  svm_learn.c)

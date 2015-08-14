@@ -10,6 +10,9 @@ OD_ADD_EXAMPLE(od_example_files FILES od_example_files.cpp
 OD_ADD_EXAMPLE(od_image_hog FILES od_image_hog.cpp
                 LINK_WITH od_common od_global_image_detector)
 
+OD_ADD_EXAMPLE(od_hog_train FILES od_hog_train.cpp
+                LINK_WITH od_common od_global_image_detector)
+
 OD_ADD_EXAMPLE(od_image_hog_files FILES od_image_hog_files.cpp
                 LINK_WITH od_common od_global_image_detector)
 
