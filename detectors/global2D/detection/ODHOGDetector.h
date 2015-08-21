@@ -18,10 +18,10 @@ namespace od
 
   namespace g2d
   {
-    /** \brief ODHOGDetector: A linear classifier detector for HOG features
+  /** \brief ODHOGDetector: A linear classification based detector for HOG features.
    * User can set any linear classifier through setSVMDetector function or one of the default available detectors like OD_DEFAULT_PEOPLE
    * This class will then find HOG features in the scene and use the liniar classification model as an input to classify the scene
-   * It covers both simple region detection and omni detection (multiscale mitilocation detection on the entire scene)
+   * It covers both simple region detection and omni detection (multiscale mitilocation detection on the entire scene). See examples for the usage.
    *
    *
    * \author Kripasindhu Sarkar
@@ -61,6 +61,7 @@ namespace od
 
       int detect(ODScene *scene, std::vector<ODDetection *> &detections)
       { }
+
 
       SVMType const &getSvmtype() const
       {

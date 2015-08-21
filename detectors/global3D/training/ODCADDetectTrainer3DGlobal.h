@@ -12,7 +12,32 @@ namespace od
 {
   namespace g3d
   {
-/** \brief ODCADDetectTrainer3DGlobal
+/** \brief Training class for the detector ODCADDetector3DGlobal.
+   *
+   * This class uses PCL 3d_recognition_framework in the background for the training of 3D CAD models (in PLY format) and should be used with ODCADDetector3DGlobal for their detection in a pointcloud.
+   * In the training_input_location_ the CAD models should be arranged in the following structure:
+   *
+   * - <Database dir>
+        - <Category 1 dir>
+          - ...
+          - ...
+        - <Category 2 dir>
+          - ...
+          - ...
+        - ...
+
+    For example:
+
+    - /home/user/DB
+      - /home/user/DB/bottles
+        - /home/user/DB/bottles/milk.ply
+        - /home/user/DB/bottles/wine.ply
+      - /home/user/DB/fruit
+        - /home/user/DB/fruit/apple.ply
+        - /home/user/DB/fruit/banana.ply
+
+
+    After the training use the detector class ODCADDetector3DGlobal.
    *
    * \author Kripasindhu Sarkar
    *

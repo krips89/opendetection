@@ -17,7 +17,7 @@ namespace bf = boost::filesystem;
 
 namespace od
 {
-  /** \brief Maining Trainer class; all trainers derives from this
+  /** \brief The base class for all trainers. All trainers derives from this and implement the function train().
    *
    * \author Kripasindhu Sarkar
    *

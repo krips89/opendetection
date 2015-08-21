@@ -17,13 +17,14 @@ namespace od
 {
   namespace g2d
   {
-    /** \brief ODCascadeDetector: This class classifies a scene (omni detection) using a provided cascade classifier
-   * Given a scene the class will first find HAAR like features and use the cascade classifier to classify the scene. Only supports omni detection for the time being
-    *
-    *
-    * \author Kripasindhu Sarkar
-    *
-    */
+    /** \brief A class for detection using Cascade classifiers.
+     * Given a scene and a cascade classifier, this class performs a classification and returns detections. The training is not supported in OD currently but is compatible to the cascade training of OpenCV.
+     * Train your cascade classifiers using OpenCV's *opencv_traincascade* utility (http://docs.opencv.org/master/dc/d88/tutorial_traincascade.html#gsc.tab=0). It is a great tool for traning your cascade.
+     * Paste the generated xml in training_data_location_/CASCADE/*.cascade.xml to use your trained cascade.
+     *
+     * \author Kripasindhu Sarkar
+     *
+     */
 
     class ODCascadeDetector : public ODDetector2D
     {
@@ -44,7 +45,6 @@ namespace od
 
       ODDetections2D *detectOmni(ODSceneImage *scene);
       ODDetections* detect(ODSceneImage *scene);
-
 
     private:
       boost::shared_ptr<cv::CascadeClassifier> haar_cascade_;

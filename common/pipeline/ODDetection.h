@@ -18,8 +18,10 @@
 namespace od
 {
 
-  /** \brief Detection: This class contains detection information; like if it is a type of recognition or a classification etc.
-   * It also contains info like poses etc depending on the method of object detection
+  /** \brief The base class of all the detection.
+   *
+   * This is the base class of all the detection classes containing the detection information. All the ODDetector s return a collection of this class (in the form of ODDetections).
+   * Supports two modes: recognition (with type OD_DETECTION_RECOG) and classification (with type OD_DETECTION_CLASS). Along with the type, ODDetector sets an ID to identify what class or what instance of recognition is detected/recognied.
    *
    * \author Kripasindhu Sarkar
    *
@@ -65,11 +67,15 @@ namespace od
     }
 
 
+    /** \brief Get/Set the confidence of the detection. ODDetector can use this to provide confidence amnong several detections.
+      */
     double getConfidence() const
     {
       return confidence_;
     }
 
+    /** \brief Get/Set the confidence of the detection. ODDetector can use this to provide confidence amnong several detections.
+      */
     void setConfidence(double confidence_)
     {
       ODDetection::confidence_ = confidence_;
@@ -81,7 +87,7 @@ namespace od
     double confidence_;
   };
 
-  /** \brief Detection in 2D
+  /** \brief Detection for 2D with 2D location information
    *
    * \author Kripasindhu Sarkar
    *
@@ -134,7 +140,7 @@ namespace od
     cv::Mat metainfo_image_;
   };
 
-  /** \brief Detection in 3D
+  /** \brief Detection in 3D with 3D location information.
    *
    * \author Kripasindhu Sarkar
    *
@@ -225,10 +231,20 @@ namespace od
     typename pcl::PointCloud<pcl::PointXYZ>::Ptr metainfo_cluster_;
   };
 
+  /** \brief Detection in 2D with complete information.
+  *
+  * \author Kripasindhu Sarkar
+  *
+  */
   class ODDetectionComplete: public ODDetection2D, public ODDetection3D
   {
   };
 
+  /** \brief The container class for ODDetection
+  *
+  * \author Kripasindhu Sarkar
+  *
+  */
   class ODDetections
   {
   public:
@@ -286,11 +302,17 @@ namespace od
     typename pcl::PointCloud<pcl::PointXYZ>::Ptr metainfo_cluster_;
   };
 
-
+/** \brief The container class for ODDetection2D returned by ODDetector2D
+  *
+  * \author Kripasindhu Sarkar
+  *
+  */
   class ODDetections2D: public ODDetections
   {
   public:
 
+    /** \brief Draws rectangles over the input image using the bounding box information present in all the 2D detections. This is a quick function to render and verify the detections made.
+      */
     ODSceneImage renderMetainfo(ODSceneImage input)
     {
       //picking up random colors for different detection algorithm, if exist
@@ -316,6 +338,11 @@ namespace od
 
   };
 
+  /** \brief The container class for ODDetection3D returned by ODDetector3D
+  *
+  * \author Kripasindhu Sarkar
+  *
+  */
   class ODDetections3D: public ODDetections
   {
   public:
@@ -324,6 +351,11 @@ namespace od
     ODDetection3D * at(int i) { return dynamic_cast<ODDetection3D *>(detections_[i]); }
   };
 
+  /** \brief The container class for ODDetectionComplete returned by ODDetector2DComplete
+ *
+ * \author Kripasindhu Sarkar
+ *
+ */
   class ODDetectionsComplete: public ODDetections
   {
   public:

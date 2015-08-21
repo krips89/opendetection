@@ -25,6 +25,13 @@ namespace od
     IMAGE_GLOBAL_CLASSIFICATION,
   };
 
+  /** \brief The common class for detectors. Both Trainers and Detectors drerives from this and therefore, all the common data/functionalities of Trainers and Detectors should go here.
+  *
+  *
+  * \author Kripasindhu Sarkar
+  *
+  */
+
   class ODDetectorCommon
   {
   public:
@@ -34,26 +41,41 @@ namespace od
 
     virtual void init() = 0;
 
+
+    /** \brief Gets/Sets the directory containing the data for training. The trainer uses the data from directory for training. Detectors can use this location to get additional information in its detection algirhtms as well.
+      */
     std::string getTrainingInputLocation() const
     {
       return training_input_location_;
     }
 
+    /** \brief Gets/Sets the directory containing the data for training. The trainer uses the data from directory for training. Detectors can use this location to get additional information in its detection algirhtms as well.
+      */
     void setTrainingInputLocation(std::string training_input_location_)
     {
       this->training_input_location_ = training_input_location_;
     }
 
+    /** \brief Gets/Sets the base directory for trained data. This should be same for all Trainers and Detectors and can be considered as the 'database' of trained data. Trainers uses one of its
+     * subdirectories based on its type to store algo specific trained data. The corresponding Detector would use the same directory to fetch the trained data for online detection.
+      */
     std::string getTrainingDataLocation() const
     {
       return training_data_location_;
     }
 
+
+    /** \brief The base directory for trained data. This should be same for all Trainers and Detectors and can be considered as the 'database' of trained data. Trainers uses one of its
+     * subdirectories based on its type to store algo specific trained data. The corresponding Detector would use the same directory to fetch the trained data for online detection.
+     */
     void setTrainingDataLocation(std::string training_data_location_)
     {
       this->training_data_location_ = training_data_location_;
     }
 
+
+    /** \brief Gets the specific directory for a Trainer or a Detector inside training_data_location_.
+      */
     std::string getSpecificTrainingDataLocation()
     {
       return training_data_location_ + "/" + "TD_" + TRAINED_DATA_IDENTIFIER_;

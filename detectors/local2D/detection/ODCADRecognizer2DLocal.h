@@ -32,17 +32,16 @@ namespace od
 
   namespace l2d
   {
-    //--model=Data/Chicken/Mesh.xml --mesh=Data/Chicken/Mesh.ply
-    // --use_gpu --fast --method=1 --error=2 --confidence=0.9 --iterations=500 --inliers=30 --model=Data/Chicken/Mesh.xml --mesh=Data/Chicken/Mesh.ply --test_images=./Data/Chicken/Chicken/*.JPG --camera_intrinsic_file=Data/out_camera_dataset_101.yml
-    // --use_gpu --fast --method=1 --error=2 --confidence=0.9 --iterations=500 --inliers=30 --test_images=./Data/Lion/test_images/IMG_*.JPG --camera_intrinsic_file=Data/out_camera_data_lion_old.yml
-    //  --fast --method=1 --error=2 --confidence=0.9 --iterations=500 --inliers=30 --test_images=./Data/Lion/Lion2/IMG_*.JPG --camera_intrinsic_file=Data/out_camera_dataset_101.yml
-    //--fast --method=1 --error=2 --confidence=0.9 --iterations=500 --inliers=10 --model=Data/Totem/Param.SIFT.xml --mesh=Data/Totem/Param.ply --test_images=./Data/Totem/Totem/IMG_0251.JPG --camera_intrinsic_file=Data/out_camera_dataset_101.yml
 
-    /** \brief Simple ransac based 3D object detector; the details will be explained later
-   *
-   * \author Kripasindhu Sarkar
-   *
-   */
+    /** \brief Simple RANSAC based 3D object recognizer.
+     *
+     * A recognizer which uses local features like SIFT/SURF to perform object recognition.
+     * Given a 'trained model' trained by ODCADRecogTrainerSnapshotBased or trained externally (manually augmenting features in 3D cad models), this class performs a complete detection
+     * in an image. It first extracts 2D features from the scene, matches them with all the feature augmented models (the trained data) and in the end solves PnP under RANSAC.
+     *
+     * \author Kripasindhu Sarkar
+     *
+     */
     class ODCADRecognizer2DLocal : public ODImageLocalMatchingDetector
     {
     public:

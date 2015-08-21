@@ -11,7 +11,13 @@
 namespace od
 {
 
-
+  /** \brief Class for running multiple Detection algorithms (with default parameters) on the same scene.
+   *
+   * Using this class one can do object detection/recognition using multiple algorithms and provide outcome of detections (eg. people detected by HOG, face detected by Cascade, bottle detected PnPRansac in the same image).
+  *
+  * \author Kripasindhu Sarkar
+  *
+  */
   class ODDetectorMultiAlgo : public ODDetector
   {
   public:

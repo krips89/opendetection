@@ -96,7 +96,11 @@ namespace od
     return "";
   }
 
-
+/** \brief An utility class for Timer related operations.
+   *
+   * \author Kripasindhu Sarkar
+   *
+   */
   class Timer
   {
   private:
@@ -158,6 +162,11 @@ namespace od
     std::cout << std::endl;
   }
 
+  /** \brief Utility class for File and directory handling.
+   *
+   * \author Kripasindhu Sarkar
+   *
+   */
   class FileUtils
   {
   public:

@@ -25,12 +25,19 @@
 namespace od
 {
   namespace g3d
-  {
-/** \brief ODCADDetector3DGlobal
-  *
-  * \author Kripasindhu Sarkar
-  *
-  */
+    {
+  /** \brief Detector based on 3D global features like VFH, ESF, CVFH etc.
+    *
+    * This class uses PCL 3d_recognition_framework in the background for the detection. First train your data using ODCADDetectTrainer3DGlobal and use this class for the detection.
+    * This detection will assume the presence of a plane (like a table top) in the pointcloud. It segments the point cloud assuming the presence of a plane and using a simple Euclidian segmentation.
+    * After that it finds the global features of each segmented scene match them with the trained data thereby performing a clssification. Read the documentation of ODCADDetectTrainer3DGlobal to know how
+    * the training data should be arranged and trained to get meaningful detection.
+    *
+    * This class provides a detection for each segmented scenes which matches them the best. So the number of positive detection is same as the number of possible segmented scene in the point cloud.
+    *
+    * \author Kripasindhu Sarkar
+    *
+    */
     template<typename PointT = pcl::PointXYZRGBA>
     class ODCADDetector3DGlobal : public ODDetector3D<PointT>
     {

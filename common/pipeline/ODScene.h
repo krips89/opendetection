@@ -14,7 +14,7 @@
 
 namespace od
 {
-  /** \brief This contains information about the scenes. Scenes can be image scene or point cloud scene
+  /** \brief Base class for Scenes. This contains information about the scenes. Scenes can be image scenes or point cloud scenes
    *
    * \author Kripasindhu Sarkar
    *
@@ -24,7 +24,7 @@ namespace od
     virtual void *getData() = 0;
   };
 
-  /** \brief Image scene
+  /** \brief Class for Image Scene.
    *
    * \author Kripasindhu Sarkar
    *
@@ -84,7 +84,11 @@ namespace od
   };
 
 
-
+  /** \brief Class for 3D scene containing point cloud.
+    *
+    * \author Kripasindhu Sarkar
+    *
+    */
   template <typename PointType = pcl::PointXYZRGBA>
   class ODScenePointCloud : public ODScene
   {

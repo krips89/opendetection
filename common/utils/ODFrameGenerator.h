@@ -18,11 +18,18 @@ namespace od
     GENERATOR_TYPE_FILE_LIST, GENERATOR_TYPE_DEVICE
   };
 
-  /** \brief The FrameGenerator class for capturing and reading Scenes conveniently
+
+
+  /** \brief The FrameGenerator class for capturing and reading Scenes conveniently.
+   * Templated with two parameters - SceneType identifying a Scene class, and TYPE identifying the type of input. After the instantiation with a correct TYPE, use the function
+   * getNextFrame() to get an instance of next scene of SceneType. getNextFrame() returns valid scenes until all scenes matched are exhausted - the time  when 'isValid()' is false.
    *
-   * \author Kripasindhu Sarkar
-   *
-   */
+   * \tparam SceneT One of the Scene classes - ODSceneImage or ODScenePointCloud
+   * \tparam TYPE TYPE can be GENERATOR_TYPE_FILE_LIST which means you provide the list of scene files to be returned by the FrameGenerator in the constructor (for eg. \/home/username/pics/*.jpg)
+   * Or it can be GENERATOR_TYPE_DEVICE which picks up the webcam or the kinect based on the SceneType.
+ * \author Kripasindhu Sarkar
+ *
+ */
   template<typename SceneT, GeneratorType TYPE>
   class ODFrameGenerator
   {
@@ -42,6 +49,7 @@ namespace od
     cv::VideoCapture inputCapture_;
     bool exhausted_;
   };
+
 
   template<typename SceneT>
   class ODFrameGenerator<SceneT, GENERATOR_TYPE_FILE_LIST>

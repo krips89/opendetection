@@ -16,9 +16,9 @@ namespace od
 {
   namespace g2d
   {
-    /** \brief ODHOGTrainer; class for training HOG based detector. Use ODHOGDetector after training with this class.
+    /** \brief Class for training HOG based detector.
      *
-     * This is the training class for training HOG based detector. SVMlight is used here to train linear SVM on the HOG features. It supports the usage of multiple random windows in negetive training images
+     * Use ODHOGDetector after training with this class. This is the training class for training HOG based detector. SVMlight is used here to train linear SVM on the HOG features. It supports the usage of multiple random windows in negetive training images
      * to increase the number of negetive features by the function 'setNOFeaturesNeg'. It also supports "Hard negetive" training which collects all the false positive
      * windows after initial training to retrain and obtain a new feature vector. Use the function 'setTrainHardNegetive' to enable this feature.
      *
@@ -91,17 +91,17 @@ namespace od
         return nofeatures_neg;
       }
 
-      void setNOFeaturesNeg(int FEATNUM_NEGFILE)
+      void setNOFeaturesNeg(int featno)
       {
-        ODHOGTrainer::nofeatures_neg = FEATNUM_NEGFILE;
+        ODHOGTrainer::nofeatures_neg = featno;
       }
 
-      cv::Point const &getStart_hog_pos() const
+      cv::Point const &getStartHogPos() const
       {
         return start_hog_pos;
       }
 
-      void setStart_hog_pos(cv::Point const &start_hog_pos)
+      void setStartHogPos(cv::Point const &start_hog_pos)
       {
         ODHOGTrainer::start_hog_pos = start_hog_pos;
       }
