@@ -55,6 +55,9 @@ namespace od
       cv::Size maxSize_;
 
     };
+    /** \example objectdetector/od_image_cascade.cpp
+     *  \example objectdetector/od_image_cascade_files.cpp
+     */
   }
 
 }

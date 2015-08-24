@@ -231,7 +231,8 @@ namespace od
 
       double trainWithSVMLight(std::string svmModelFile, std::string svmDescriptorFile, std::vector<float> &descriptorVector);
     };
-
+    /** \example objectdetector/od_hog_train.cpp
+     */
 
   }
 }

@@ -17,7 +17,7 @@ namespace od
    * This class uses PCL 3d_recognition_framework in the background for the training of 3D CAD models (in PLY format) and should be used with ODCADDetector3DGlobal for their detection in a pointcloud.
    * In the training_input_location_ the CAD models should be arranged in the following structure:
    *
-   * - <Database dir>
+   * - \<training_input_location_\>
         - <Category 1 dir>
           - ...
           - ...
@@ -70,6 +70,11 @@ namespace od
     protected:
       std::string desc_name;
     };
+
+    /** \example objectdetector/od_pc_global_real_time.cpp
+     *  \example objectdetector/od_pc_global_files.cpp
+     */
+
   }
 }
 

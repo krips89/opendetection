@@ -1,7 +1,7 @@
-OD_ADD_EXAMPLE(od_image_camera FILES od_image_camera.cpp
+OD_ADD_EXAMPLE(od_image_camera FILES od_image_cadrecog_camera.cpp
                 LINK_WITH od_common od_local_image_detector)
 
-OD_ADD_EXAMPLE(od_example_files FILES od_example_files.cpp
+OD_ADD_EXAMPLE(od_example_files FILES od_image_cadrecog_files.cpp
                 LINK_WITH od_common od_local_image_detector)
 
 
@@ -31,13 +31,13 @@ OD_ADD_EXAMPLE(od_image_facerecog FILES od_image_facerecog.cpp
 
 
 
-OD_ADD_EXAMPLE(od_example_pc_global FILES od_example_pc_global.cpp
+OD_ADD_EXAMPLE(od_example_pc_global FILES od_pc_global.cpp
                 LINK_WITH od_common od_pointcloud_global_detector)
 
-OD_ADD_EXAMPLE(od_example_pc_global_files FILES od_example_pc_global_files.cpp
+OD_ADD_EXAMPLE(od_example_pc_global_files FILES od_pc_global_files.cpp
                 LINK_WITH od_common od_pointcloud_global_detector)
 
-OD_ADD_EXAMPLE(od_example_pc_global_real_time FILES od_example_pc_global_real_time.cpp
+OD_ADD_EXAMPLE(od_example_pc_global_real_time FILES od_pc_global_real_time.cpp
                 LINK_WITH od_common od_pointcloud_global_detector)
 
 OD_ADD_EXAMPLE(od_example_framegenerator FILES od_example_framegenerator.cpp

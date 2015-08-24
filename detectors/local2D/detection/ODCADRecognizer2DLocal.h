@@ -238,7 +238,9 @@ namespace od
 
       bool detectSingleModel(ODSceneImage *scene, Model const &model, ODDetection3D *&pD, cv::Mat &frame_viz);
     };
-
+    /** \example objectdetector/od_image_cadrecog_camera.cpp
+     * \example objectdetector/od_image_cadrecog_files.cpp
+     */
   }
 }
 

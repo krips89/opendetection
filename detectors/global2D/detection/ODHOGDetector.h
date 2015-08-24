@@ -18,15 +18,20 @@ namespace od
 
   namespace g2d
   {
-  /** \brief ODHOGDetector: A linear classification based detector for HOG features.
-   * User can set any linear classifier through setSVMDetector function or one of the default available detectors like OD_DEFAULT_PEOPLE
-   * This class will then find HOG features in the scene and use the liniar classification model as an input to classify the scene
-   * It covers both simple region detection and omni detection (multiscale mitilocation detection on the entire scene). See examples for the usage.
-   *
-   *
-   * \author Kripasindhu Sarkar
-   *
-   */
+    /** \brief A linear classifier for HOG features.
+     *
+     * This class takes an image as an input, finds its HOG features using the parameters containing in the trained data, runs the linear classifier (present in the trained data) on the computed HOG features
+     * and finally produces the classification output. Covers both multiscale detection (detectOmni()) and detection on a fixed scene (detect() - the scene is resized to the HOG window size).
+     *
+     * Use ODHOGTrainer for the training of new objects. By default this class provides two people detector: OD_DEFAULT_PEOPLE, the people detector from OpenCV and OD_DAIMLER_PEOPLE, the second detector available from OpenCV.
+     * One can set any linear classifier, the linear weight vector through setSVMDetector() function but it is highly not recommended as the HOG parameters and the weight vector can be out of sync.
+     * One must set appropriate HOG parameters after using setSVMDetector() function with which the weight vector was trained.
+     *
+     * \author Kripasindhu Sarkar
+     *
+     */
+
+
     class ODHOGDetector : public ODDetector2D
     {
     public:
@@ -138,6 +143,13 @@ namespace od
 
     };
 
+  /** \example objectdetector/od_image_hog.cpp
+  *   \example objectdetector/od_image_hog_files.cpp
+  *   This is an example of how to use the ODHOGDetector class.
+  *   More details about this example.
+  */
   }
 }
+
+
 #endif //OPENDETECTION_ODHOGMULTISCALEDETECTOR_H

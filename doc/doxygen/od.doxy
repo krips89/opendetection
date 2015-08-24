@@ -2,4 +2,14 @@
 
 <h1>OpenDetection</h1>
 
-The <b>OpenDetection </b> is a <b> OpenDetection is a standalone open source project for object detection and recognition in images and 3D point clouds.
+<b>Open Detection (OD) </b> is a standalone open source project for object detection and recognition in images and 3D point clouds.
+
+\image html odlogo_detailed.png
+
+<h1>Quick Links</h1>
+<ul>
+  <li>Source Code: https://github.com/krips89/opendetection</li>
+  <li>Bug report and queries: mailto:kripasindhu.sarkar@dfki.de</li>
+</ul>
+
+*/	    

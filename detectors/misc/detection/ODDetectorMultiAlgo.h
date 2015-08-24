@@ -43,7 +43,9 @@ namespace od
     std::vector<ODDetector3D<PointT> *> detectors_3d_;
   };
 
-
+  /** \example objectdetector/od_multialgo_files.cpp
+    * \example objectdetector/od_multialgo_pc.cpp
+    */
 
 }
 #endif //OPENDETECTION_ODDETECTORMULTIALGO_H

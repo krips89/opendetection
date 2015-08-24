@@ -23,14 +23,15 @@ namespace od
   {
 
 
-    /** \brief ODFaceRecognizer: global feature based facerecognizer
-   *
-   * Supports EigenFace and FischerFace currently. As an global detector, it does not perform a multiscale omni detection. It just says if a given scene represents a face.
-   * To search for a face in an entire scene, you need to use a onnidetector which performs this task on multiscale on each locatoin
-   *
-   * \author Kripasindhu Sarkar
-   *
-   */
+    /** \brief A facerecognizer based on EigenFace and FischerFace algorithms.
+     *
+     * Currently it just supports detection on fixed scene (detect()) and does not support multiscale detection. This is due to the fact that class for cascade classifier -
+     * ODCascadeDetector supports multiscale detection and can be easily integrated with this recognizer - first by finding face using the Cascade and then applying this recognizer on that detected window.
+     * This is faster than trying to perform recognition on each multiscale window.
+     *
+     * \author Kripasindhu Sarkar
+     *
+     */
 
     class ODFaceRecognizer : public ObjectDetector
     {
@@ -100,7 +101,8 @@ namespace od
       static void read_csv(const std::string &filename, std::vector<cv::Mat> &images, std::vector<int> &labels, char separator = ';');
 
     };
-
+    /** \example objectdetector/od_image_facerecog.cpp
+      */
   }
 }
 #endif //OPENDETECTION_ODPOINTCLOUDGLOBALMATCHING_H

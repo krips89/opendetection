@@ -82,6 +82,9 @@ namespace od
       boost::shared_ptr<pcl::rec_3d_framework::GlobalClassifier<pcl::PointXYZ> > global_;
 
     };
+    /** \example objectdetector/od_pc_global_real_time.cpp
+     *  \example objectdetector/od_pc_global_files.cpp
+     */
   }
 }
 

@@ -43,6 +43,9 @@ namespace od
       void trainSingleModel(std::string objname);
 
     };
+    /** \example objectdetector/od_image_cadrecog_camera.cpp
+    * \example objectdetector/od_image_cadrecog_files.cpp
+    */
 
   }
 }
