@@ -62,6 +62,8 @@ namespace od
 
     void findSiftGPUDescriptors(cv::Mat const &image, cv::Mat &descriptors, std::vector<cv::KeyPoint> &keypoints);
 
+    void computeAndSave(cv::Mat const &image, std::string const path);
+
   private:
 
     cv::Ptr<cv::FeatureDetector> feature_detector_;

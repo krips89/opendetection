@@ -10,7 +10,7 @@ if(NOT OD_INSTALL_ARCHIVE_DIR)
   set(OD_INSTALL_ARCHIVE_DIR lib)
 endif()
 if(NOT OD_INSTALL_INCLUDE_DIR)
-  set(OD_INSTALL_INCLUDE_DIR include/od-{OD_VERSION}/od)
+  set(OD_INSTALL_INCLUDE_DIR include/od-${OD_VERSION}/od)
 endif()
 if(NOT OD_INSTALL_DATA_DIR)
   set(OD_INSTALL_DATA_DIR share/od-${OD_VERSION})
@@ -80,12 +80,17 @@ macro(OD_ADD_LIBRARY_ALL _name )
         SOVERSION ${OD_MAJOR_VERSION}.${OD_MINOR_VERSION}
         )
 
+
     # Install library
     install(TARGETS ${lib_name}
         RUNTIME DESTINATION ${OD_INSTALL_RUNTIME_DIR} COMPONENT ${lib_name}
         LIBRARY DESTINATION ${OD_INSTALL_LIBRARY_DIR} COMPONENT ${lib_name}
         ARCHIVE DESTINATION ${OD_INSTALL_ARCHIVE_DIR} COMPONENT ${lib_name})
 
+    message(${_name})
+    message("includes to od_add_library: "  ${OD_ADD_LIBRARY_ALL_INCS})
+    message("include dir: "  ${OD_INSTALL_INCLUDE_DIR})
+    message("include dir: "  ${OD_INSTALL_DOXYGEN_DIR})
     #install includes
     install(FILES ${_OD_ADD_LIBRARY_ALL_INCS}
             DESTINATION ${OD_INSTALL_INCLUDE_DIR}/${_name}

@@ -211,6 +211,15 @@ void drawModel(cv::Mat image, const Model *model, PnPProblem *pnpProblem, cv::Sc
 
 }
 
+void drawModel(cv::Mat image, const Model *model, cv::Mat R_vect, cv::Mat t_mat, cv::Mat A_mat, cv::Mat dist, cv::Scalar color)
+{
+  std::vector<cv::Point2f> imgpoints;
+  cv::projectPoints(model->get_points3d(), R_vect, t_mat, A_mat, dist, imgpoints);
+  draw2DPoints(image, imgpoints, color);
+
+}
+
+
 // Computes the norm of the translation error
 double get_translation_error(const cv::Mat &t_true, const cv::Mat &t)
 {

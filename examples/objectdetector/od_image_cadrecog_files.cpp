@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
   //detector
   od::l2d::ODCADRecognizer2DLocal *detector = new od::l2d::ODCADRecognizer2DLocal(trained_data_dir);
   //set commandline options type inputs
-  detector->parseParameterString("--use_gpu --method=1 --error=2 --confidence=0.7 --iterations=500 --inliers=15 --metainfo");
+  detector->parseParameterString("--use_gpu --method=1 --error=2 --confidence=0.8 --iterations=500 --inliers=20 --metainfo");
   detector->setCameraIntrinsicFile("/home/sarkar/models/opendetection_local/image_local_scenes/camera_householdnew.xml");   //set some other inputs
   detector->init();
 
@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
     ODDetections3D *detections =  detector->detectOmni(scene);
 
     if(detections->size() > 0)
-      cv::imshow("Overlay", detections->getMetainfoImage()); //only showing the first detection
+      cv::imshow("Overlay", detections->getMetainfoImage());
     else
       cv::imshow("Overlay", scene->getCVImage());
 

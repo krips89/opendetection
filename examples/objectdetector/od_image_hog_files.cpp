@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
     ODDetections2D *detections =  detector->detectOmni(scene);
 
     if(detections->size() > 0)
-      cv::imshow("Overlay", detections->renderMetainfo(*scene).getCVImage()); //only showing the first detection
+      cv::imshow("Overlay", detections->renderMetainfo(*scene).getCVImage());
     else
       cv::imshow("Overlay", scene->getCVImage());
 

@@ -86,9 +86,8 @@ namespace od
     unsigned char *data = image.data;
     cv::Mat greyimage;
     if(image.type() != CV_8U) {
-      cv::Mat tmp;
-      cv::cvtColor(image, tmp, cv::COLOR_BGR2GRAY);
-      data = tmp.data;
+      cv::cvtColor(image, greyimage, cv::COLOR_BGR2GRAY);
+      data = greyimage.data;
     }
     sift_gpu_->RunSIFT(image.cols, image.rows, data, GL_LUMINANCE, GL_UNSIGNED_BYTE);
 
@@ -184,4 +183,16 @@ namespace od
     cv::Mat image = cv::imread(image_name);
   }
 
+  void ODFeatureDetector2D::computeAndSave(cv::Mat const &image, std::string const path)
+  {
+    cv::Mat descriptors;
+    vector<cv::KeyPoint> keypoints;
+    if(mode_ == SIFT_GPU) {
+      findSiftGPUDescriptors1(image, descriptors, keypoints);
+      sift_gpu_->SaveSIFT(path.c_str());
+    } else {
+      //DO NOTHING! IMPLEMENT LATER
+
+    }
+  }
 }

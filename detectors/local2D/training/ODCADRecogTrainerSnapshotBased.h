@@ -42,6 +42,12 @@ namespace od
 
       void trainSingleModel(std::string objname);
 
+    protected:
+      int no_ring_;
+      float view_angle_;
+      int no_snapshot_per_ring_;
+
+
     };
     /** \example objectdetector/od_image_cadrecog_camera.cpp
     * \example objectdetector/od_image_cadrecog_files.cpp

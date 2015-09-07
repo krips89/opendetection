@@ -6,9 +6,7 @@ if(SPHINX_FOUND)
     set_target_properties(tutorials PROPERTIES FOLDER "Documentation (Tutorials)")
   endif(USE_PROJECT_FOLDERS)
   install(DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/html"
-          DESTINATION "${DOC_INSTALL_DIR}/tutorials"
+          DESTINATION "${OD_INSTALL_DOC_DIR}/tutorials"
           COMPONENT doc)
-  install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/content/sources"
-          DESTINATION "${DOC_INSTALL_DIR}/tutorials"
-          COMPONENT doc)
+
 endif(SPHINX_FOUND)

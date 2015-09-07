@@ -52,6 +52,7 @@ void draw3DCoordinateAxes(cv::Mat image, const std::vector<cv::Point2f> &list_po
 void drawObjectMesh(cv::Mat image, const Mesh *mesh, PnPProblem *pnpProblem, cv::Scalar color);
 void drawObjectMesh1(cv::Mat image, const Mesh *mesh, const Model *model, PnPProblem *pnpProblem, cv::Scalar color);
 void drawModel(cv::Mat image, const Model *model, PnPProblem *pnpProblem, cv::Scalar color);
+void drawModel(cv::Mat image, const Model *model, cv::Mat R_vect, cv::Mat t_mat, cv::Mat A_mat, cv::Mat dist, cv::Scalar color);
 
 // Computes the norm of the translation error
 double get_translation_error(const cv::Mat &t_true, const cv::Mat &t);

@@ -347,6 +347,26 @@ namespace od
   {
   public:
 
+    /*ODSceneImage renderMetainfo(ODSceneImage input)
+    {
+      //picking up random colors for different detection algorithm, if exist
+      std::map<std::string, cv::Scalar> color_map;
+      for(int i = 0; i < detections_.size(); i++)
+      {
+        if(color_map.find(detections_[i]->getId()) == color_map.end())
+          color_map[detections_[i]->getId()] = CV_RGB(rand()%255, rand()%255, rand()%255);
+      }
+
+      cv::Mat image = input.getCVImage().clone();
+      for(int i = 0; i < detections_.size(); i++)
+      {
+        ODDetections3D * detection = dynamic_cast<ODDetections3D *>(detections_[i]);
+        cv::rectangle(image, detection->bounding_box_2d_, color_map[detections_[i]->getId()], 2);
+      }
+      return ODSceneImage(image);
+    }*/
+
+
     ODDetection3D * operator[](int i) { return dynamic_cast<ODDetection3D *>(detections_[i]); }
     ODDetection3D * at(int i) { return dynamic_cast<ODDetection3D *>(detections_[i]); }
   };

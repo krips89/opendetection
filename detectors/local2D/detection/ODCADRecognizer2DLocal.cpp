@@ -76,7 +76,7 @@ namespace od
         confidence = !parser.has("confidence") ? parser.get<float>("confidence") : confidence;
         minInliers = !parser.has("inliers") ? parser.get<int>("inliers") : minInliers;
         pnpMethod = !parser.has("method") ? parser.get<int>("method") : pnpMethod;
-        metainfo = parser.has("metainfo");
+        metainfo_ = parser.has("metainfo");
       }
 
     }
@@ -131,7 +131,12 @@ namespace od
 
         ODDetection3D *detection;
         if(detectSingleModel(scene, models[i], detection, viz))
+        {
           detections->push_back(detection);
+
+          if(metainfo_)
+            drawModel(viz, &models[i], pnp_detection.get_R_vect(), pnp_detection.get_t_matrix(), pnp_detection.get_A_matrix(), pnp_detection.get_dist_coef(),  yellow);
+        }
       }
       detections->setMetainfoImage(viz);
       return detections;
@@ -182,43 +187,13 @@ namespace od
 
       if(inliers_idx.rows < minInliers) return false;
 
+      cout << "RECOGNIZED: " << model.id << endl;
       //else everything is fine; report the detection
       detection3D = new ODDetection3D();
       detection3D->setLocation(pnp_detection.get_t_matrix());
-      detection3D->setPose(pnp_detection.get_P_matrix());
+      detection3D->setPose(pnp_detection.get_R_matrix());
       detection3D->setType(ODDetection::OD_DETECTION_RECOG);
       detection3D->setId(model.id);
-
-      if(metainfo)
-      {
-
-        for(int inliers_index = 0; inliers_index < inliers_idx.rows; ++inliers_index)
-        {
-          int n = inliers_idx.at<int>(inliers_index);         // i-inlier
-          Point2f point2d = list_points2d_scene_match[n]; // i-inlier point 2D
-          list_points2d_inliers.push_back(point2d);           // add i-inlier to list
-        }
-        // Draw outliers
-        draw2DPoints(frame_vis, list_points2d_scene_match, red);
-        draw2DPoints(frame_vis, list_points2d_inliers, blue);
-
-        drawModel(frame_vis, &model, &pnp_detection, yellow); // draw estimated pose
-
-        cout << "Object detected: " << model.id << endl;
-        // Draw some debug text
-        int inliers_int = inliers_idx.rows;
-        int outliers_int = (int) good_matches.size() - inliers_int;
-        string inliers_str = IntToString(inliers_int);
-        string outliers_str = IntToString(outliers_int);
-        string n = IntToString((int) good_matches.size());
-        string text = "Found: " + model.id;
-        string text2 = "Inliers: " + inliers_str + " - Outliers: " + outliers_str;
-
-
-        drawText(frame_vis, text, green);
-        drawText2(frame_vis, text2, red);
-        detection3D->setMetainfoImage(frame_vis);
-      }
 
       //reset
       pnp_detection.clearExtrinsics();

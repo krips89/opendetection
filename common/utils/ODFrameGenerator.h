@@ -204,7 +204,6 @@ namespace od
     int frame_counter_;
     boost::mutex mutex_;
     bool active_;
-
   };
 
 }

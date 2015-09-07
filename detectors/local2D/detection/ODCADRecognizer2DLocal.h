@@ -107,12 +107,12 @@ namespace od
 
       bool isMetainfo() const
       {
-        return metainfo;
+        return metainfo_;
       }
 
       void setMetainfo(bool metainfo)
       {
-        ODCADRecognizer2DLocal::metainfo = metainfo;
+        ODCADRecognizer2DLocal::metainfo_ = metainfo;
       }
 
       int getIterationsCount() const
@@ -168,6 +168,8 @@ namespace od
       ODCADRecognizer2DLocal(string const &training_data_location_ = 0) : ODImageLocalMatchingDetector(
           training_data_location_)
       {
+        metainfo_ = true;
+
         camera_intrinsic_file = "Data/out_camera_data_lion_old.yml";         // mesh
 
         red = cv::Scalar(0, 0, 255);
@@ -216,7 +218,6 @@ namespace od
       bool fast_match;       // fastRobustMatch() or robustMatch()
       bool use_gpu;
       bool use_gpu_match;
-      bool metainfo;
 
 // RANSAC parameters
       int iterationsCount;      // number of Ransac iterations.
