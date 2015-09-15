@@ -21,7 +21,17 @@ namespace od
    */
   class ODScene
   {
+  public:
+
     virtual void *getData() = 0;
+
+    std::string const &getPath() const
+    {
+      return path_;
+    }
+
+  protected:
+    std::string path_;
   };
 
   /** \brief Class for Image Scene.
@@ -62,6 +72,7 @@ namespace od
     ODSceneImage(std::string const &path):is_trained_(false)
     {
       this->cvimage_ = cv::imread(path);
+      this->path_ = path;
     }
 
     cv::Mat getCVImage()
@@ -107,6 +118,7 @@ namespace od
       {
         std::cout<<"ERROR: Couldn't read the file "<< point_cloud_file <<std::endl;
       }
+      this->path_ = point_cloud_file;
     }
 
     ODScenePointCloud(): point_cloud_(new pcl::PointCloud<PointType>())

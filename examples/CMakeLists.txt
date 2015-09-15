@@ -1,1 +1,2 @@
 add_subdirectory(objectdetector)
+add_subdirectory(apps)

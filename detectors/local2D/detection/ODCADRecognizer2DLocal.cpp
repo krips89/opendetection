@@ -144,6 +144,10 @@ namespace od
 
     bool ODCADRecognizer2DLocal::detectSingleModel(ODSceneImage *scene, Model const &model, ODDetection3D *&detection3D, Mat & frame_vis)
     {
+
+      //reset
+      pnp_detection.clearExtrinsics();
+
       vector<Point3f> list_points3d_model = model.get_points3d();  // list with model 3D coordinates
       vector<KeyPoint> list_keypoints_model = model.get_keypoints();  // list with model 3D coordinates
       Mat descriptors_model = model.get_descriptors();                  // list with descriptors of each 3D coordinate
@@ -195,8 +199,7 @@ namespace od
       detection3D->setType(ODDetection::OD_DETECTION_RECOG);
       detection3D->setId(model.id);
 
-      //reset
-      pnp_detection.clearExtrinsics();
+
 
       return true;
     }

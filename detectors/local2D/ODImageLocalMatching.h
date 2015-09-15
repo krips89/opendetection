@@ -44,7 +44,7 @@ namespace od
       ODImageLocalMatchingDetector(std::string const &training_data_location_) : ODDetector2DComplete(training_data_location_)
       {
         TRAINED_DATA_IDENTIFIER_ = "FEATCORR";
-        TRAINED_DATA_EXT_ = "corr.xml";
+        TRAINED_DATA_EXT_ = ".xml";
       }
     };
 
