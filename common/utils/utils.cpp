@@ -20,4 +20,15 @@ namespace od
     return ret;
   }
 
+  void normL2(cv::Mat &descriptors)
+  {
+    for (int r = 0; r < descriptors.rows; r++)
+    {
+      float norm=0;
+      for (int c = 0; c < descriptors.cols; c++) norm+=(descriptors.at<float>(r, c)*descriptors.at<float>(r, c));
+      norm = 1.0/sqrt(norm);
+      for (int c = 0; c < descriptors.cols; c++) descriptors.at<float>(r, c)*=norm;
+    }
+  }
 }
+

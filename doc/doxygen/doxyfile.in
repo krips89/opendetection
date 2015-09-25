@@ -111,14 +111,17 @@ INPUT                  = "@OD_SOURCE_DIR@" \
 INPUT_ENCODING         = UTF-8
 FILE_PATTERNS          = *.h \
                          *.hpp \
-                         *.doxy
+                         *.doxy \
+                         *.markdown \
+                         *.md
 RECURSIVE              = YES
 EXCLUDE                = "@OD_SOURCE_DIR@/cmake" \
 
 EXCLUDE_SYMLINKS       = YES
 EXCLUDE_PATTERNS       = "@OD_SOURCE_DIR@/detectors/*/detection/*/*" \
                          "@OD_SOURCE_DIR@/detectors/*/training/*/*" \
-                         "@OD_SOURCE_DIR@/3rdparty/*"
+                         "@OD_SOURCE_DIR@/3rdparty/*" \
+                         "@OD_SOURCE_DIR@/README.md"
 EXCLUDE_SYMBOLS        = 
 EXAMPLE_PATH           = "@OD_SOURCE_DIR@/examples"
 EXAMPLE_PATTERNS       = *
@@ -166,11 +169,11 @@ HTML_TIMESTAMP         = YES
 HTML_DYNAMIC_SECTIONS  = NO
 GENERATE_DOCSET        = YES
 DOCSET_FEEDNAME        = "Doxygen generated docs"
-DOCSET_BUNDLE_ID       = pointclouds.org
-DOCSET_PUBLISHER_ID    = pointclouds.org.Publisher
-DOCSET_PUBLISHER_NAME  = Point Cloud Library (PCL) Development Team
+DOCSET_BUNDLE_ID       = opendetection.org
+DOCSET_PUBLISHER_ID    = opendetection.org.Publisher
+DOCSET_PUBLISHER_NAME  = Open Detection (OD)
 GENERATE_HTMLHELP      = @DOCUMENTATION_HTML_HELP@
-CHM_FILE               = "pcl-@PCL_MAJOR_VERSION@.@PCL_MINOR_VERSION@.chm"
+CHM_FILE               = "od-@OD_MAJOR_VERSION@.@OD_MINOR_VERSION@.chm"
 HHC_LOCATION           = "@HTML_HELP_COMPILER@"
 GENERATE_CHI           = NO
 CHM_INDEX_ENCODING     = 
@@ -178,16 +181,16 @@ BINARY_TOC             = NO
 TOC_EXPAND             = NO
 GENERATE_QHP           = NO
 QCH_FILE               = 
-QHP_NAMESPACE          = pointclouds.org.Project
+QHP_NAMESPACE          =
 QHP_VIRTUAL_FOLDER     = doc
 QHP_CUST_FILTER_NAME   = 
 QHP_CUST_FILTER_ATTRS  = 
 QHP_SECT_FILTER_ATTRS  = 
 QHG_LOCATION           = 
 GENERATE_ECLIPSEHELP   = NO
-ECLIPSE_DOC_ID         = pointclouds.org.Project
+ECLIPSE_DOC_ID         =
 DISABLE_INDEX          = NO
-GENERATE_TREEVIEW      = NO
+GENERATE_TREEVIEW      = YES
 ENUM_VALUES_PER_LINE   = 4
 TREEVIEW_WIDTH         = 250
 EXT_LINKS_IN_WINDOW    = NO

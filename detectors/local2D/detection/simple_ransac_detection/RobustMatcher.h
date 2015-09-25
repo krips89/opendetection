@@ -73,6 +73,8 @@ public:
 
   void match(const cv::Mat & descriptors_frame, const cv::Mat &descriptors_model, std::vector<cv::DMatch>& good_matches);
 
+  void matchNormalized(cv::Mat &descriptors_frame, cv::Mat &descriptors_model, vector<cv::DMatch> &good_matches);
+
 private:
   // pointer to the feature point detector object
   cv::Ptr<od::ODFeatureDetector2D> featureDetector_;

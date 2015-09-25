@@ -161,7 +161,10 @@ namespace od
 
       Mat frame = scene->getCVImage();
 
-      rmatcher.match(scene->getDescriptors(), descriptors_model, good_matches);
+      //normalize
+      Mat scenedes = scene->getDescriptors();
+      rmatcher.matchNormalized(scenedes, descriptors_model, good_matches);
+      //rmatcher.match(scenedes, descriptors_model, good_matches);
 
       if(good_matches.size() <= 0) return false;
 

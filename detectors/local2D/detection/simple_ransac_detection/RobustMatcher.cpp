@@ -220,6 +220,12 @@ void RobustMatcher::match(const cv::Mat & descriptors_frame, const cv::Mat &desc
   }
 }
 
+void RobustMatcher::matchNormalized(cv::Mat & descriptors_frame, cv::Mat &descriptors_model, std::vector<cv::DMatch>& good_matches)
+{
+  od::normL2(descriptors_frame); od::normL2(descriptors_model);
+  match(descriptors_frame, descriptors_model, good_matches);
+}
+
 void RobustMatcher::robustMatch( const cv::Mat& frame, std::vector<cv::DMatch>& good_matches,
               std::vector<cv::KeyPoint>& keypoints_frame, const cv::Mat& descriptors_model )
 {

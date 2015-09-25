@@ -9,6 +9,7 @@
 #include <boost/preprocessor.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/algorithm/string.hpp>
+#include <opencv2/core/core.hpp>
 
 #include <fstream>
 #include <sstream>
@@ -59,6 +60,8 @@ namespace od
   }
 
   std::vector<std::string> myglob(const std::string &pat);
+
+  void normL2(cv::Mat &descriptors);
 
   static std::string getTexfileinObj(std::string objfilename)
   {
