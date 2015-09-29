@@ -5,7 +5,6 @@
 #ifndef OPENDETECTION_OBJECTDETECTOR_H
 #define OPENDETECTION_OBJECTDETECTOR_H
 
-#include <jmorecfg.h>
 #include <string>
 #include <vector>
 #include "ODDetection.h"
@@ -36,7 +35,7 @@ namespace od
   {
   public:
 
-    ODDetectorCommon( std::string const &training_data_location_="") : training_data_location_(training_data_location_)
+    ODDetectorCommon( std::string const &training_data_location_="") : trained_data_location_(training_data_location_)
     { }
 
     virtual void init() = 0;
@@ -59,30 +58,30 @@ namespace od
     /** \brief Gets/Sets the base directory for trained data. This should be same for all Trainers and Detectors and can be considered as the 'database' of trained data. Trainers uses one of its
      * subdirectories based on its type to store algo specific trained data. The corresponding Detector would use the same directory to fetch the trained data for online detection.
       */
-    std::string getTrainingDataLocation() const
+    std::string getTrainedDataLocation() const
     {
-      return training_data_location_;
+      return trained_data_location_;
     }
 
 
     /** \brief The base directory for trained data. This should be same for all Trainers and Detectors and can be considered as the 'database' of trained data. Trainers uses one of its
      * subdirectories based on its type to store algo specific trained data. The corresponding Detector would use the same directory to fetch the trained data for online detection.
      */
-    void setTrainingDataLocation(std::string training_data_location_)
+    virtual void setTrainedDataLocation(std::string training_data_location_)
     {
-      this->training_data_location_ = training_data_location_;
+      this->trained_data_location_ = training_data_location_;
     }
 
 
-    /** \brief Gets the specific directory for a Trainer or a Detector inside training_data_location_.
+    /** \brief Gets the specific directory for a Trainer or a Detector inside trained_data_location_.
       */
     std::string getSpecificTrainingDataLocation()
     {
-      return training_data_location_ + "/" + "TD_" + TRAINED_DATA_IDENTIFIER_;
+      return trained_data_location_ + "/" + "TD_" + TRAINED_DATA_IDENTIFIER_;
     }
 
   protected:
-    std::string training_input_location_, training_data_location_;
+    std::string training_input_location_, trained_data_location_;
     std::string TRAINED_DATA_EXT_, TRAINED_DATA_IDENTIFIER_;
   };
 
@@ -114,7 +113,7 @@ namespace od
       return always_train_;
     }
 
-    void setAlwaysTrain(boolean always_train_)
+    void setAlwaysTrain(bool always_train_)
     {
       this->always_train_ = always_train_;
     }

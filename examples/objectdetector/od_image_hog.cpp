@@ -21,10 +21,14 @@ int main(int argc, char *argv[])
   std::string trained_data_dir(argv[1]);
   //detector
   g2d::ODHOGDetector *detector = new g2d::ODHOGDetector(trained_data_dir);
+  //g2d::ODHOGDetector *detector = new g2d::ODHOGDetector;
+  //detector->setSvmtype(g2d::ODHOGDetector::OD_DAIMLER_PEOPLE);
   detector->init();
 
   //get scenes
-  od::ODFrameGenerator<od::ODSceneImage, od::GENERATOR_TYPE_DEVICE> frameGenerator("0");
+  //od::ODFrameGenerator<od::ODSceneImage, od::GENERATOR_TYPE_DEVICE> frameGenerator("/home/sarkar/data/pedestrian/2012_06_21_144331_BendingIn.avi");
+  od::ODFrameGenerator<od::ODSceneImage, od::GENERATOR_TYPE_DEVICE> frameGenerator("/home/sarkar/data/pedestrian/WalkByShop1front.mpg");
+
   //GUI
   cv::namedWindow("Overlay", cv::WINDOW_NORMAL);
   while(frameGenerator.isValid() && cv::waitKey(20) != 27)

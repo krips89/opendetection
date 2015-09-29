@@ -23,7 +23,7 @@ namespace od
 {
 
   //BASED ON 2D SCENE
-  ODDetections *ODDetectorMultiAlgo::detect(ODSceneImage *scene)
+  ODDetections *ODDetectorMultiAlgo2D::detect(ODSceneImage *scene)
   {
     ODDetections * detections_all = new ODDetections;
     for (int i = 0; i < detectors_2d_.size(); i++)
@@ -35,7 +35,7 @@ namespace od
     return detections_all;
   }
 
-  ODDetections2D *ODDetectorMultiAlgo::detectOmni(ODSceneImage *scene)
+  ODDetections2D *ODDetectorMultiAlgo2D::detectOmni(ODSceneImage *scene)
   {
     ODDetections2D * detections_all = new ODDetections2D;
     for (int i = 0; i < detectors_2d_.size(); i++)
@@ -49,7 +49,40 @@ namespace od
 
 
 
+
+
+
+  void ODDetectorMultiAlgo2D::init()
+  {
+    //make a list of different algorithms
+    //vector<ODDetector *> detectors = {new ODCascadeDetector(trained_data_location_), new ODHOGDetector(trained_data_location_), new ODCADRecognizer2DLocal(trained_data_location_)};
+    detectors_2d_.push_back(new ODCascadeDetector(trained_data_location_));
+    detectors_2d_.push_back(new ODHOGDetector(trained_data_location_));
+    //  detectors.push_back(new ODCADRecognizer2DLocal(trained_data_location_));
+
+    for (int i = 0; i < detectors_2d_.size(); i++)
+    {
+      detectors_2d_[i]->init();
+    }
+  }
+
+
+
+
   /////############BASED ON 3D SCENE#####################
+
+  void ODDetectorMultiAlgo::init()
+  {
+      //3D
+    detectors_3d_.push_back(new ODCADDetector3DGlobal<PointT>(trained_data_location_, training_input_location_));
+
+    for (int i = 0; i < detectors_3d_.size(); i++)
+    {
+      detectors_3d_[i]->init();
+    }
+  }
+
+
   ODDetections* ODDetectorMultiAlgo::detect(ODScenePointCloud<PointT> *scene)
   {
     ODDetections * detections_all = new ODDetections;
@@ -72,29 +105,5 @@ namespace od
     }
 
     return detections_all;
-  }
-
-
-  void ODDetectorMultiAlgo::init()
-  {
-    //make a list of different algorithms
-    //vector<ODDetector *> detectors = {new ODCascadeDetector(training_data_location_), new ODHOGDetector(training_data_location_), new ODCADRecognizer2DLocal(training_data_location_)};
-    detectors_2d_.push_back(new ODCascadeDetector(training_data_location_));
-    detectors_2d_.push_back(new ODHOGDetector(training_data_location_));
-    //  detectors.push_back(new ODCADRecognizer2DLocal(training_data_location_));
-
-    for (int i = 0; i < detectors_2d_.size(); i++)
-    {
-      detectors_2d_[i]->init();
-    }
-
-
-    //3D
-    detectors_3d_.push_back(new ODCADDetector3DGlobal<PointT>(training_data_location_, training_input_location_));
-
-    for (int i = 0; i < detectors_3d_.size(); i++)
-    {
-      detectors_3d_[i]->init();
-    }
   }
 }

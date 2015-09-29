@@ -46,7 +46,7 @@ namespace od
   class ODDetector2D: public ODDetector
   {
   public:
-    ODDetector2D(std::string const &training_data_location_) : ODDetector(training_data_location_)
+    ODDetector2D(std::string const &trained_data_location_) : ODDetector(trained_data_location_)
     { }
 
     ODDetections* detect(ODScene *scene)
@@ -80,7 +80,7 @@ namespace od
   class ODDetector3D: public ODDetector
   {
   public:
-    ODDetector3D(std::string const &training_data_location_) : ODDetector(training_data_location_)
+    ODDetector3D(std::string const &trained_data_location_) : ODDetector(trained_data_location_)
     { }
 
     /** \brief Function for performing detection on a segmented scene.
@@ -109,7 +109,7 @@ namespace od
   class ODDetector2DComplete: public ODDetector
   {
   public:
-    ODDetector2DComplete(std::string const &training_data_location_) : ODDetector(training_data_location_)
+    ODDetector2DComplete(std::string const &trained_data_location_) : ODDetector(trained_data_location_)
     { }
 
     /** \brief Function for performing detection on a segmented scene.

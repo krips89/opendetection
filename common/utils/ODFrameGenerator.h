@@ -36,6 +36,7 @@ namespace od
   public:
 
     ODFrameGenerator(std::string input = "");
+    ODFrameGenerator(int input = 0){}
 
     SceneT * getNextFrame();
 
@@ -89,7 +90,13 @@ namespace od
   public:
     ODFrameGenerator(std::string input = "")
     {
-      input_capture_.open(atoi(input.c_str()));
+      input_capture_.open(input);
+      if (!input_capture_.isOpened()) { cout << "FATAL: Cannot open video capture!";}
+    }
+
+    ODFrameGenerator(int input = 0)
+    {
+      input_capture_.open(input);
       if (!input_capture_.isOpened()) { cout << "FATAL: Cannot open video capture!";}
     }
 

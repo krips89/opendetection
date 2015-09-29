@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
   //detector
   od::g3d::ODCADDetector3DGlobal<pcl::PointXYZRGBA> *detector = new od::g3d::ODCADDetector3DGlobal<pcl::PointXYZRGBA>();
   detector->setTrainingInputLocation(training_input_dir);
-  detector->setTrainingDataLocation(trained_data_dir);
+  detector->setTrainedDataLocation(trained_data_dir);
   detector->init();
 
   //GUI and feedback

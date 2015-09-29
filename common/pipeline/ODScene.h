@@ -5,7 +5,8 @@
 #ifndef OPENDETECTION_SCENE_H
 #define OPENDETECTION_SCENE_H
 
-#include <opencv2/core/core.hpp>
+//#include <opencv2/core/core.hpp>
+#include <opencv2/core/types.hpp>
 #include <iostream>
 #include <opencv2/imgcodecs.hpp>
 #include <pcl/point_cloud.h>

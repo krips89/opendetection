@@ -19,11 +19,11 @@ int main(int argc, char *argv[])
 
   //detector
   od::g2d::ODCascadeDetector *detector = new od::g2d::ODCascadeDetector;
-  detector->setTrainingDataLocation(trained_cascade);
+  detector->setTrainedDataLocation(trained_cascade);
   detector->init();
 
   //get scenes
-  od::ODFrameGenerator<od::ODSceneImage, od::GENERATOR_TYPE_DEVICE> frameGenerator("0");
+  od::ODFrameGenerator<od::ODSceneImage, od::GENERATOR_TYPE_DEVICE> frameGenerator(0);
   //GUI
   cv::namedWindow("Overlay", cv::WINDOW_NORMAL);
   while(frameGenerator.isValid() && cv::waitKey(20) != 27)

@@ -165,8 +165,8 @@ namespace od
         ODCADRecognizer2DLocal::pnpMethod = pnpMethod;
       }
 
-      ODCADRecognizer2DLocal(string const &training_data_location_ = 0) : ODImageLocalMatchingDetector(
-          training_data_location_)
+      ODCADRecognizer2DLocal(string const &trained_data_location_ = 0) : ODImageLocalMatchingDetector(
+          trained_data_location_)
       {
         metainfo_ = true;
 

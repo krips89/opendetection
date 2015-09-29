@@ -163,7 +163,7 @@ namespace od
 
     int ODCADRecogTrainerSnapshotBased::train()
     {
-      FileUtils::createTrainingDir(training_data_location_);
+      FileUtils::createTrainingDir(trained_data_location_);
 
       //get models in the directory
       std::vector<std::string> files;

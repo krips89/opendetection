@@ -12,26 +12,32 @@ namespace od
   {
 
 
+
     void ODHOGDetector::init()
     {
+
       switch(svmtype_)
       {
         case OD_DEFAULT_PEOPLE:
           hog_.setSVMDetector(cv::HOGDescriptor::getDefaultPeopleDetector());
-
+          cout << "HOG TYPE: OpenCV Default People" << endl;
           //hog_.save(getSpecificTrainingDataLocation() + "/defaultpeople." + TRAINED_DATA_EXT_);
           break;
         case OD_DAIMLER_PEOPLE:
           hog_.winSize = cv::Size(48, 96);
           hog_.setSVMDetector(cv::HOGDescriptor::getDaimlerPeopleDetector());
-
+          cout << "HOG TYPE: OpenCV Daimler People" << endl;
           //hog_.save(getSpecificTrainingDataLocation() + "/daimlerpeople." + TRAINED_DATA_EXT_);
           break;
         case OD_FILE:
-          load(FileUtils::getFirstFile(getSpecificTrainingDataLocation(), TRAINED_DATA_EXT_));
+          string hogfile = FileUtils::getFirstFile(getSpecificTrainingDataLocation(), TRAINED_DATA_EXT_);
+          load(hogfile);
+          cout << "HOG TYPE: Custom HOG features loaded from: " << hogfile << endl;
           break;
           //dont set anything for custom, it is to be set by the user by setSVMDetector
       }
+
+      printParameters();
     }
 
     void ODHOGDetector::load(std::string filename)
@@ -122,5 +128,13 @@ namespace od
       hog_.setSVMDetector(descriptor_vector);
     }
 
+    void ODHOGDetector::printParameters()
+    {
+      cout << "winSize: " << winSize << endl;
+      cout << "blockSize: " << blockSize << endl;
+      cout << "blockStride: " << blockStride << endl;
+      cout << "cellSize: " << cellSize << endl;
+      cout << "hitThreshold: " << hitThreshold << endl;
+    }
   }
 }

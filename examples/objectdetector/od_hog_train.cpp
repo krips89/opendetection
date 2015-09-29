@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
 
 
   od::g2d::ODHOGDetector *detector = new od::g2d::ODHOGDetector;
-  detector->setTrainingDataLocation(trained_data_dir);
+  detector->setTrainedDataLocation(trained_data_dir);
   detector->init();
 
   //get scenes

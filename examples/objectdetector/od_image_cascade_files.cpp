@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
 
   //detector
   od::g2d::ODCascadeDetector *detector = new od::g2d::ODCascadeDetector;
-  detector->setTrainingDataLocation(trained_cascade);
+  detector->setTrainedDataLocation(trained_cascade);
   //detector->setSvmtype(g2d::ODCascadeDetector::OD_DAIMLER_PEOPLE);
   detector->init();
 

@@ -18,6 +18,31 @@ namespace od
   * \author Kripasindhu Sarkar
   *
   */
+  class ODDetectorMultiAlgo2D : public ODDetector2D
+  {
+  public:
+    ODDetectorMultiAlgo2D(std::string const &training_data_location_) : ODDetector2D(training_data_location_)
+    { }
+
+
+    typedef pcl::PointXYZRGBA PointT;
+
+
+
+    ODDetections *detect(ODSceneImage *scene) ;
+    ODDetections2D *detectOmni(ODSceneImage *scene);
+
+    ODDetections* detect(ODScenePointCloud<PointT> *scene);
+    ODDetections3D* detectOmni(ODScenePointCloud<PointT> *scene);
+
+
+    void init();
+
+  private:
+    std::vector<ODDetector2D *> detectors_2d_;
+    std::vector<ODDetector3D<PointT> *> detectors_3d_;
+  };
+
   class ODDetectorMultiAlgo : public ODDetector
   {
   public:

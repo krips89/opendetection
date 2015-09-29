@@ -21,7 +21,8 @@ int main(int argc, char *argv[])
 
   //detector
   od::g2d::ODHOGDetector *detector = new od::g2d::ODHOGDetector;
-  detector->setTrainingDataLocation(trained_hog);
+  detector->setTrainedDataLocation(trained_hog);
+  detector->setSvmtype(g2d::ODHOGDetector::OD_DAIMLER_PEOPLE);
   //detector->setSvmtype(g2d::ODHOGDetector::OD_CUSTOM);
   //detector->setSVMFromFile("/home/sarkar/exp/trainhog/trainHOG/build/descriptorvector.dat");
   //detector->setHitThreshold(0.98612);

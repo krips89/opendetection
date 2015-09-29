@@ -1,6 +1,8 @@
 Introduction {#introduction_general}
 ================
 
+[TOC]
+
 Philosophy and motivation {#phil}
 ====
 
@@ -62,10 +64,13 @@ ODDetections2D *detections =  detector->detectOmni(scene); //Use the detect* met
 showimage(detections->renderMetainfo(*scene).getCVImage())  //do something with the detections, 
 \endcode
 
-And so on...
+And so on... Our APIs are highly structured and follow deep polymorphism for the detector hierarchy. The library is in C++ for the fast implementation. The details are provided in the next sections. 
 
 Usage and target audience {#targetaud} 
 =======
-
-
+The project was originated with the aim of having a vision tool for robotics (in particular for [Robocomp](https://github.com/robocomp/robocomp)). So, we have the following different categories of target audience. 
+   
+   1. **Robotics Applications and robots:** The simple APIs does not involve one to know the intricate details of the application, thereby making this library a good application tools - what is required for robotics.
+   2. **Computer Vision beginners and enthusiasts:**  On the same line as our APIs are simple and easy-to-use, its a great tool for experimentation for new computer vision scholars.
+   3. **Computer Vision researchers:** The method dependent parameters to fine-tune detections to its limit, makes this a great tool for computer vision experts. It is also a great tool for comparison of results different methods. After all this is just a collection of various detection/recognition method together under one simple roof.  
 

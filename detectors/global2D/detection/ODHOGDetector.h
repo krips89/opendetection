@@ -39,15 +39,17 @@ namespace od
       OD_DEFINE_ENUM_WITH_STRING_CONVERSIONS(SVMType, (OD_CUSTOM)(OD_DEFAULT_PEOPLE)(OD_DAIMLER_PEOPLE)(OD_FILE))
 
 
-      ODHOGDetector(std::string const &training_data_location_ = "", cv::Size winsize = cv::Size(64,128), cv::Size blocksize = cv::Size(16,16), cv::Size blockstride = cv::Size(8,8), cv::Size cellsize = cv::Size(8,8), float hitshreshold = 0.0):
-                                                                      ODDetector2D(training_data_location_),  winSize(winsize), blockSize(blocksize), blockStride(blockstride),
+      ODHOGDetector(std::string const &trained_data_location_ = "", cv::Size winsize = cv::Size(64,128), cv::Size blocksize = cv::Size(16,16), cv::Size blockstride = cv::Size(8,8), cv::Size cellsize = cv::Size(8,8), float hitshreshold = 0.0):
+                                                                      ODDetector2D(trained_data_location_),  winSize(winsize), blockSize(blocksize), blockStride(blockstride),
                                                                       cellSize(cellsize), hitThreshold(hitshreshold), hog_(winSize, blockSize, blockStride, cellSize, 9)
       {
         TRAINED_DATA_IDENTIFIER_ = "HOG";
         TRAINED_DATA_EXT_ = "hog.xml";
         metainfo_ = true;
-        if(training_data_location_ == "") svmtype_ = OD_FILE;
-        else svmtype_ = OD_DEFAULT_PEOPLE;
+        svmtype_ = OD_DEFAULT_PEOPLE;
+
+        if (trained_data_location_ != "")
+          svmtype_ = OD_FILE;
       }
 
 
@@ -67,6 +69,12 @@ namespace od
       int detect(ODScene *scene, std::vector<ODDetection *> &detections)
       { }
 
+
+      void setTrainedDataLocation(std::string trained_data_location_)
+      {
+        this->trained_data_location_ = trained_data_location_;
+        this->svmtype_ = OD_FILE;
+      }
 
       SVMType const &getSvmtype() const
       {
@@ -128,6 +136,7 @@ namespace od
         ODHOGDetector::hitThreshold = hitThreshold;
       }
 
+      void printParameters();
 
     protected:
       //properteis

@@ -29,8 +29,8 @@ namespace od
     {
 
     public:
-      ODHOGTrainer(std::string const &training_input_location_ = "", std::string const &training_data_location_ = "", cv::Size winsize = cv::Size(64,128), cv::Size blocksize = cv::Size(16,16), cv::Size blockstride = cv::Size(8,8), cv::Size cellsize = cv::Size(8,8), float hitshreshold = 0.0):
-          ODTrainer(training_input_location_, training_data_location_),  winSize(winsize), blockSize(blocksize), blockStride(blockstride),
+      ODHOGTrainer(std::string const &training_input_location_ = "", std::string const &trained_data_location_ = "", cv::Size winsize = cv::Size(64,128), cv::Size blocksize = cv::Size(16,16), cv::Size blockstride = cv::Size(8,8), cv::Size cellsize = cv::Size(8,8), float hitshreshold = 0.0):
+          ODTrainer(training_input_location_, trained_data_location_),  winSize(winsize), blockSize(blocksize), blockStride(blockstride),
           cellSize(cellsize), hog_(winSize, blockSize, blockStride, cellSize, 9)
       {
 
@@ -44,7 +44,7 @@ namespace od
         winStride = cv::Size();
         train_hard_negetive_ = false;
 
-        if(training_data_location_ != "")
+        if(trained_data_location_ != "")
         {
           posSamplesDir = training_input_location_ + "/pos";
           negSamplesDir = training_input_location_ + "/neg";
