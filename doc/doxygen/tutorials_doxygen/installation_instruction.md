@@ -7,11 +7,11 @@ Installation Instructions {#installation_instruction}
 The compilation and installation of OD is fairly simple. You first have to install its dependencies before compiling. Folllowing are the dependencies with their specific settings:
 
 
-Dependencies {#tag1}
+Dependencies {#installation_instruction1}
 ============
 
 
-##OpenCV 3.0## {#tag2}
+##OpenCV 3.0## {#installation_instruction2}
 
 OpenCV 3.0 is to be compiled with the modules xfeatures2d (for features like SIFT) and CUDA.
     
@@ -30,12 +30,12 @@ OpenCV 3.0 is to be compiled with the modules xfeatures2d (for features like SIF
         *CMAKE options*: WITH_CUDA=ON       
 
  
-##VTK 6.0 or above {#tag3}
+##VTK 6.0 or above {#installation_instruction3}
     
 Download and compile latest VTK with its default settings.
     
    
-##PCL 1.6 or above {#tag4}   
+##PCL 1.6 or above {#installation_instruction4}   
     
 - **Source:** https://github.com/PointCloudLibrary/pcl or https://github.com/PointCloudLibrary/pcl/releases
 
@@ -45,16 +45,16 @@ Download and compile latest VTK with its default settings.
   
       *Additional CMAKE options:* BUILD_apps=ON, BUILD_apps_3d_rec_framework=ON
     
-##Eigen {#tag5}
+##Eigen {#installation_instruction5}
 Get the latest version of Eigen (source) using your package manager.
 
 
-Installing Open Detection {#tag6}
+Installing Open Detection {#installation_instruction6}
 ====
 
 With the above dependencies installed, OD should compile without any problem. Download the source from https://github.com/krips89/opendetection and compile it with default cmake options. The code while platform independent, is only tested and run in Linux machine. Instructions for the usage for linux are provided below: 
 
-##Instructions: {#tag7}
+##Instructions: {#installation_instruction7}
 Compile out of source using cmake+your favorite compiler. For example:
 
 Download the code: 

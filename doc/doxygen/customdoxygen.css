@@ -1364,7 +1364,13 @@ tr.heading h2 {
   }
 }
 
+
+/*Added styles*/
 div.image img[src="odlogo_detailed.png"]{
     width:600px;
+}
+code {
+    border: 1px solid #C4CFE5;
+    background-color: #FBFCFD;
 }
 
