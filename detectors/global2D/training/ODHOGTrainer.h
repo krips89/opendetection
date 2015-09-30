@@ -34,8 +34,8 @@ namespace od
           cellSize(cellsize), hog_(winSize, blockSize, blockStride, cellSize, 9)
       {
 
-        TRAINED_DATA_IDENTIFIER_ = "HOG";
-        TRAINED_DATA_EXT_ = "hog.xml";
+        TRAINED_LOCATION_DENTIFIER_ = "HOG";
+        TRAINED_DATA_ID_ = "hog.xml";
 
         //algo parameter init
         trainingPadding = cv::Size(0, 0);

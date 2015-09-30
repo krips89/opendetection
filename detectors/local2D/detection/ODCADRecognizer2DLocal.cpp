@@ -90,7 +90,7 @@ namespace od
       pnp_detection = PnPProblem(cam_man, dist_coeff);
 
       // get all trained models
-      FileUtils::getFilesInDirectoryRec(getSpecificTrainingDataLocation(), TRAINED_DATA_EXT_, model_names);
+      FileUtils::getFilesInDirectoryRec(getSpecificTrainingDataLocation(), TRAINED_DATA_ID_, model_names);
 
       for(int i = 0; i < model_names.size(); i++)
       {

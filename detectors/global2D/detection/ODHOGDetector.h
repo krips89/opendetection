@@ -41,10 +41,11 @@ namespace od
 
       ODHOGDetector(std::string const &trained_data_location_ = "", cv::Size winsize = cv::Size(64,128), cv::Size blocksize = cv::Size(16,16), cv::Size blockstride = cv::Size(8,8), cv::Size cellsize = cv::Size(8,8), float hitshreshold = 0.0):
                                                                       ODDetector2D(trained_data_location_),  winSize(winsize), blockSize(blocksize), blockStride(blockstride),
-                                                                      cellSize(cellsize), hitThreshold(hitshreshold), hog_(winSize, blockSize, blockStride, cellSize, 9)
+                                                                      cellSize(cellsize), hitThreshold(hitshreshold), hog_(winSize, blockSize, blockStride, cellSize, 9, 1, -1,
+                                                                                                                           cv::HOGDescriptor::L2Hys, 0.2, false, cv::HOGDescriptor::DEFAULT_NLEVELS)
       {
-        TRAINED_DATA_IDENTIFIER_ = "HOG";
-        TRAINED_DATA_EXT_ = "hog.xml";
+        TRAINED_LOCATION_DENTIFIER_ = "HOG";
+        TRAINED_DATA_ID_ = "hog.xml";
         metainfo_ = true;
         svmtype_ = OD_DEFAULT_PEOPLE;
 

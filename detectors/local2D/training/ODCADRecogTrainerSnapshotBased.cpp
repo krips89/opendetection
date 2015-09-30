@@ -192,7 +192,7 @@ namespace od
       boost::filesystem::path p(objname);
       cb->input_dir = boost::filesystem::path(objname).parent_path().c_str();
       cb->output_dir = getSpecificTrainingDataLocation();
-      cb->output_extension = TRAINED_DATA_EXT_;
+      cb->output_extension = TRAINED_DATA_ID_;
 
       vtkSmartPointer<vtkOBJReader> reader = vtkSmartPointer<vtkOBJReader>::New();
       reader->SetFileName(objname.c_str());

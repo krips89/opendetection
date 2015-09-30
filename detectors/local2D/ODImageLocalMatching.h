@@ -27,8 +27,8 @@ namespace od
     public:
       ODImageLocalMatchingTrainer(std::string const &training_input_location_, std::string const &training_data_location_) : ODTrainer(training_input_location_, training_data_location_)
       {
-        TRAINED_DATA_IDENTIFIER_ = "FEATCORR";
-        TRAINED_DATA_EXT_ = "corr.xml";
+        TRAINED_LOCATION_DENTIFIER_ = "FEATCORR";
+        TRAINED_DATA_ID_ = "corr.xml";
       }
     };
 
@@ -43,8 +43,8 @@ namespace od
     public:
       ODImageLocalMatchingDetector(std::string const &training_data_location_) : ODDetector2DComplete(training_data_location_)
       {
-        TRAINED_DATA_IDENTIFIER_ = "FEATCORR";
-        TRAINED_DATA_EXT_ = ".xml";
+        TRAINED_LOCATION_DENTIFIER_ = "FEATCORR";
+        TRAINED_DATA_ID_ = ".xml";
       }
     };
 

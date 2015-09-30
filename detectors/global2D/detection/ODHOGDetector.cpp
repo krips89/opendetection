@@ -11,8 +11,6 @@ namespace od
   namespace g2d
   {
 
-
-
     void ODHOGDetector::init()
     {
 
@@ -25,12 +23,13 @@ namespace od
           break;
         case OD_DAIMLER_PEOPLE:
           hog_.winSize = cv::Size(48, 96);
+          hitThreshold =1.2;
           hog_.setSVMDetector(cv::HOGDescriptor::getDaimlerPeopleDetector());
           cout << "HOG TYPE: OpenCV Daimler People" << endl;
           //hog_.save(getSpecificTrainingDataLocation() + "/daimlerpeople." + TRAINED_DATA_EXT_);
           break;
         case OD_FILE:
-          string hogfile = FileUtils::getFirstFile(getSpecificTrainingDataLocation(), TRAINED_DATA_EXT_);
+          string hogfile = FileUtils::getFirstFile(getSpecificTrainingDataLocation(), TRAINED_DATA_ID_);
           load(hogfile);
           cout << "HOG TYPE: Custom HOG features loaded from: " << hogfile << endl;
           break;

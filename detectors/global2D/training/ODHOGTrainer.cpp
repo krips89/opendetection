@@ -359,7 +359,7 @@ namespace od
 
       }
 
-      save(getSpecificTrainingDataLocation() + "/odtrained." + TRAINED_DATA_EXT_);
+      save(getSpecificTrainingDataLocation() + "/odtrained." + TRAINED_DATA_ID_);
 
       return EXIT_SUCCESS;
     }

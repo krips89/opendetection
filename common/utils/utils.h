@@ -63,6 +63,20 @@ namespace od
 
   void normL2(cv::Mat &descriptors);
 
+  /**
+     * @brief makeCanvas Makes composite image from the given images
+     * @param vecMat Vector of Images.
+     * @param windowHeight The height of the new composite image to be formed.
+     * @param nRows Number of rows of images. (Number of columns will be calculated
+     *              depending on the value of total number of images).
+     * @return new composite image.
+     */
+  cv::Mat makeCanvasMultiImage(std::vector<cv::Mat>& vecMat, int windowHeight, int nRows);
+  //cv::Mat makeCanvasMultiImages(std::vector<cv::Mat>& imgs, cv::Size cellSize = imgs[0].size(), std::vector<std::string> messages = std::vector<std::string>());
+  cv::Mat makeCanvasMultiImages(std::vector<cv::Mat>& imgs, cv::Size cellSize, std::vector<std::string> messages);
+
+  cv::Scalar getHashedColor(std::string name, int constadd);
+
   static std::string getTexfileinObj(std::string objfilename)
   {
 
@@ -164,6 +178,7 @@ namespace od
       std::cout << list[i] << " ";
     std::cout << std::endl;
   }
+
 
   /** \brief Utility class for File and directory handling.
    *

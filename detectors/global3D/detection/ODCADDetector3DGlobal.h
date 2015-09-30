@@ -46,7 +46,7 @@ namespace od
       ODCADDetector3DGlobal(std::string const &training_data_location = "", std::string const &training_input_location = "") : ODDetector3D<PointT>(training_data_location),
                                                                           NN(2), desc_name("esf")
       {
-        this->TRAINED_DATA_IDENTIFIER_ = "GLOBAL3DVFH";
+        this->TRAINED_LOCATION_DENTIFIER_ = "GLOBAL3DVFH";
         this->training_input_location_ = training_input_location;
       }
 

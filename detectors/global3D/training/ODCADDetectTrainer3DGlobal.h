@@ -50,7 +50,7 @@ namespace od
           training_input_location_, training_data_location_)
       {
         desc_name = "esf";
-        TRAINED_DATA_IDENTIFIER_ = "GLOBAL3DVFH";
+        TRAINED_LOCATION_DENTIFIER_ = "GLOBAL3DVFH";
       }
 
       int train();

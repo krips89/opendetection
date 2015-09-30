@@ -35,8 +35,13 @@ namespace od
   {
   public:
 
-    ODDetectorCommon( std::string const &training_data_location_="") : trained_data_location_(training_data_location_)
-    { }
+    ODDetectorCommon( std::string const &trained_data_location_="") : trained_data_location_(trained_data_location_)
+    {
+      std::string clasname = typeid(this).name();
+      TRAINED_DATA_ID_ = clasname;
+      std::transform(clasname.begin(), clasname.end(), clasname.begin(), ::toupper);
+      TRAINED_LOCATION_DENTIFIER_  = clasname;
+    }
 
     virtual void init() = 0;
 
@@ -67,9 +72,9 @@ namespace od
     /** \brief The base directory for trained data. This should be same for all Trainers and Detectors and can be considered as the 'database' of trained data. Trainers uses one of its
      * subdirectories based on its type to store algo specific trained data. The corresponding Detector would use the same directory to fetch the trained data for online detection.
      */
-    virtual void setTrainedDataLocation(std::string training_data_location_)
+    virtual void setTrainedDataLocation(std::string trained_data_location_)
     {
-      this->trained_data_location_ = training_data_location_;
+      this->trained_data_location_ = trained_data_location_;
     }
 
 
@@ -77,12 +82,27 @@ namespace od
       */
     std::string getSpecificTrainingDataLocation()
     {
-      return trained_data_location_ + "/" + "TD_" + TRAINED_DATA_IDENTIFIER_;
+      return trained_data_location_ + "/" + "TD_" + TRAINED_LOCATION_DENTIFIER_;
+    }
+
+    std::string getSpecificTrainingData()
+    {
+      return getSpecificTrainingDataLocation() + "/" + TRAINED_DATA_ID_;
+    }
+
+    std::string const &getTrainedDataID() const
+    {
+      return TRAINED_DATA_ID_;
+    }
+
+    void setTrainedDataID(std::string const &trainedDataID)
+    {
+      ODDetectorCommon::TRAINED_DATA_ID_ = trainedDataID;
     }
 
   protected:
     std::string training_input_location_, trained_data_location_;
-    std::string TRAINED_DATA_EXT_, TRAINED_DATA_IDENTIFIER_;
+    std::string TRAINED_DATA_ID_, TRAINED_LOCATION_DENTIFIER_;
   };
 
   /** \brief This is the main class for object detection and recognition.

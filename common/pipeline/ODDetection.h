@@ -11,6 +11,7 @@
 #include <Eigen/Core>
 #include <opencv2/core/eigen.hpp>
 
+
 #include <pcl/point_cloud.h>
 #include <pcl/point_types.h>
 #include <opencv2/imgproc.hpp>
@@ -302,6 +303,9 @@ namespace od
     typename pcl::PointCloud<pcl::PointXYZ>::Ptr metainfo_cluster_;
   };
 
+
+
+
 /** \brief The container class for ODDetection2D returned by ODDetector2D
   *
   * \author Kripasindhu Sarkar
@@ -315,19 +319,20 @@ namespace od
       */
     ODSceneImage renderMetainfo(ODSceneImage input)
     {
+
       //picking up random colors for different detection algorithm, if exist
-      std::map<std::string, cv::Scalar> color_map;
+      /*std::map<std::string, cv::Scalar> color_map;
       for(int i = 0; i < detections_.size(); i++)
       {
         if(color_map.find(detections_[i]->getId()) == color_map.end())
          color_map[detections_[i]->getId()] = CV_RGB(rand()%255, rand()%255, rand()%255);
-      }
+      }*/
 
       cv::Mat image = input.getCVImage().clone();
       for(int i = 0; i < detections_.size(); i++)
       {
         ODDetection2D * detection = dynamic_cast<ODDetection2D *>(detections_[i]);
-        cv::rectangle(image, detection->bounding_box_2d_, color_map[detections_[i]->getId()], 2);
+        cv::rectangle(image, detection->bounding_box_2d_, getHashedColor(detections_[i]->getId(), 100), 2);
       }
       return ODSceneImage(image);
     }
