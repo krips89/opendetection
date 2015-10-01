@@ -20,7 +20,7 @@ namespace od
     /** \brief A class for detection using Cascade classifiers.
      * Given a scene and a cascade classifier, this class performs a classification and returns detections. The training is not supported in OD currently but is compatible to the cascade training of OpenCV.
      * Train your cascade classifiers using OpenCV's *opencv_traincascade* utility (http://docs.opencv.org/master/dc/d88/tutorial_traincascade.html#gsc.tab=0). It is a great tool for traning your cascade.
-     * Paste the generated xml in trained_data_location_/CASCADE/*.cascade.xml to use your trained cascade.
+     * Paste the generated xml in trained_data_location_/TD_CASCADE/\*.cascade.xml to use your trained cascade.
      *
      * \author Kripasindhu Sarkar
      *

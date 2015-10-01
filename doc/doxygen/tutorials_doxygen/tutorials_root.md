@@ -12,8 +12,22 @@ As always, we would be happy to hear your comments and receive your contribution
 
     A general introduction to the core principles of OpenDetection 
     
+    
 -   @subpage installation_instruction
 
     Installation instructions to get started
     
--   @subpage basic_structures    
+
+-   @subpage getting_started 
+    
+    Get started with OD, and do your first detection!
+    
+    
+-   @subpage basic_structures 
+    
+    Introduction to the basic classes and usage structure of OD
+    
+    
+-   @subpage detection_2d 
+    
+    2D detection/recognition methods

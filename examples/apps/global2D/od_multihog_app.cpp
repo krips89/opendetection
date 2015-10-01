@@ -4,8 +4,6 @@
    * \author Kripasindhu Sarkar
    *
    */
-///home/sarkar/work/opencv/face /home/sarkar/data/pedestrian/WalkByShop1front.mpg /home/sarkar/data/pedestrian/WalkByShop1front_comparison.avi
-
 
 #include "detectors/global2D/detection/ODHOGDetector.h"
 #include "common/utils/ODFrameGenerator.h"

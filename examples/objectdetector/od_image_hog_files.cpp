@@ -22,17 +22,14 @@ int main(int argc, char *argv[])
   //detector
   od::g2d::ODHOGDetector *detector = new od::g2d::ODHOGDetector;
   detector->setTrainedDataLocation(trained_hog);
-  detector->setSvmtype(g2d::ODHOGDetector::OD_DAIMLER_PEOPLE);
-  //detector->setSvmtype(g2d::ODHOGDetector::OD_CUSTOM);
-  //detector->setSVMFromFile("/home/sarkar/exp/trainhog/trainHOG/build/descriptorvector.dat");
-  //detector->setHitThreshold(0.98612);
+  //detector->setSvmtype(g2d::ODHOGDetector::OD_DAIMLER_PEOPLE);
   detector->init();
 
   //get scenes
   od::ODFrameGenerator<od::ODSceneImage, od::GENERATOR_TYPE_FILE_LIST> frameGenerator(images);
   //GUI
   cv::namedWindow("Overlay", cv::WINDOW_NORMAL);
-  while(frameGenerator.isValid() && cv::waitKey(2000) != 27)
+  while(frameGenerator.isValid() && cv::waitKey(1000) != 27)
   {
     od::ODSceneImage * scene = frameGenerator.getNextFrame();
 

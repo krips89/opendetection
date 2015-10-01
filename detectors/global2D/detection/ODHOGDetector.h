@@ -155,7 +155,9 @@ namespace od
 
   /** \example objectdetector/od_image_hog.cpp
   *   \example objectdetector/od_image_hog_files.cpp
+  *   \example apps/global2D/od_multihog_app.cpp
   *   This is an example of how to use the ODHOGDetector class.
+  *
   *   More details about this example.
   */
   }
