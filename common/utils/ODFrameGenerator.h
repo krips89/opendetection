@@ -78,7 +78,10 @@ namespace od
       return new SceneT(file_list_[curr_image_]);
     }
     bool isValid() {return !exhausted_;}
-
+    std::string currentFile()
+    {
+      return file_list_[curr_image_];
+    }
     std::vector<std::string> file_list_;
     bool exhausted_;
     int curr_image_;

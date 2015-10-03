@@ -1,17 +1,15 @@
-
 Detection 2D {#detection_2d}
 ====
 [TOC]
 
-Detection 2D {#detection_2d}
+Detection 2D {#detection_2d1}
 ===
 
 This article goes through the 2D detection methods covered in OD. Specifically, it covers the classes - od::g2d::ODHOGDetector through a tutorial.
 
-2D detection methods are performed by the classes Detector2D. They accept a `SceneImage` and performs detection/recognition on them. Currently Detector2Ds are classified into g2d and l2d namespaces. g2d covers detection methods which uses global 2D features (like HOG/Cascade) while l2d covers detection methods which uses local 2D features (like SIFT/SURF/ORB) for detection/recognition.
+2D detection methods are performed by the classes Detector2D. They accept a `SceneImage` and performs detection/recognition on them. Currently Detector2Ds are classified into g2d and l2d namespaces. g2d covers detection methods which uses global 2D features (like HOG/Cascade) while l2d covers detection methods which uses local 2D features (like SIFT/SURF/ORB) for detection/recognition. Different 2D detectors that are available currently: od::g2d::ODHOGDetector, od::g2d::ODCascadeDetector, od::g2d::ODFaceRecognizer, od::l2d::ODCADRecognizer2DLocal
 
-
-##HOG feature based detection {#detection_2d1}
+##HOG feature based detection {#detection_2d2}
 
 HOGDetector is a HOG feature based linear classifier. It accepts an image (od::ODSceneImage), computes its HOG feature (in a multiscale mannar for detectOmni() and a single descriptor from the resized image for detect()), runs a linear SVM obtained either by HOGTrainer through training or some default ones (from OpenCV), and informs if the classifier is true thereby providing detection.
 
@@ -94,12 +92,12 @@ int main(int argc, char *argv[])
 }
 \endcode
 
-###Data
+###Data {#detection_2d3}
 This app compares the results of HOG based detection with three different trained classifiers. For this app you need a pre-trained hog descriptor in your `trained_data` directory. You can either train  as in `examples/objectdetector/od_hog_train.cpp`, or get the OD pre-trained data from the \ref getting_started2 "Data Repository".
 
 For the query video, get a clip containing many pedestrians. For example you can get one from http://www.robots.ox.ac.uk/ActiveVision/Research/Projects/2009bbenfold_headpose/project.html#datasets
 
-Run the app as:
+Run the app from the build directory as:
 
     examples/apps/od_multihog_app <path_to_data>/trained_data/ <input_pedestrian_video> <output_comparison_video_with_detection>
 
@@ -112,7 +110,7 @@ Depending on the input video, you will see something like the following:
 \endhtmlonly
 
 
-###Code explanation
+###Code explanation {#detection_2d4}
 We first init 3 different instances of HOGDetector of different settings.  
 
       vector<g2d::ODHOGDetector*> detectors;

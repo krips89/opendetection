@@ -158,11 +158,13 @@ GENERATE_HTML          = YES
 HTML_OUTPUT            = html
 HTML_FILE_EXTENSION    = .html
 HTML_HEADER            = @OD_SOURCE_DIR@/doc/doxygen/header_od.html
-HTML_FOOTER            = @OD_SOURCE_DIR@/doc/doxygen/footer_od.html
+HTML_FOOTER            = @OD_SOURCE_DIR@/doc/doxygen/footer.html
 HTML_STYLESHEET        = 
 HTML_EXTRA_FILES       = "@OD_SOURCE_DIR@/doc/doxygen/css/tabs.css" \
                          "@OD_SOURCE_DIR@/doc/doxygen/images/odlogo.png" \
-                         "@OD_SOURCE_DIR@/doc/doxygen/images/odlogo_detailed.png" \
+                         "@OD_SOURCE_DIR@/doc/doxygen/images/cadrecog2d.png" \
+                         "@OD_SOURCE_DIR@/doc/doxygen/images/cadrecog3d.png" \
+                         "@OD_SOURCE_DIR@/doc/doxygen/images/face_business.jpg" \
                          "@OD_SOURCE_DIR@/doc/doxygen/images/snap_hog3.png"
 HTML_EXTRA_STYLESHEET  = "@OD_SOURCE_DIR@/doc/doxygen/css/customdoxygen.css"
 HTML_COLORSTYLE_HUE    =

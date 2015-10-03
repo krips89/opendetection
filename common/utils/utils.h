@@ -63,16 +63,15 @@ namespace od
 
   void normL2(cv::Mat &descriptors);
 
+
   /**
-     * @brief makeCanvas Makes composite image from the given images
-     * @param vecMat Vector of Images.
-     * @param windowHeight The height of the new composite image to be formed.
-     * @param nRows Number of rows of images. (Number of columns will be calculated
-     *              depending on the value of total number of images).
-     * @return new composite image.
-     */
-  cv::Mat makeCanvasMultiImage(std::vector<cv::Mat>& vecMat, int windowHeight, int nRows);
-  //cv::Mat makeCanvasMultiImages(std::vector<cv::Mat>& imgs, cv::Size cellSize = imgs[0].size(), std::vector<std::string> messages = std::vector<std::string>());
+    * @brief Makes composite image from the given images. Equal number of rows and columns are preferred. Therefore, number of rows = sqrt(number of input images)
+    *
+    * @param imgs Vector of Images.
+    * @param cellSize Size of individual images to be placed inside the composite images. images from `imgs` will be resized to this size before appending.
+    * @param messages Messages to be put on the top left of each image in `imgs`. Note `message.size()` should be equal to `imgs.size()`.
+    * @return new composite image.
+    */
   cv::Mat makeCanvasMultiImages(std::vector<cv::Mat>& imgs, cv::Size cellSize, std::vector<std::string> messages);
 
   cv::Scalar getHashedColor(std::string name, int constadd);

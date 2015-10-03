@@ -36,7 +36,10 @@ int main(int argc, char *argv[])
     ODDetections2D *detections =  detector->detectOmni(scene);
 
     if(detections->size() > 0)
+    {
       cv::imshow("Overlay", detections->renderMetainfo(*scene).getCVImage());
+      cv::imwrite(frameGenerator.currentFile() + ".detected.jpg", detections->renderMetainfo(*scene).getCVImage());
+    }
     else
       cv::imshow("Overlay", scene->getCVImage());
 

@@ -61,7 +61,7 @@
 }
 
 
-.topnav {
+.tablist {
     position:relative;
     z-index:1;
     font-size: 17px;
@@ -71,18 +71,18 @@
     padding:0;
     letter-spacing:1px;
 }
-.topnav a{
+.tablist a{
     text-decoration:none;
     padding:10px 15px 9px 15px !important;
     border-bottom:none;
     display:inline-block;
 }
-.topnav a:hover{
+.tablist a:hover{
     border-bottom:none;
     background-color:#000000;
     color:#ffffff;
 }
-.topnav a.active {
+.tablist a.active {
     background-color:#8AC007;
     color:#ffffff;
 }

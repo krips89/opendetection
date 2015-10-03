@@ -1,12 +1,8 @@
-OD Tutorials {#tutorial_root}
+User Guide {#tutorial_root}
 ================
 
  \tableofcontents 
  
-The following links describe a set of basic OpenDetection tutorials. Most of the tutorials uses the demos and examples present in `examples/objectdetector'. 
-But the information about the sources and the data are provided in the individual tutorials as well. 
- 
-As always, we would be happy to hear your comments and receive your contributions on any tutorial.
 
 -   @subpage introduction_general
 
@@ -31,3 +27,12 @@ As always, we would be happy to hear your comments and receive your contribution
 -   @subpage detection_2d 
     
     2D detection/recognition methods
+    
+    
+-   @subpage detection_3d 
+    
+    3D detection/recognition methods    
+
+-   @subpage writing_a_new_app 
+    
+    Write your own app using the detectors.     
