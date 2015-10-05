@@ -167,9 +167,9 @@ HTML_EXTRA_FILES       = "@OD_SOURCE_DIR@/doc/doxygen/css/tabs.css" \
                          "@OD_SOURCE_DIR@/doc/doxygen/images/face_business.jpg" \
                          "@OD_SOURCE_DIR@/doc/doxygen/images/snap_hog3.png"
 HTML_EXTRA_STYLESHEET  = "@OD_SOURCE_DIR@/doc/doxygen/css/customdoxygen.css"
-HTML_COLORSTYLE_HUE    =
-HTML_COLORSTYLE_SAT    =
-HTML_COLORSTYLE_GAMMA  =
+HTML_COLORSTYLE_HUE    =218
+HTML_COLORSTYLE_SAT    =82
+HTML_COLORSTYLE_GAMMA  =15
 HTML_TIMESTAMP         = YES
 HTML_DYNAMIC_SECTIONS  = NO
 GENERATE_DOCSET        = YES
