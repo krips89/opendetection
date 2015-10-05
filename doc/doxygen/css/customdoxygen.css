@@ -1366,6 +1366,12 @@ tr.heading h2 {
 
 
 /*Added styles*/
+/*body {
+    width: 980px;
+    align-content: center;
+     margin-left: auto;
+    margin-right: auto;
+}*/
 div.image img[src="odlogo_detailed.png"]{
     width:600px;
 }
@@ -1392,13 +1398,29 @@ h3 { margin-top: .75em; }
     box-sizing: content-box;
 }
 
+/*.odlCarouselClass
+{
+    position: relative;
+    padding-bottom: 56.25%; /!* 16:9 *!/
+    padding-top: 25px;
+    height: 0;
+
+    /!*padding-bottom: 50px;*!/
+}*/
+
 
 .odlCarouselClass .item
 {
     width: auto;
-    height: 300px;
+    height: 250px;
 
     /*padding-bottom: 50px;*/
+ /*   position: relative;
+    padding-bottom: 56.25%; /!* 16:9 *!/
+    padding-top: 25px;
+    height: 0;*/
+
+
 }
 
 
@@ -1422,3 +1444,47 @@ h3 { margin-top: .75em; }
 .carousel-caption ul { color: #fff; }
 .carousel-caption-inset { padding-left: 60px; padding-right: 60px; }
 .carousel-caption p a, .carousel-caption p a:hover, .carousel-caption p a:visited { color: #7ae; }
+
+.youtubevideo {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    padding-top: 25px;
+    height: 0;
+}
+.youtubevideo iframe {
+    position: absolute;
+    top: 17px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    vertical-align: bottom;
+}
+
+body {
+    background-color: #CCC;
+    color: black;
+    margin: 0;
+}
+
+div.contents, div.header {
+    margin-bottom: 0px;
+    margin-top: 0px;
+    padding: 12px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 1070px;
+    background-color: white;
+    border-radius: 8px;
+}
+
+#titlearea {
+    background-color: white;
+}
+
+hr.footer {
+    display: none;
+}
+
+.footer {
+    background-color: #AAA;
+}
