@@ -161,7 +161,7 @@ HTML_HEADER            = @OD_SOURCE_DIR@/doc/doxygen/header_od.html
 HTML_FOOTER            = @OD_SOURCE_DIR@/doc/doxygen/footer_od.html
 HTML_STYLESHEET        = 
 HTML_EXTRA_FILES       = "@OD_SOURCE_DIR@/doc/doxygen/css/tabs.css" \
-                         "@OD_SOURCE_DIR@/doc/doxygen/images/odlogo.png" \
+                         "@OD_SOURCE_DIR@/doc/doxygen/images/odlogo_detailed.png" \
                          "@OD_SOURCE_DIR@/doc/doxygen/images/cadrecog2d.png" \
                          "@OD_SOURCE_DIR@/doc/doxygen/images/cadrecog3d.png" \
                          "@OD_SOURCE_DIR@/doc/doxygen/images/face_business.jpg" \
