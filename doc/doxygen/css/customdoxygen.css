@@ -1462,7 +1462,7 @@ h3 { margin-top: .75em; }
 
 body {
     background-color: #CCC;
-    background-color: #e9eaed;
+    /*background-color: #e9eaed;*/
     color: black;
     margin: 0;
 }
