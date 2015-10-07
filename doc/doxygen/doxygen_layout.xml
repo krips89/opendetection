@@ -1,8 +1,8 @@
 <doxygenlayout version="1.0">
   <!-- Navigation index tabs for HTML output -->
   <navindex>
-    <tab type="mainpage" visible="yes" title=""/>
-    <tab type="pages" visible="yes" title=""/>
+    <tab type="mainpage" visible="yes" title="OD"/>
+    <tab type="pages" visible="yes" title="User Guide"/>
     <tab type="modules" visible="yes" title=""/>
       <tab type="usergroup" title="API Documentation">
           <tab type="namespaces" visible="yes" title="">
