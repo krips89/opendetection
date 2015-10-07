@@ -48,6 +48,11 @@ Download and compile latest VTK with its default settings.
 ##Eigen {#installation_instruction5}
 Get the latest version of Eigen (source) using your package manager.
 
+##SVMLight
+We use SVMLight for training. To user the feature of training using SVMLight, you need to download the source and put in a specific folder (we could not include the source in 3rdparty because of its restrictive licence). Please see http://svmlight.joachims.org/ for the details and terms of use.
+
+Download the source code from http://svmlight.joachims.org/ and extract it to `opendetection/3rdparty/svmlight`. You should have files like `svm_common.c`, `svm_learn.c`, etc. under the directory `opendetection/3rdparty/svmlight`.
+
 
 Installing Open Detection {#installation_instruction6}
 ====
