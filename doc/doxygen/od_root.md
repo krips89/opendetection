@@ -25,8 +25,13 @@ The library is built with a very specific goal - to answer the fundamental probl
 ##Quick Links
 - <a href="annotated.html"><b>API Documentation</b></a>
 - Source Code: https://github.com/krips89/opendetection
-- Bug report and queries: mailto:kripasindhu.sarkar@dfki.de        
-        
+- Queries: mailto:kripasindhu.sarkar@dfki.de     
+- Discussion group: https://groups.google.com/forum/#!forum/opendetection/   
+    
+##New: GSoC 2016 Ideas
+**We are in!**
+
+We are selected in Google Summer of Code 2016 as a mentoring organization!  We hope we can make maximum out of it and get great contributions from the students. Please find the list of ideas for GSoC here - \ref idea_list_gsoc2016 "GSoC 2016 Ideas".
         
 \htmlonly
     </div>

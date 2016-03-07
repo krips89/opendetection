@@ -162,6 +162,7 @@ HTML_FOOTER            = @OD_SOURCE_DIR@/doc/doxygen/footer_od.html
 HTML_STYLESHEET        = 
 HTML_EXTRA_FILES       = "@OD_SOURCE_DIR@/doc/doxygen/css/tabs.css" \
                          "@OD_SOURCE_DIR@/doc/doxygen/images/odlogo_detailed.png" \
+                         "@OD_SOURCE_DIR@/doc/doxygen/images/odlogo_small.ico" \
                          "@OD_SOURCE_DIR@/doc/doxygen/images/cadrecog2d.png" \
                          "@OD_SOURCE_DIR@/doc/doxygen/images/cadrecog3d.png" \
                          "@OD_SOURCE_DIR@/doc/doxygen/images/face_business.jpg" \
@@ -219,7 +220,7 @@ PAPER_TYPE             = a4wide
 EXTRA_PACKAGES         = amsmath amssymb
 LATEX_HEADER           = 
 LATEX_FOOTER           =
-PDF_HYPERLINKS         = YES
+PDF_HYPERLINKS         = NO
 USE_PDFLATEX           = YES
 LATEX_BATCHMODE        = NO
 LATEX_HIDE_INDICES     = NO

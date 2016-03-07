@@ -35,4 +35,11 @@ User Guide {#tutorial_root}
 
 -   @subpage writing_a_new_app 
     
-    Write your own app using the detectors.     
+    Write your own app using the detectors.
+         
+         
+###New: GSoC 2016 Ideas
+
+-    @subpage idea_list_gsoc2016
+
+       
