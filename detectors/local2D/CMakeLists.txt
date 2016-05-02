@@ -36,7 +36,7 @@ if(build)
 
 
     OD_ADD_LIBRARY_ALL("${SUBSYS_NAME}" SRCS ${srcs} INCS ${incs} ${impl_incs})
-
+    install(FILES ${incs} DESTINATION ${OD_INSTALL_INCLUDE_DIR}/${SUBSYS_NAME} COMPONENT ${LIB_NAME})
 
     if(SUBSYS_DEPS)
       target_link_libraries("${LIB_NAME}" ${SUBSYS_DEPS})

@@ -29,19 +29,20 @@ OpenCV 3.0 is to be compiled with the modules xfeatures2d (for features like SIF
              
         *CMAKE options*: WITH_CUDA=ON       
 
+
  
 ##VTK 6.0 or above {#installation_instruction3}
     
 Download and compile latest VTK with its default settings.
     
    
-##PCL 1.6 or above {#installation_instruction4}   
+##PCL 1.8 or above {#installation_instruction4}   
     
 - **Source:** https://github.com/PointCloudLibrary/pcl or https://github.com/PointCloudLibrary/pcl/releases
 
 - **Required settings:**
 
-  * *3d_rec_framework* - for ESF, ESF etc recognition pipeline.
+  * *3d_rec_framework* - for ESF, ESF etc recognition pipeline. To build with this setting you need to install OpenNI as well, which is the mandatory dependency for this app. Please refer to the PCL website for the version information. 
   
       *Additional CMAKE options:* BUILD_apps=ON, BUILD_apps_3d_rec_framework=ON
     

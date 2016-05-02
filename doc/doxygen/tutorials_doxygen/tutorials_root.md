@@ -42,4 +42,8 @@ User Guide {#tutorial_root}
 
 -    @subpage idea_list_gsoc2016
 
+-    @subpage gsoc2016_blog_giacomo
+
+-    @subpage gsoc2016_blog_abhishek
+
        

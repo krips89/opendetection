@@ -2,8 +2,16 @@
   <!-- Navigation index tabs for HTML output -->
   <navindex>
     <tab type="mainpage" visible="yes" title="OD"/>
-    <!--tab type="usergroup" url= "\ref tutorial_root" title="User Guide"/-->
-    <tab type="pages" visible="yes" title="User Guide"/>
+    <tab type="usergroup" url= "\ref tutorial_root" title="User Guide">
+        <tab type="user" url= "\ref introduction_general" title="Introduction"/>
+        <tab type="user" url= "\ref installation_instruction" title="Installation Instructions"/>
+        <tab type="user" url= "\ref getting_started" title="Getting Started"/>
+        <tab type="user" url= "\ref basic_structures" title="Basic Structures"/>
+        <tab type="user" url= "\ref detection_2d" title="Detection 2D"/>
+        <tab type="user" url= "\ref detection_3d" title="Detection 3D"/>
+        <tab type="user" url= "\ref writing_a_new_app" title="Writing your own app"/>
+    </tab>
+    <!--tab type="pages" visible="yes" title="User Guide"/-->
     <tab type="modules" visible="yes" title=""/>
       <tab type="usergroup" title="API Documentation">
           <tab type="namespaces" visible="yes" title="">
@@ -23,8 +31,13 @@
           <tab type="examples" visible="yes" title=""/>
       </tab>
 
+      <!--tab type="usergroup" url= "\ref installation_instruction" title="Downloads"/-->
+      <tab type="usergroup" title="GSoC16 Blogs">
+          <tab type="user" url= "\ref gsoc2016_blog_giacomo" title="GSoC 2016 Blog - Giacomo"/>
+          <tab type="user" url= "\ref gsoc2016_blog_abhishek" title="GSoC 2016 Blog - Abhishek"/>
+      </tab>
+      <tab type="usergroup" url= "\ref idea_list_gsoc2016" title="GSoC 2016 Ideas"/>
       <tab type="usergroup" url= "\ref installation_instruction" title="Downloads"/>
-      <tab type="user" url= "\ref idea_list_gsoc2016" title="GSoC 2016 Ideas"/>
   </navindex>
 
   <!-- Layout definition for a class page -->

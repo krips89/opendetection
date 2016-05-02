@@ -30,8 +30,8 @@ Following are the list of ideas we will focus for this time in decreasing order 
 **Key tasks**: 
 * Make a short report of the popular and state-of-the-art detection/recognition techniques (to let us know that you have the proficiency in this area)
 * Add CNN based algorithms in the library with OpenDetection Compatible APIs in the following order: - 
-* Implement OD interface for training and testing (under od::Trainers) neural network architectures with convolutional layer and possible recurrent layers using Caffe.
-* Implement interface for forward phase of object detection (under od::Detectors) on some pre-trained caffe models (or trained models from the previous step) based on architectures which have been used for object detection. 
+* Implement OD interface for training and testing (under od::ODTrainer s) neural network architectures with convolutional layer and possible recurrent layers using Caffe.
+* Implement interface for forward phase of object detection (under od::ODDetector s or one of its subclasses) on some pre-trained caffe models (or trained models from the previous step) based on architectures which have been used for object detection. 
 * Implement train/test data preparation/region extraction and other preprocessing steps (maybe in a separate module).
 * Implement any other state-of-the-art detection architectures which uses CNNs.  
 
@@ -69,7 +69,8 @@ This is one of the important project and have a very strong influence to the fut
 ###3. Integration of some other popular detection algorithms in OpenDetection {#idea_list_gsoc20165}
 
 **Key tasks**:
-This is an open idea. We always would like to integrate **state-of-the-art** algorithms in our framework. It would be easy to port an available C++ code in this framework instead of implementing an idea/paper from scratch. So, we expect you to *do some literature review and report different algorithms* with their availability and the ones you would like to add. Please note that, just because the implementation of some algorithm is available online does not mean that it is the state-of-the-art or one of the popular algorithms. 
+* This is an open idea. We always would like to integrate **state-of-the-art** algorithms in our framework. It would be easy to port an available C++ code in this framework instead of implementing an idea/paper from scratch. So, we expect you to *do some literature review and report different algorithms* with their availability and the ones you would like to add. Please note that, just because the implementation of some algorithm is available online does not mean that it is the state-of-the-art or one of the popular algorithms. 
+* Implement/port the identified detection algorithms under od::ODDetector2D/od::ODDetector3D and the respective *Trainer* s. 
  
 **Prerequisites**: Expertise in Computer Vision and C++. 
 

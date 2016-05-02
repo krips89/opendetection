@@ -14,7 +14,8 @@ Open Detection
     
 **Open Detection (OD)** is a standalone open source project for object detection and recognition in images and 3D point clouds. Open Detection is released under the terms of the **BSD license**, and thus free for commercial and research use. The project was originated under **Google Summer of Code 2015**  with the aim of having a vision tool for robotics (in particular for [Robocomp](https://github.com/robocomp/robocomp)). 
 
-The library is built with a very specific goal - to answer the fundamental problem of Computer Vision - Object Recognition and Detection. We make available to everyone the existing solution in this direction in a common, intuitive and user-friendly APIs. Our simple and user-friendly APIs make this a great tool for **Robotics Applications and robots** and **Computer Vision beginners and enthusiasts**. And of course, the method dependent parameters to fine-tune detections to the limit, makes this a great tool for **Computer Vision researchers and experts**.   
+The library is built with a very specific goal - to answer the fundamental problem of Computer Vision - Object Recognition and Detection. We make available to everyone the existing solution in this direction in a common, intuitive and user-friendly APIs. 
+
 
 ##Getting Started
 * Download and compile using \ref installation_instruction
@@ -28,10 +29,32 @@ The library is built with a very specific goal - to answer the fundamental probl
 - Queries: mailto:kripasindhu.sarkar@dfki.de     
 - Discussion group: https://groups.google.com/forum/#!forum/opendetection/   
     
-##New: GSoC 2016 Ideas
+    
+News
+===
+
+##GSoC 2016 - Accepted Projects: 
+Congratulations to Giacomo Dabisias and Abhishek Kumar Annamraju for getting their projects accepted in Google Summer of Code 2016! Following are the details of their projects: 
+
+* Abhishek Kumar Annamraju	- **CNN based object localization and recognition for openDetection library.** 
+  - [Link to Proposal](https://summerofcode.withgoogle.com/serve/6621875723567104/) - [Link to GSoC2016 Project Page](https://docs.google.com/document/d/1-rq4BFcc_SgZLpQrA26_8hQYpSgUnGMcgNHbe7ipYuc/edit?pref=2&pli=1)
+  - \ref gsoc2016_blog_abhishek "Link to blog"
+      
+* Giacomo Dabisias - **Framework design and library maintenance.**
+  - [Link to Proposal](https://docs.google.com/document/d/16Wyd0h5b9-7DaG7ZYJT30a2i096krviFUCcDYwg-jZc/edit?usp=sharing) - [Link to GSoC2016 Project Page](https://summerofcode.withgoogle.com/organizations/6007728078061568/#5675882488266752)
+  - \ref gsoc2016_blog_giacomo "Link to blog"
+
+    
+
+##GSoC 2016 mentoring organization - accepted
+
 **We are in!**
 
-We are selected in Google Summer of Code 2016 as a mentoring organization!  We hope we can make maximum out of it and get great contributions from the students. Please find the list of ideas for GSoC here - \ref idea_list_gsoc2016 "GSoC 2016 Ideas".
+We are selected in Google Summer of Code 2016 as a mentoring organization.  We hope we can make maximum out of it and get great contributions from the students. Please find the list of ideas for GSoC here - \ref idea_list_gsoc2016 "GSoC 2016 Ideas".
+        
+##Talk at FOSSASIA
+We will be presenting our library at FOSSASIA 2016, Singapore - an annual conference featuring prominent Open Tech icons. More details are available in the <a href ="http://2016.fossasia.org/"><b>FOSSASIA 2016 website</b></a>
+
         
 \htmlonly
     </div>
